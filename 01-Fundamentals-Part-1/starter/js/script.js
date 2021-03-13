@@ -115,7 +115,32 @@ console.log(BMIMark, BMIJohn, markHigherBMI);
 */
 
 /* ===== LESSON STRINGS AND TEMPLATE LITERALS ===== */
+/*
+const firstName = "Theron";
+const job = "Teacher";
+const birthYear = "1990";
+const year = "2021";
+
+const sentence = "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
+console.log(sentence);
+
+// `` template literal assembles seperate variables literally
+const newSentence = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(newSentence);
+
+console.log(`Just a regular string...`)
+console.log('Just a regular string... \n\ This is the rest of the regular \n\ string')
+
+//Now with template literals just enter
+console.log(`String
+on multiple
+lines`);
+*/
+
 /* ===== LESSON TAKING DECISIONS IF / ELSE STATEMENTS ===== */
+
+
+
 /* ===== CHALLENGE #2 ===== */
 /* ===== TYPE CONVERSION AND COERCION ===== */
 /* ===== TRUTHY AND FALSY VALUES ===== */
