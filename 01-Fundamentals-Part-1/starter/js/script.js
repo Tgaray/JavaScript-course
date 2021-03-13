@@ -138,10 +138,52 @@ lines`);
 */
 
 /* ===== LESSON TAKING DECISIONS IF / ELSE STATEMENTS ===== */
+/*
+const age = 15;
 
+if (age >= 18) {
+    console.log(`Sarah can start taking lessons for her driving license.`)
+} else {
+    const yearsLeft = 18 - age;
+    console.log(`Sarah has ${yearsLeft} years left to start going for her drivers license`)
+}
 
+const birthYear = 1990;
+// define the variable outside both code blocks in the if else so that it can be assigned at each point otherwise you will get an error.
+let century;
+
+if (birthYear <= 2000) {
+    let century = 20;
+    console.log(`You were born in the ${century}th century`)
+} else {
+    let century = 21;
+    console.log(`You were born in the ${century}st century`)
+}
+*/
 
 /* ===== CHALLENGE #2 ===== */
+/*
+const markWeight = 95;
+const markHeight = 1.88;
+const johnWeight = 110;
+const johnHeight = 1.76;
+
+//const markWeight = 78;
+//const markHeight = 1.69;
+//const johnWeight = 92;
+//const johnHeight = 1.95;
+const bmiMark = markWeight / (markHeight * markHeight);
+console.log(Math.round(bmiMark));
+const bmiJohn = johnWeight / (johnHeight * johnHeight);
+console.log(Math.round(bmiJohn));
+
+if (bmiMark > bmiJohn) {
+    console.log(`Mark's BMI ${Math.round(bmiMark)} is higher than John's BMI ${Math.round(bmiJohn)}.`)
+} else {
+    console.log(`Mark's BMI ${Math.round(bmiMark)} is lower than John's BMI ${Math.round(bmiJohn)}.`)
+}
+*/
+
 /* ===== TYPE CONVERSION AND COERCION ===== */
 /* ===== TRUTHY AND FALSY VALUES ===== */
 /* ===== EQUALITY OPERATORS: == VS === ===== */
