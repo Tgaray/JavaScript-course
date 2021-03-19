@@ -185,11 +185,194 @@ if (bmiMark > bmiJohn) {
 */
 
 /* ===== TYPE CONVERSION AND COERCION ===== */
+
+/*
+//type conversion
+const inputY = "1990";
+console.log(Number(inputY), inputY);
+console.log(Number(inputY) + 18);
+console.log(Number("Jonas"));
+console.log(typeof NaN);
+console.log(String(23), 23);
+
+//typecoercion + converts the number to a string -, /, *, > to a number
+console.log("I am " + 23 + " years old");
+console.log("23" - "10" - 3);
+console.log("23" * "10");
+
+let n = "1" + 1; // string 11
+n = n - 1; // - makes it a number again so -1 is the number 10
+console.log(n);
+*/
+
 /* ===== TRUTHY AND FALSY VALUES ===== */
+
+// falsy values are not exactly false but they will become false when we try to convert them to a boolean
+// falsy values 0, '', undefined, null, NaN and ofc false itself anything else will be true
+
+/*
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean(""));
+console.log(Boolean("Jonas"));
+console.log(Boolean({})); // empty object
+console.log(Boolean(1));
+
+const money = 0;
+if (money) {
+    console.log("Don't spend it all")
+} else {
+    console.log("You should get a job!");
+}
+
+const moMoney = 100;
+if (moMoney) {
+    console.log("Don't spend it all")
+} else {
+    console.log("You should get a job!");
+}
+
+let moMoMoney;
+if (moMoMoney) {
+    console.log("moMoMoney is " + moMoMoney)
+} else {
+    console.log("moMoMoney is " + moMoMoney);
+}
+*/
+
 /* ===== EQUALITY OPERATORS: == VS === ===== */
-/* ===== BOOLEAN LOGIC ===== */
-/* ===== LOGICAL OPERATORS ===== */
+
+/*
+const age = 30;
+//Boolean if both sides are exactly the same (STRICT, does not do type coercion)
+if (age === 30) console.log("You just became an adult :D strict");
+if ("30" === 30) console.log("You just became an adult :D"); //does not work
+//Loose type coercion
+if ("30" == 30) console.log("You just became an adult :D strict"); //assume == does not exist rather convert the value manually
+
+const favourite = Number(prompt("What is your favorite number"));
+console.log(favourite);
+console.log(typeof favourite);
+//console.log(Number(favourite));
+
+if (favourite === 8) {
+    console.log("Cool! 8 is a great number!")
+} else if (favourite === 7) {
+    console.log("7 is also a cool number!")
+} else if (favourite === 9) {
+    console.log("9 is also cool!")
+} else {
+    console.log("Number is not 8 or 7 or 9")
+}
+
+//strict also !== (different operator also preferably use the strict version and convert otherwise)
+if (favourite !== 8) console.log("Why not 8?");
+*/
+
+/* ===== BOOLEAN LOGIC ===== ===== LOGICAL OPERATORS =====*/
+
+/*
+let age = 17;
+
+if (age !== 20) {
+    console.log("age is not 20 and is a " + typeof age)
+} else {
+    console.log("age is 20 and is a " + typeof age)
+}
+
+if (age >= 20 || age <= 30) {
+    console.log(age + " is between 20 and 30")
+} else if (age > 30) {
+    console.log(age + " is more than 30")
+} else {
+    console.log(age + " is less than 20")
+}
+
+if (age >= 20 && age <= 30) {
+    console.log(age + " is between 20 and 30")
+} else if (age > 30) {
+    console.log(age + " is more than 30")
+} else {
+    console.log(age + " is less than 20")
+}
+
+if (age >= 20 || age !== 15) {
+    console.log(age + " so at least one of the options in the if is true maybe both")
+} else {
+    console.log(age + " so none of the if conditions are true")
+}
+
+const hasDriversLicense = true;
+const hasGoodVision = false;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+if (hasDriversLicense && hasGoodVision) {
+    console.log("Sarah can drive")
+} else {
+    console.log("Sarah can not drive yet")
+}
+
+const isTired = true;
+if (hasDriversLicense || hasGoodVision || isTired) {
+    console.log("Sarah can drive")
+} else {
+    console.log("Sarah can not drive yet")
+}
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+    console.log("Sarah can drive")
+} else {
+    console.log("Sarah can not drive yet")
+}
+*/
+
+
 /* ===== CHALLENGE #3 ===== */
+
+/*
+const dolphinsScore1 = 96;
+const dolphinsScore2 = 19;
+const dolphinsScore3 = 89;
+const koalasScore1 = 96;
+const koalasScore2 = 89;
+const koalasScore3 = 19;
+
+const averageDolphins = Math.floor((dolphinsScore1 + dolphinsScore2 + dolphinsScore3) / 3);
+console.log(averageDolphins);
+const averageKoalas = Math.floor((koalasScore1 + koalasScore2 + koalasScore3) / 3);
+console.log(averageKoalas);
+
+if (averageDolphins > averageKoalas) {
+    console.log("Dolphins are the winners!")
+} else if (averageKoalas > averageDolphins) {
+    console.log("Koalas are the winners!")
+} else {
+    console.log("No winners its a draw!")
+}
+
+if (averageDolphins > averageKoalas && averageDolphins >= 100) {
+    console.log("Dolphins are the winners!")
+} else if (averageKoalas > averageDolphins && averageKoalas >= 100) {
+    console.log("Koalas are the winners!")
+} else if (averageDolphins === averageKoalas) {
+    console.log("No winners its a draw!")
+}
+
+if (averageDolphins > averageKoalas && averageDolphins >= 100) {
+    console.log("Dolphins are the winners!")
+} else if (averageKoalas > averageDolphins && averageKoalas >= 100) {
+    console.log("Koalas are the winners!")
+} else if (averageDolphins === averageKoalas && averageDolphins >= 100 && averageKoalas >= 100) {
+    console.log("No winners its a draw!")
+} else {
+    console.log("No winners at all the average score is less than 100!")
+}
+*/
+
+
 /* ===== THE SWITCH STATEMENT ===== */
 /* ===== STATEMENTS AND EXPRESSIONS ===== */
 /* ===== THE CONDITIONAL (TERNARY) OPERATOR ===== */
