@@ -372,9 +372,94 @@ if (averageDolphins > averageKoalas && averageDolphins >= 100) {
 }
 */
 
-
 /* ===== THE SWITCH STATEMENT ===== */
+
+
+/* const day = "sunday";
+
+switch (day) {
+    case "monday": // day === "monday"
+        console.log(day + " I have to start grading PDES");
+        console.log(day + " I have a Brightspace meeting");
+        break;// tell the code to stop after having found a match
+    case "tuesday":
+        console.log(day + " First day of BASC grading");
+        break;
+    case "wednesday":
+        console.log(day + " Second day of BASC grading");
+        break;
+    case "thursday":
+        console.log(day + " Third day of BASC grading");
+        break;
+    case "friday":
+        console.log(day + " I work at IW");
+        break;
+    case "saturday":
+    case "sunday":
+        console.log(day + " Relax");
+        break;
+    default:
+        console.log("Not a valid day!")
+}
+
+if (day === "monday") {
+    console.log(day + " I have to start grading PDES");
+    console.log(day + " I have a Brightspace meeting");
+} else if (day === "tuesday") {
+    console.log(day + " First day of BASC grading");
+} else if (day === "wednesday") {
+    console.log(day + " Second day of BASC grading");
+} else if (day === "thursday") {
+    console.log(day + " Third day of BASC grading");
+} else if (day === "friday") {
+    console.log(day + " I work at IW");
+} else if (day === "saturday" || day === "sunday") {
+    console.log(day + " Relax");
+} else {
+    console.log("Not a valid day!")
+} */
+
 /* ===== STATEMENTS AND EXPRESSIONS ===== */
+
+/* 3 + 4 // expression
+1991 // expression
+true && false && !false // expression
+
+if (23 > 10) {
+    const str = "23 is bigger"; // the string is an expression, expressions produce values. the entire line is a statement
+} // statement are like full sentences that performs some action(s) */
+
 /* ===== THE CONDITIONAL (TERNARY) OPERATOR ===== */
+
+
+/*
+const age = 23;
+
+//The condition, the if : the else (ternary condition is an expression not a statement)
+age >= 18 ? console.log("I like to drink beer 🍻") :
+    console.log("I like to drink milk 🥛");
+
+const drink = age >= 18 ? "beer 🍻" : "milk 🥛"; // expression
+console.log(drink);
+
+let drink2;
+if (age >= 18) {
+    drink2 = "beer 🍻";
+} else {
+    drink2 = "milk 🥛";
+}
+console.log(drink2);
+
+//using the Ternary operator you can use the expression in a template literal
+console.log(`Im allowed to drink ${age >= 18 ? "beer 🍻" : "milk 🥛"} because I am ${age} `)
+*/
+
 /* ===== CHALLENGE #4 ===== */
-/* ===== JAVASCRIPT RELEASES: ES5, ES6+ AND ESNEXT ===== */
+
+/*
+const bill = 200;
+
+// condition? if true.. else..
+const tip = bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.20;
+console.log(`The meal cost $${bill}, the tip was $${tip} this makes for a whopping total of $${bill + tip}`);
+*/
