@@ -5,9 +5,9 @@ let continent = "Europe";
 let population = "17 million";
 
 console.log("I was born in the " + country + " it is a country in " + continent + " that has " + population + " people in it.");
-
-
+*/
 /* ===== LESSON DATA TYPES ===== */
+
 /*
 let javascriptIsFun = true;
 console.log(javascriptIsFun);
@@ -23,6 +23,9 @@ let language;
 let population = "17 million";
 const country = "the Netherlands";
 
+let PI = 3.1415;
+console.log(PI);
+
 console.log(isIsLand);
 console.log(language);
 console.log(population);
@@ -30,10 +33,20 @@ console.log(country);
 
 language = "Dutch";
 console.log(language);
+
+let yoyoyo = true;
+console.log(yoyoyo);
+console.log(typeof yoyoyo);
+console.log(typeof true);
+console.log(typeof 23);
+console.log(typeof "yoyo");
+yoyoyo = "yoyo";
+console.log(typeof yoyoyo);
+console.log(yoyoyo);
 */
 
 /* ===== LESSON LET, CONST, VAR ===== */
-/*
+
 let age = 30;
 age = 31;
 
@@ -43,7 +56,6 @@ const birthYear = 1991;
 // never use var (old after ES6)
 var job = "programmer";
 job = "teacher";
-*/
 
 /* ===== LESSON OPERATORS ===== */
 /*
