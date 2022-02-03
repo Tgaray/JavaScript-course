@@ -47,6 +47,7 @@ console.log(yoyoyo);
 
 /* ===== LESSON LET, CONST, VAR ===== */
 
+/*
 let age = 30;
 age = 31;
 
@@ -57,9 +58,15 @@ const birthYear = 1991;
 var job = "programmer";
 job = "teacher";
 
+let grandpaAge = 100;
+grandpaAge = 92;
+console.log(grandpaAge);
+*/
+
 /* ===== LESSON OPERATORS ===== */
+
 /*
-const now = 2037;
+const now = 2022;
 const ageTheron = now - 1990;
 const ageYietta = now - 1995;
 console.log(ageTheron, ageYietta);
@@ -84,7 +91,7 @@ console.log(ageTheron > ageYietta);// >, <, >=, <=
 console.log(ageTheron >= 30);
 const isFullAge = ageTheron >= 30;
 console.log(now - 1991 > now - 1995); // JS knows to calculate the numbers first before comparing them
-*/
+ */
 
 /* ===== LESSON OPERATOR PRESEDENCE ===== */
 /*
@@ -104,6 +111,7 @@ console.log(ageTheron, ageYietta, averageAge);
 */
 
 /* ===== CHALLENGE #1 ===== */
+
 /*
 //const markWeight = 78;
 //const markHeight = 1.69;
@@ -124,7 +132,7 @@ const BMIMark = massMark / (heightMark ** 2);
 const BMIJohn = massJohn / (heightJohn ** 2);
 const markHigherBMI = BMIMark > BMIJohn;
 console.log(BMIMark, BMIJohn, markHigherBMI);
-*/
+ */
 
 /* ===== LESSON STRINGS AND TEMPLATE LITERALS ===== */
 /*
