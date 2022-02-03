@@ -61,7 +61,7 @@ job = "teacher";
 let grandpaAge = 100;
 grandpaAge = 92;
 console.log(grandpaAge);
-*/
+ */
 
 /* ===== LESSON OPERATORS ===== */
 
@@ -135,6 +135,7 @@ console.log(BMIMark, BMIJohn, markHigherBMI);
  */
 
 /* ===== LESSON STRINGS AND TEMPLATE LITERALS ===== */
+
 /*
 const firstName = "Theron";
 const job = "Teacher";
@@ -148,8 +149,8 @@ console.log(sentence);
 const newSentence = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
 console.log(newSentence);
 
-console.log(`Just a regular string...`)
-console.log('Just a regular string... \n\ This is the rest of the regular \n\ string')
+console.log(`Just a regular string...`);
+console.log('Just a regular string... \n\ This is the rest of the regular \n\ string');
 
 //Now with template literals just enter
 console.log(`String
