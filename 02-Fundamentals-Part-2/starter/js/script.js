@@ -1,17 +1,19 @@
+'use strict';
+
 /* ===== ACTIVATING STRICT MODE ===== */
 
-/*
+/* 
 'use strict'; // to use strict we have to define this at the beginning of js file, well see failures visible errors otherwise kept silent
 
 let hasDriversLicense = false;
 const passTest = true;
 
-if (passTest) hasDriversLcense = true;
-if (hasDriversLicense) console.log("I can drive :D");
+if (passTest) hasDriverLicense = true;
+if (hasDriversLicense) console.log('I can drive :)');
 
-//const interface = "Audio";  //reserved for strict mode var name cant be used
-//const if = 23;  //reserved for strict mode var name cant be used
-*/
+const interface = 'audio'; // this is a reserved term for future use in case JS uses it later on
+const private = 'private'; // this is a reserved term for future use in case JS uses it later on
+ */
 
 /* ===== FUNCTIONS ===== */
 /* ===== FUNCTION DECLARATIONS VS EXPRESSIONS ===== */

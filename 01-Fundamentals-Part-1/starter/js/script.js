@@ -159,6 +159,7 @@ lines`);
 */
 
 /* ===== LESSON TAKING DECISIONS IF / ELSE STATEMENTS ===== */
+
 /*
 const age = 15;
 
@@ -183,33 +184,28 @@ if (birthYear <= 2000) {
 */
 
 /* ===== CHALLENGE #2 ===== */
+
 /*
-const markWeight = 95;
-const markHeight = 1.88;
-const johnWeight = 110;
-const johnHeight = 1.76;
+const massMark = 95;
+const heightMark = 1.88;
+const massJohn = 85;
+const heightJohn = 1.76;
+const BMIMark = massMark / (heightMark ** 2);
+const BMIJohn = massJohn / (heightJohn ** 2);
+const markHigherBMI = BMIMark > BMIJohn;
+console.log(BMIMark, BMIJohn, markHigherBMI);
 
-//const markWeight = 78;
-//const markHeight = 1.69;
-//const johnWeight = 92;
-//const johnHeight = 1.95;
-const bmiMark = markWeight / (markHeight * markHeight);
-console.log(Math.round(bmiMark));
-const bmiJohn = johnWeight / (johnHeight * johnHeight);
-console.log(Math.round(bmiJohn));
-
-if (bmiMark > bmiJohn) {
-    console.log(`Mark's BMI ${Math.round(bmiMark)} is higher than John's BMI ${Math.round(bmiJohn)}.`)
+if (BMIJohn > BMIMark) {
+    console.log(`BMI of John is ${BMIJohn} and is higher than the BMI of Mark which is ${BMIMark}`);
 } else {
-    console.log(`Mark's BMI ${Math.round(bmiMark)} is lower than John's BMI ${Math.round(bmiJohn)}.`)
+    console.log(`BMI of Mark is ${BMIMark} and is higher than the BMI of John which is ${BMIJohn}`);
 }
 */
 
 /* ===== TYPE CONVERSION AND COERCION ===== */
 
-/*
 //type conversion
-const inputY = "1990";
+/* const inputY = "1990";
 console.log(Number(inputY), inputY);
 console.log(Number(inputY) + 18);
 console.log(Number("Jonas"));
@@ -217,21 +213,21 @@ console.log(typeof NaN);
 console.log(String(23), 23);
 
 //typecoercion + converts the number to a string -, /, *, > to a number
-console.log("I am " + 23 + " years old");
+console.log("I am " + Number(23) + " years old");
+console.log("I am " + String(23) + " years old")
 console.log("23" - "10" - 3);
 console.log("23" * "10");
 
 let n = "1" + 1; // string 11
 n = n - 1; // - makes it a number again so -1 is the number 10
-console.log(n);
-*/
+console.log(n); */
 
 /* ===== TRUTHY AND FALSY VALUES ===== */
 
 // falsy values are not exactly false but they will become false when we try to convert them to a boolean
 // falsy values 0, '', undefined, null, NaN and ofc false itself anything else will be true
 
-/*
+/* 
 console.log(Boolean(0));
 console.log(Boolean(undefined));
 console.log(Boolean(""));
@@ -255,26 +251,26 @@ if (moMoney) {
 
 let moMoMoney;
 if (moMoMoney) {
-    console.log("moMoMoney is " + moMoMoney)
+    console.log("True is " + moMoMoney)
 } else {
-    console.log("moMoMoney is " + moMoMoney);
+    console.log("False is " + moMoMoney);
 }
-*/
+ */
 
 /* ===== EQUALITY OPERATORS: == VS === ===== */
 
 /*
 const age = 30;
 //Boolean if both sides are exactly the same (STRICT, does not do type coercion)
-if (age === 30) console.log("You just became an adult :D strict");
+if (age === 30) console.log("You just became an adult :D (strict)");
 if ("30" === 30) console.log("You just became an adult :D"); //does not work
 //Loose type coercion
-if ("30" == 30) console.log("You just became an adult :D strict"); //assume == does not exist rather convert the value manually
+if ("30" == 30) console.log("You just became an adult :D (loose)"); //assume == does not exist rather convert the value manually
 
 const favourite = Number(prompt("What is your favorite number"));
 console.log(favourite);
 console.log(typeof favourite);
-//console.log(Number(favourite));
+console.log(Number(favourite));
 
 if (favourite === 8) {
     console.log("Cool! 8 is a great number!")
@@ -287,19 +283,19 @@ if (favourite === 8) {
 }
 
 //strict also !== (different operator also preferably use the strict version and convert otherwise)
-if (favourite !== 8) console.log("Why not 8?");
+if (favourite !== 8) console.log("Why not 8?"); 
 */
 
 /* ===== BOOLEAN LOGIC ===== ===== LOGICAL OPERATORS =====*/
 
-/*
+/* 
 let age = 17;
 
 if (age !== 20) {
     console.log("age is not 20 and is a " + typeof age)
 } else {
     console.log("age is 20 and is a " + typeof age)
-}
+} 
 
 if (age >= 20 || age <= 30) {
     console.log(age + " is between 20 and 30")
@@ -350,7 +346,6 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
 }
 */
 
-
 /* ===== CHALLENGE #3 ===== */
 
 /*
@@ -395,8 +390,8 @@ if (averageDolphins > averageKoalas && averageDolphins >= 100) {
 
 /* ===== THE SWITCH STATEMENT ===== */
 
-
-/* const day = "sunday";
+/* 
+const day = "sunday";
 
 switch (day) {
     case "monday": // day === "monday"
@@ -438,11 +433,12 @@ if (day === "monday") {
     console.log(day + " Relax");
 } else {
     console.log("Not a valid day!")
-} */
+}
+ */
 
 /* ===== STATEMENTS AND EXPRESSIONS ===== */
 
-/* 3 + 4 // expression
+/* 3 + 4 // expressions produce values
 1991 // expression
 true && false && !false // expression
 
@@ -452,9 +448,8 @@ if (23 > 10) {
 
 /* ===== THE CONDITIONAL (TERNARY) OPERATOR ===== */
 
-
-/*
-const age = 23;
+/* 
+const age = 16;
 
 //The condition, the if : the else (ternary condition is an expression not a statement)
 age >= 18 ? console.log("I like to drink beer 🍻") :
@@ -473,14 +468,14 @@ console.log(drink2);
 
 //using the Ternary operator you can use the expression in a template literal
 console.log(`Im allowed to drink ${age >= 18 ? "beer 🍻" : "milk 🥛"} because I am ${age} `)
-*/
+ */
 
 /* ===== CHALLENGE #4 ===== */
 
-/*
-const bill = 200;
+/* 
+let tip;
+let bill = 150;
+bill >= 50 && bill <= 200 ? tip = bill * 0.15 : tip = bill * 0.20;
+console.log(`the bill is ${bill} and the tip is ${tip}, which is ${tip / bill * 100}% of the price of ${bill}`);
 
-// condition? if true.. else..
-const tip = bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.20;
-console.log(`The meal cost $${bill}, the tip was $${tip} this makes for a whopping total of $${bill + tip}`);
-*/
+ */
