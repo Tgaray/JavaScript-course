@@ -99,7 +99,7 @@ console.log(yearsUntilRetirement);
 /* ===== FUNCTIONS CALLING OTHER FUNCTIONS ===== */
 
 //Dont repeat yourself principle or singular use principle. The cutting of the fruit which is a different function than processing the fruit (lets say for 10 different fruits) only has to be changed in one location instead of multiple if we wrote the * in the fruitprocessing function for each fruit that could be put in.
-/* 
+/*
 function cutFruitPieces(fruit) {
     return fruit * 4;
 }
@@ -116,7 +116,7 @@ console.log(fruitProcessor(2, 3)); */
 
 /* ===== REVIEWING FUNCTIONS ===== */
 
-/* 
+/*
 //parameters names can be the same, no problem, basically a local variable for each function
 const calcAge1 = function (birthYear) {
     return 2022 - birthYear;
@@ -204,6 +204,7 @@ function checkWinner(avgKoalas, avgPandas) {
 console.log(checkWinner(averageKoalas, averagePandas)); 
 */
 
+/* 
 const calcAverage = (a, b, c) => (a + b + c) / 3;
 
 let scoreK = calcAverage(34, 23, 71);
@@ -228,10 +229,69 @@ const checkWinnerChickenDinner = function (avgK, avgP) {
 
 console.log(checkWinnerChickenDinner(scoreK, scoreP));
 console.log(checkWinnerChickenDinner(612, 254));
-
+ */
 
 /* ===== INTRODUCTION TO ARRAYS ===== */
-/* ===== BASIC ARRAY OPERATORS ===== */
+
+/* 
+//An array is not a primitive value so you can change the array even with const but not the entire array in one go.
+const friends = ['Levy', 'Nibras', 'Dimitri'];
+console.log(friends);
+
+const years = new Array(1990, 1991, 1992, 1993);
+console.log(friends[2], years[3]);
+console.log(friends.length);
+
+//in thise case we want the last value so we have to subtract one from the index to start at 0
+console.log(friends[friends.length - 1]);
+
+//using [] to add a friend at a specific location
+friends[2] = 'Job';
+console.log(friends);
+
+//you can add all sorts of data to the array
+const firstName = 'Theron';
+const testArray = [firstName, "Garay", 2022 - 1990, "Teacher", friends];
+console.log(testArray);
+
+//Excersize
+const calcAge2 = function (birthYear) {
+    return 2022 - birthYear;
+}
+
+//calcAge2(years); would not work because we are passing on an array not the values
+const age1 = calcAge2(years[0]);
+const age2 = calcAge2(years[1]);
+const age3 = calcAge2(years[years.length - 1]);
+console.log(age1, age2, age3);
+
+const ages = [calcAge2(years[0]), calcAge2(years[1]), calcAge2(years[years.length - 1])];
+console.log(ages);
+ */
+
+/* ===== BASIC ARRAY OPERATIONS ===== */
+
+const friends = ['Levy', 'Nibras', 'Dimitri'];
+//add to end
+friends.push('Job');
+const newLength = friends.push('Nathan');
+//add to beginning
+friends.unshift('Stacho');
+console.log(friends);
+console.log(newLength);
+
+//remove elements
+//pop remove last element
+friends.pop();
+console.log(friends);
+const popped = friends.pop();
+console.log(friends);
+//popped returns which friend was last removed
+console.log(popped);
+//to remove the first value
+friends.shift();
+console.log(friends);
+
 /* ===== CODING CHALLENGE #2 ===== */
 /* ===== INTRODUCTION TO OBJECTS ===== */
 /* ===== DOT VS. BRACKET NOTATION ===== */
