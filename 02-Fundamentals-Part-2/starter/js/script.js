@@ -292,6 +292,13 @@ console.log(popped);
 friends.shift();
 console.log(friends);
 
+//request the index
+console.log(friends.indexOf('Dimitri'));
+console.log(friends.indexOf('Bob'));
+console.log(friends.includes('Levy'));
+console.log(friends.includes('Bob'));
+
+
 /* ===== CODING CHALLENGE #2 ===== */
 /* ===== INTRODUCTION TO OBJECTS ===== */
 /* ===== DOT VS. BRACKET NOTATION ===== */
