@@ -271,6 +271,7 @@ console.log(ages);
 
 /* ===== BASIC ARRAY OPERATIONS ===== */
 
+/* 
 const friends = ['Levy', 'Nibras', 'Dimitri'];
 //add to end
 friends.push('Job');
@@ -298,8 +299,26 @@ console.log(friends.indexOf('Bob'));
 console.log(friends.includes('Levy'));
 console.log(friends.includes('Bob'));
 
+if (friends.includes('Levy')) {
+    console.log('Levy staat in de lijst');
+}
 
+ */
 /* ===== CODING CHALLENGE #2 ===== */
+
+const calcTip = function (billAmount) {
+    let tip;
+    billAmount >= 50 && billAmount <= 300 ? tip = billAmount * 0.15 : tip = billAmount * 0.20;
+    console.log(`the billAmount is ${billAmount} and the tip is ${tip}, which is ${tip / billAmount * 100}% of the price of ${billAmount}`);
+    return tip;
+}
+
+const bills = [125, 555, 44];
+const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+console.log(tips);
+console.log(totals);
+
 /* ===== INTRODUCTION TO OBJECTS ===== */
 /* ===== DOT VS. BRACKET NOTATION ===== */
 /* ===== OBJECT METHODS ===== */
