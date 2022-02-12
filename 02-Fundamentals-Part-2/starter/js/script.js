@@ -306,6 +306,7 @@ if (friends.includes('Levy')) {
  */
 /* ===== CODING CHALLENGE #2 ===== */
 
+/* 
 const calcTip = function (billAmount) {
     let tip;
     billAmount >= 50 && billAmount <= 300 ? tip = billAmount * 0.15 : tip = billAmount * 0.20;
@@ -318,9 +319,82 @@ const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
 console.log(tips);
 console.log(totals);
+ */
 
 /* ===== INTRODUCTION TO OBJECTS ===== */
+
+/* 
+// Array there is no way of giving these elements a name
+const testArray = [
+    'Theron',
+    'Garay',
+    2022 - 1990,
+    'Teacher',
+    ['Levy', 'Job', 'Nibras']
+];
+
+//Object literal syntax, literally writing an object, order of properties does not matter like in an array
+// In objects you can actually give names in key value pairs within {}
+// The below object has five properties we can call by name
+const Theron = {
+    firstName: 'Theron',
+    lastName: 'Garay',
+    age: 2022 - 1990,
+    job: 'Teacher',
+    friends: ['Levy', 'Job', 'Nibras']
+};
+//Use arrays for mor structured data 1, 2, 3 and objects for less structured data
+*/
+
 /* ===== DOT VS. BRACKET NOTATION ===== */
+
+//How to retreive and also how to change data
+
+const Theron = {
+    firstName: 'Theron',
+    lastName: 'Garay',
+    age: 2022 - 1990,
+    job: 'Teacher',
+    friends: ['Levy', 'Job', 'Nibras']
+};/*  */
+
+console.log(Theron);
+//To retreive specific data . notation
+console.log(Theron.age);
+//Bracket notation to retreive data []
+console.log(Theron['age']);
+
+//When you first need to compute the property name use [] no compute then . is fine
+const nameKey = 'Name';
+console.log(Theron[`first${nameKey}`]);
+console.log(Theron[`last${nameKey}`]);
+
+//This does not work with the dot notation, you need the brackets
+//console.log(Theron.`last${nameKey}`);
+
+//Example to show why the brackets are useful for certain cases
+const interestedIn = prompt('What do you want to know about Theron? choose between firstName, lastName, age, job and friends.')
+console.log(Theron.interestedIn); // does not work Theron. does not have a property interestedIn
+console.log(Theron[interestedIn]); // does work Theron[interestedIn] because it takes the value of the variable not the name  
+
+//undefined is a falsy value letst test if the object has properties
+if (Theron[interestedIn]) {
+    console.log(Theron[interestedIn]);
+} else {
+    console.log('Wrong request! Choose between firstName, lastName, age, job and friends.')
+}
+
+//adding properties with both . and []
+Theron.location = 'Eindhoven';
+Theron['social'] = 'Twitter';
+console.log(Theron);
+
+//Look at presedence https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+//So first the item with the dot and then the bracket because they have the same presedence #18
+console.log(`${Theron.firstName} has ${Theron.friends.length} friends, and his best friend is ${Theron.friends[0]}.`);
+
+
+
 /* ===== OBJECT METHODS ===== */
 /* ===== CODING CHALLENGE #3 ===== */
 /* ===== ITERATION: THE FOR LOOP ===== */
