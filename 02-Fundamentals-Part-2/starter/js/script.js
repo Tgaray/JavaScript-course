@@ -201,10 +201,10 @@ function checkWinner(avgKoalas, avgPandas) {
     }
 }
 
-console.log(checkWinner(averageKoalas, averagePandas)); 
+console.log(checkWinner(averageKoalas, averagePandas));
 */
 
-/* 
+/*
 const calcAverage = (a, b, c) => (a + b + c) / 3;
 
 let scoreK = calcAverage(34, 23, 71);
@@ -233,7 +233,7 @@ console.log(checkWinnerChickenDinner(612, 254));
 
 /* ===== INTRODUCTION TO ARRAYS ===== */
 
-/* 
+/*
 //An array is not a primitive value so you can change the array even with const but not the entire array in one go.
 const friends = ['Levy', 'Nibras', 'Dimitri'];
 console.log(friends);
@@ -271,7 +271,7 @@ console.log(ages);
 
 /* ===== BASIC ARRAY OPERATIONS ===== */
 
-/* 
+/*
 const friends = ['Levy', 'Nibras', 'Dimitri'];
 //add to end
 friends.push('Job');
@@ -306,7 +306,7 @@ if (friends.includes('Levy')) {
  */
 /* ===== CODING CHALLENGE #2 ===== */
 
-/* 
+/*
 const calcTip = function (billAmount) {
     let tip;
     billAmount >= 50 && billAmount <= 300 ? tip = billAmount * 0.15 : tip = billAmount * 0.20;
@@ -323,7 +323,7 @@ console.log(totals);
 
 /* ===== INTRODUCTION TO OBJECTS ===== */
 
-/* 
+/*
 // Array there is no way of giving these elements a name
 const testArray = [
     'Theron',
@@ -350,13 +350,14 @@ const Theron = {
 
 //How to retreive and also how to change data
 
+/* 
 const Theron = {
     firstName: 'Theron',
     lastName: 'Garay',
     age: 2022 - 1990,
     job: 'Teacher',
     friends: ['Levy', 'Job', 'Nibras']
-};/*  */
+};
 
 console.log(Theron);
 //To retreive specific data . notation
@@ -392,11 +393,93 @@ console.log(Theron);
 //Look at presedence https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 //So first the item with the dot and then the bracket because they have the same presedence #18
 console.log(`${Theron.firstName} has ${Theron.friends.length} friends, and his best friend is ${Theron.friends[0]}.`);
-
-
+ */
 
 /* ===== OBJECT METHODS ===== */
+
+/* 
+const Theron = {
+    firstName: 'Theron',
+    lastName: 'Garay',
+    birthYear: 1990,
+    job: 'Teacher',
+    friends: ['Levy', 'Job', 'Nibras'],
+    hasDriversLicense: true,
+
+    //function/methods in an object as an expression is a value that can be part of an object
+    // calcAge: function (birthYear) {
+    //     return 2022 - birthYear;
+    // }
+
+    //Use the this keyword/variable so that you can use the corresponding value this propertie already has
+    //The Theron object is calling 'this' (calcAge) function
+    //this (Theron) birthYear (1990)
+    // calcAge: function () {
+    //     //console.log(this);
+    //     return 2022 - this.birthYear;
+    // }
+
+    //Creating a new propterty where we store the value of this function
+    calcAge: function () {
+        //new age property
+        this.age = 2022 - this.birthYear;
+        //for heavier calculations its better to store the value then to run the function multiple times for different calls
+        return this.age;
+    },
+
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, and he has ${this.hasDriversLicense ? "a" : "no"} drivers license.`;
+    }
+};
+
+console.log(Theron.calcAge());
+console.log(Theron.age);
+console.log(Theron['calcAge'](1990));
+
+//Challenge
+//'Theron is a 32-year old teacher, and he has a/no drivers license'
+console.log(Theron.getSummary());
+//Arrays are also objects and in this lecture we created our on methods on our own objects.
+ */
+
 /* ===== CODING CHALLENGE #3 ===== */
+
+const markMiller = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+        this.bmi = this.mass / (this.height * this.height);
+        return this.bmi;
+    }
+}
+
+const johnSmith = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+        this.bmi = this.mass / (this.height * this.height);
+        return this.bmi;
+    }
+}
+
+console.log(johnSmith.calcBMI());
+console.log(markMiller.calcBMI());
+
+//Option 1
+console.log(`${markMiller.calcBMI() > johnSmith.calcBMI() ? `${markMiller.fullName}'s BMI ${markMiller.calcBMI()} is higher than ${johnSmith.fullName}'s BMI ${johnSmith.calcBMI()}.'` : `${johnSmith.fullName}'s BMI ${johnSmith.calcBMI()} is higher than ${markMiller.fullName}'s BMI ${markMiller.calcBMI()}.'`}`);
+
+//Option 2
+console.log(`${markMiller.bmi > johnSmith.bmi ? `${markMiller.fullName}'s BMI ${markMiller.bmi} is higher than ${johnSmith.fullName}'s BMI ${johnSmith.bmi}.'` : `${johnSmith.fullName}'s BMI ${johnSmith.bmi} is higher than ${markMiller.fullName}'s BMI ${markMiller.bmi}.'`}`);
+
+//Option 3
+if (markMiller.bmi > johnSmith.bmi) {
+    console.log(`${markMiller.fullName}'s BMI ${markMiller.bmi} is higher than ${johnSmith.fullName}'s BMI ${johnSmith.bmi}.'`);
+} else {
+    console.log(`${johnSmith.fullName}'s BMI ${johnSmith.bmi} is higher than ${markMiller.fullName}'s BMI ${markMiller.bmi}.'`);
+}
+
 /* ===== ITERATION: THE FOR LOOP ===== */
 /* ===== LOOPING ARRAYS, BREAKING AND CONTINUING ===== */
 /* ===== LOOPING BACKWARDS AND LOOPS IN LOOPS ===== */
