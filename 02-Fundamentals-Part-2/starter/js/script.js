@@ -444,11 +444,13 @@ console.log(Theron.getSummary());
 
 /* ===== CODING CHALLENGE #3 ===== */
 
+/* 
 const markMiller = {
     fullName: 'Mark Miller',
     mass: 78,
     height: 1.69,
     calcBMI: function () {
+        // adding the bmi property
         this.bmi = this.mass / (this.height * this.height);
         return this.bmi;
     }
@@ -459,6 +461,7 @@ const johnSmith = {
     mass: 92,
     height: 1.95,
     calcBMI: function () {
+        //adding the bmi property
         this.bmi = this.mass / (this.height * this.height);
         return this.bmi;
     }
@@ -479,8 +482,12 @@ if (markMiller.bmi > johnSmith.bmi) {
 } else {
     console.log(`${johnSmith.fullName}'s BMI ${johnSmith.bmi} is higher than ${markMiller.fullName}'s BMI ${markMiller.bmi}.'`);
 }
+ */
 
 /* ===== ITERATION: THE FOR LOOP ===== */
+
+
+
 /* ===== LOOPING ARRAYS, BREAKING AND CONTINUING ===== */
 /* ===== LOOPING BACKWARDS AND LOOPS IN LOOPS ===== */
 /* ===== THE WHILE LOOP ===== */
