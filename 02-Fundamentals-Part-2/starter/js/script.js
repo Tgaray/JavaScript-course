@@ -350,7 +350,7 @@ const Theron = {
 
 //How to retreive and also how to change data
 
-/* 
+/*
 const Theron = {
     firstName: 'Theron',
     lastName: 'Garay',
@@ -376,7 +376,7 @@ console.log(Theron[`last${nameKey}`]);
 //Example to show why the brackets are useful for certain cases
 const interestedIn = prompt('What do you want to know about Theron? choose between firstName, lastName, age, job and friends.')
 console.log(Theron.interestedIn); // does not work Theron. does not have a property interestedIn
-console.log(Theron[interestedIn]); // does work Theron[interestedIn] because it takes the value of the variable not the name  
+console.log(Theron[interestedIn]); // does work Theron[interestedIn] because it takes the value of the variable not the name
 
 //undefined is a falsy value letst test if the object has properties
 if (Theron[interestedIn]) {
@@ -397,7 +397,7 @@ console.log(`${Theron.firstName} has ${Theron.friends.length} friends, and his b
 
 /* ===== OBJECT METHODS ===== */
 
-/* 
+/*
 const Theron = {
     firstName: 'Theron',
     lastName: 'Garay',
@@ -444,7 +444,7 @@ console.log(Theron.getSummary());
 
 /* ===== CODING CHALLENGE #3 ===== */
 
-/* 
+/*
 const markMiller = {
     fullName: 'Mark Miller',
     mass: 78,
@@ -486,11 +486,166 @@ if (markMiller.bmi > johnSmith.bmi) {
 
 /* ===== ITERATION: THE FOR LOOP ===== */
 
+/*
+console.log('lifting weights repetition 1')
+console.log('lifting weights repetition 2')
+console.log('lifting weights repetition 3')
+console.log('lifting weights repetition 4')
+console.log('lifting weights repetition 5')
+console.log('lifting weights repetition 6')
+console.log('lifting weights repetition 7')
+console.log('lifting weights repetition 8')
+console.log('lifting weights repetition 9')
+console.log('lifting weights repetition 10')
+ */
 
+//for loop for x amount of repetitions
+/*
+for (let rep = 1; rep <= 10; rep++) {
+    console.log(`'lifting weights repetition ${rep}'`)
+}
+ */
 
 /* ===== LOOPING ARRAYS, BREAKING AND CONTINUING ===== */
+
+/*
+const theron = [
+    'Theron',
+    'Garay',
+    2022 - 1990,
+    'Teacher',
+    ['Levy', 'Job', 'Nibras'],
+    true
+];
+
+const types = [];
+
+for (let i = 0; i < theron.length; i++) {
+    //Reading from Jonas array
+    console.log(`The #${i} value ${theron[0]} array is ${theron[i]} and is a ${typeof theron[i]}.`);
+
+    //Filling the types array
+    //types[i] = typeof theron[i];
+    types.push(typeof theron[i]);
+}
+console.log(types);
+
+const years = [1990, 2021, 2022, 2001, 1994];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+    ages.push(2022 - years[i]);
+
+}
+console.log(ages);
+
+//continue, statement to exit current iteration of loop, in the code it continues only with strings
+console.log('=== ONLY STRINGS ===');
+for (let i = 0; i < theron.length; i++) {
+    if (typeof theron[i] !== 'string') continue;
+    console.log(theron[i], typeof theron[i]);
+}
+
+//break, statement to terminate the entire loop' break when the first number is found and stop the loop
+console.log('=== BREAK WITH NUMBER ===');
+for (let i = 0; i < theron.length; i++) {
+    if (typeof theron[i] === 'number') break;
+    console.log(theron[i], typeof theron[i]);
+}
+ */
+
 /* ===== LOOPING BACKWARDS AND LOOPS IN LOOPS ===== */
+
+/*
+const theron = [
+    'Theron',
+    'Garay',
+    2022 - 1990,
+    'Teacher',
+    ['Levy', 'Job', 'Nibras'],
+    true
+];
+
+//reverse looping
+for (let i = theron.length - 1; i >= 0; i--) {
+    console.log(i, theron[i]);
+}
+
+for (let excersize = 1; excersize <= 3; excersize++) {
+    console.log(`'==== START EXCERSIZE ${excersize}'`)
+    for (let repetition = 1; repetition <= 5; repetition++) {
+        console.log(excersize, `'==== starting excersize ${excersize} and repetition ${repetition}'`)
+    }
+}
+ */
+
 /* ===== THE WHILE LOOP ===== */
+
+//As a reference point the for loop
+
+/* 
+for (let rep = 1; rep <= 10; rep++) {
+    console.log(`FOR: starting excersize repetition ${rep}`)
+}
+
+//starting value
+let rep = 1;
+//while this condition is true keep running the code
+while (rep <= 10) {
+    //at the end of the iteration we have to add the counter
+    console.log(`WHILE: Lifting weights repetition ${rep}`);
+    rep++;
+}
+ */
+
+/* 
+//Create a random number zero to six and make it a whole number not a decimal number (trunc)
+let dice = Math.trunc(Math.random() * 6) + 1;
+//While loop can be used in more different ways than a for loop it can work without a counter
+while (dice !== 6) {
+    //this would create an infinite loop so we need an exit still
+    console.log(`You rolled ${dice}`);
+    // Change the dice value everytime the loop is run
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if (dice === 6) console.log('Loop is about to end');
+}
+ */
+
 /* ===== CODING CHALLENGE #4 ===== */
 
+/* 
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
 
+
+// const calcTip = function (billAmount) {
+//     let tip;
+
+//     console.log(`the billAmount is ${billAmount} and the tip is ${tip}, which is ${tip / billAmount * 100}% of the price of ${billAmount}`);
+//     return tip;
+// }
+
+const calcTip = function (bill) {
+    return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.20;
+}
+
+for (let i = 0; i < bills.length; i++) {
+    //we can use const because in each iteration we will create a new one
+    const tip = calcTip(bills[i]);
+    tips.push(tip);
+    totals.push(tip + bills[i]);
+}
+console.log(bills, tips, totals);
+
+const calcAverage = function (arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum / arr.length;
+}
+console.log(calcAverage([20, 30, 18]));
+console.log(calcAverage(totals));
+console.log(calcAverage(tips));
+ */
