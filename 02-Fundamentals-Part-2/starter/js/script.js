@@ -583,7 +583,7 @@ for (let excersize = 1; excersize <= 3; excersize++) {
 
 //As a reference point the for loop
 
-/* 
+/*
 for (let rep = 1; rep <= 10; rep++) {
     console.log(`FOR: starting excersize repetition ${rep}`)
 }
@@ -598,7 +598,7 @@ while (rep <= 10) {
 }
  */
 
-/* 
+/*
 //Create a random number zero to six and make it a whole number not a decimal number (trunc)
 let dice = Math.trunc(Math.random() * 6) + 1;
 //While loop can be used in more different ways than a for loop it can work without a counter
@@ -613,7 +613,7 @@ while (dice !== 6) {
 
 /* ===== CODING CHALLENGE #4 ===== */
 
-/* 
+/*
 const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
 const tips = [];
 const totals = [];
@@ -649,3 +649,39 @@ console.log(calcAverage([20, 30, 18]));
 console.log(calcAverage(totals));
 console.log(calcAverage(tips));
  */
+
+/* ===== CODING CHALLENGE #4 ===== */
+
+// SECOND ATTEMPT
+const calcTip = function (billAmount) {
+    let tip;
+    billAmount >= 50 && billAmount <= 300 ? tip = billAmount * 0.15 : tip = billAmount * 0.20;
+    return tip;
+}
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+
+const calcAverage = function (arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum / arr.length;
+}
+
+for (let i = 0; i < bills.length; i++) {
+    const tip = calcTip(bills[i]);
+    tips.push(tip);
+    totals.push(tip + bills[i]);
+}
+
+console.log(bills, tips, totals);
+console.log(calcAverage([2, 3, 6]));
+console.log(calcAverage(bills));
+console.log(calcAverage(tips));
+console.log(calcAverage(totals));
+
+
+
