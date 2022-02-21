@@ -652,6 +652,7 @@ console.log(calcAverage(tips));
 
 /* ===== CODING CHALLENGE #4 ===== */
 
+/* 
 // SECOND ATTEMPT
 const calcTip = function (billAmount) {
     let tip;
@@ -682,6 +683,5 @@ console.log(calcAverage([2, 3, 6]));
 console.log(calcAverage(bills));
 console.log(calcAverage(tips));
 console.log(calcAverage(totals));
-
-
+ */
 
