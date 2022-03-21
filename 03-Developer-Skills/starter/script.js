@@ -38,6 +38,7 @@
 //2 Breaking up into sub-problems
 //Merge two arrays
 
+/* 
 const temperatures1 = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
 const temperatures2 = [3, -12, 6, -31, 49, 13, 117, 15, 'error', 2, 4];
 
@@ -59,4 +60,56 @@ const calcTempAmplitude = function (temp1, temp2) {
 };
 
 const amplitude = calcTempAmplitude(temperatures1, temperatures2);
+console.log(amplitude);
+ */
+
+//Debugging
+
+/* 
+  const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celcius',
+    //C) fix the bug
+    value: Number(prompt('Degrees celsius:')),
+  };
+
+  //B) find the bug
+  console.log(measurement);
+  console.table(measurement);
+  console.log(measurement.value);
+  // console.warn(measurement.value);
+  // console.error(measurement.value);
+
+  //Make the string into a number so it can be added to 273
+  //C) fix the bug
+  const kelvin = parseInt(measurement.value) + 273;
+  return kelvin;
+};
+
+//A) identify the bug
+console.log(measureKelvin()); 
+*/
+
+const calcTempAmplitude = function (temp1, temp2) {
+  const temps = temp1.concat(temp2);
+  console.log(temps);
+
+  let max = 0;
+  let min = 0;
+  for (let i = 0; i < temps.length; i++) {
+    const curTemp = temps[i];
+    //continue makes it so that the rest of the iteration will not be finished and skip to the next iteration (if it matches the condition)
+    if (typeof curTemp !== 'number') continue;
+
+    debugger;
+    if (curTemp > max) max = curTemp;
+    if (curTemp < min) min = curTemp;
+  }
+  console.log(max, min);
+  return max - min;
+};
+
+const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
+//A) Identify
 console.log(amplitude);
