@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fauna+One&family=Playfair+Display&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,52 +7,78 @@
 }
 
 body {
-  background-color: rgb(255, 247, 201);
-  font-family: Arial;
-  font-size: 20px;
+  background-color: #0d6647;
+  color: #fff;
+  font-size: 12px;
   padding: 50px;
 }
 
 h1 {
-  font-size: 35px;
-  margin-bottom: 25px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  margin: 0 0 20px 0;
 }
 
 p {
-  margin-bottom: 20px;
+  font-family: "Fauna One", serif;
+  margin: 0 0 20px 0;
 }
 
-.first {
-  color: red;
+img {
+  border: solid 3px grey;
 }
 
-#your-name {
-  background-color: rgb(255, 220, 105);
-  border: 5px solid #444;
-  width: 400px;
-  padding: 25px;
-  margin-top: 30px;
+form#contact-form {
+  font-family: "Playfair Display", serif;
+  margin: 20px 0;
+  width: 50%;
 }
 
-input,
-button {
+legend {
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+}
+
+label {
+  display: block;
+  margin: 0 auto;
+  padding: 20px 0 0 20px;
+}
+
+input {
+  display: block;
+  margin: 0 0 0 20px;
+  padding: 20px 0 0 20px;
+}
+
+input[type="submit"] {
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+  border: none;
   padding: 10px;
-  font-size: 16px;
+  margin: 20px;
+  background-color: #fff;
+  color: #0d6647;
+}
+
+input[type="submit"]:hover {
+  background-color: #149668;
+  color: #fff;
 }
 
 a {
-  background-color: yellowgreen;
+  color: #fff;
+  text-decoration: none;
 }
 
-#course-image {
-  width: 300px;
+a:hover {
+  color: #149668;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
-#your-name h2 {
-  color: olivedrab;
+.highlight {
+  background-color: #149668;
 }

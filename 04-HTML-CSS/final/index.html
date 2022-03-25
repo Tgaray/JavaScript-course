@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <hea>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link href="style.css" rel="stylesheet" />
-
-    <title>Learning HTML & CSS</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Celtics practice page for JS course</title>
   </head>
-  <body>
-    <h1>JavaScript is fun, but so is HTML & CSS!</h1>
-    <p class="first">
-      You can learn JavaScript without HTML and CSS, but for DOM manipulation
-      it's useful to have some basic ideas of HTML & CSS. You can learn more
-      about it
-      <a href="https://www.udemy.com/user/jonasschmedtmann/">on Udemy</a>.
+  <p>
+    <h1>BOSTON CELTICS PRACTICE PAGE</h1>
+    <p>
+      <a href="https://www.nba.com/celtics/">The Boston Celtics</a> (/ˈsɛltɪks/ SEL-tiks) are an American professional
+      basketball team based in Boston. The Celtics compete in the National
+      Basketball Association <span class="highlight">(NBA)</span> as a member of the league's Eastern
+      Conference Atlantic Division. Founded in 1946 as one of the league's
+      original eight teams, the Celtics play their home games at TD Garden,
+      which they share with the National Hockey League's Boston Bruins. 
+    </p>  
+    <p>
+      The Celtics are regarded as one of the most successful basketball teams in NBA
+      history; The franchise is tied with the Los Angeles Lakers for most NBA
+      Championships won with 17 <span class="highlight">(accounting for 23.6 percent of all NBA
+      championships since the league's founding)</span> and currently holds the record
+      for the most recorded wins of any NBA team.
+    <p>
+      The Celtics have a notable rivalry with the Los Angeles Lakers, which was heavily highlighted
+      throughout the 1960s and 1980s. During the two teams' many match-ups in
+      the 1980s, the Celtics' star, Larry Bird, and the Lakers' star, Magic
+      Johnson, had an ongoing feud. The franchise has played the Lakers a record
+      12 times in the NBA Finals <span class="highlight">(including their most recent appearances in
+      2008 and 2010)</span>, of which the Celtics have won nine.
     </p>
-
-    <h2>Another heading</h2>
-    <p class="second">
-      Just another paragraph
+    <p>
+      Four Celtics players <span class="highlight">(Bob Cousy, Bill Russell, Dave Cowens and Larry Bird)</span> have won the
+      NBA Most Valuable Player Award for an NBA record total of 10 MVP
+      awards. Both the nickname "Celtics" and their mascot "Lucky the
+      Leprechaun" are a nod to Boston's historically large Irish population, and
+      also to the Original Celtics, a marquee team prior to the NBA.
     </p>
-
-    <img
-      id="course-image"
-      src="https://img-a.udemycdn.com/course/480x270/437398_46c3_9.jpg"
-    />
-
-    <form id="your-name">
-      <h2>Your name here</h2>
-      <p class="first">Please fill in this form :)</p>
-
-      <input type="text" placeholder="Your name" />
-      <button>OK!</button>
+    <img src="https://i.ytimg.com/vi/SRNL_fogOiA/hqdefault.jpg"/>
+    <form id="contact-form">
+      <fieldset>
+        <legend>
+          Feel free to contact
+        </legend>
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname">
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <input type="submit" value="Submit">
+      </fieldset>
     </form>
   </body>
 </html>
