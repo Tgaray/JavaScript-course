@@ -157,3 +157,4 @@ const printForecast = function(temperature){
 
 printForecast(temp1);
 */
+
