@@ -136,14 +136,25 @@ const temp2 = [12, 5, -5, 0, 4];
 const temperatures = temp1.concat(temp2);
 console.log(temperatures);
 
-debugger;
 const printForecast = function (temparray) {
-  let forecast;
-  for (let i = 0; i < temparray.length; i++) {
-    forecast += temparray[i];
+  let forecast = '';
+  for (let i = 0; i < temparray.length - 1; i++) {
+    forecast += `${temparray[i]} degrees in ${[i + 1]} days. `;
   }
-  return forecast;
   console.log(forecast);
 };
 
-console.log(printForecast(temperatures));
+printForecast(temperatures);
+
+/*
+const temp1 = [17, 18, 19];
+
+const printForecast = function(temperature){
+  for(let i = 0; i < temp1.length; i++){
+    console.log(`${temp1[i]} degrees in ${i} days`)
+  }
+}
+
+printForecast(temp1);
+*/
+
