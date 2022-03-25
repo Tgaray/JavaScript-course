@@ -139,7 +139,7 @@ console.log(temperatures);
 const printForecast = function (temparray) {
   let forecast = '';
   for (let i = 0; i < temparray.length - 1; i++) {
-    forecast += `${temparray[i]} degrees in ${[i + 1]} days. `;
+    forecast += ` ... ${temparray[i]} degrees in ${[i + 1]} days`;
   }
   console.log(forecast);
 };
@@ -157,4 +157,3 @@ const printForecast = function(temperature){
 
 printForecast(temp1);
 */
-
