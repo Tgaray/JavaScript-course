@@ -90,7 +90,7 @@ console.log(amplitude);
 //A) identify the bug
 console.log(measureKelvin()); 
 */
-
+/* 
 const calcTempAmplitude = function (temp1, temp2) {
   const temps = temp1.concat(temp2);
   console.log(temps);
@@ -113,3 +113,37 @@ const calcTempAmplitude = function (temp1, temp2) {
 const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
 //A) Identify
 console.log(amplitude);
+ */
+
+// Coding Challenge #1
+
+//The problem
+//Given an array of forecasted max temperatures, the thermometer displays a string with these temperatures. Give the strings back for each value in the array will be the max temparture for the next day.
+
+//1 Understanding the problem
+//With two arrays doe we need to implement the functionality twice
+//Could I use a template literal to add each new piece to the string
+//Could I add strings together to create one long string
+//No, Merge the array twice
+
+//2 Breaking up into sub-problems
+//Merge two arrays
+//Loop through the arrays and addt hem to a template literal
+//Return the string
+
+const temp1 = [17, 21, 23];
+const temp2 = [12, 5, -5, 0, 4];
+const temperatures = temp1.concat(temp2);
+console.log(temperatures);
+
+debugger;
+const printForecast = function (temparray) {
+  let forecast;
+  for (let i = 0; i < temparray.length; i++) {
+    forecast += temparray[i];
+  }
+  return forecast;
+  console.log(forecast);
+};
+
+console.log(printForecast(temperatures));
