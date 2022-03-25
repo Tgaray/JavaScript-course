@@ -90,30 +90,63 @@ console.log(amplitude);
 //A) identify the bug
 console.log(measureKelvin()); 
 */
+/* 
+const calcTempAmplitude = function (temp1, temp2) {
+  const temps = temp1.concat(temp2);
+  console.log(temps);
 
-// const calcTempAmplitude = function (temp1, temp2) {
-//   const temps = temp1.concat(temp2);
-//   console.log(temps);
+  let max = 0;
+  let min = 0;
+  for (let i = 0; i < temps.length; i++) {
+    const curTemp = temps[i];
+    //continue makes it so that the rest of the iteration will not be finished and skip to the next iteration (if it matches the condition)
+    if (typeof curTemp !== 'number') continue;
 
-//   let max = 0;
-//   let min = 0;
-//   for (let i = 0; i < temps.length; i++) {
-//     const curTemp = temps[i];
-//     //continue makes it so that the rest of the iteration will not be finished and skip to the next iteration (if it matches the condition)
-//     if (typeof curTemp !== 'number') continue;
+    debugger;
+    if (curTemp > max) max = curTemp;
+    if (curTemp < min) min = curTemp;
+  }
+  console.log(max, min);
+  return max - min;
+};
 
-//     debugger;
-//     if (curTemp > max) max = curTemp;
-//     if (curTemp < min) min = curTemp;
-//   }
-//   console.log(max, min);
-//   return max - min;
-// };
+const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
+//A) Identify
+console.log(amplitude);
+ */
 
-// const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
-// //A) Identify
-// console.log(amplitude);
+// Coding Challenge #1
 
+//The problem
+//Given an array of forecasted max temperatures, the thermometer displays a string with these temperatures. Give the strings back for each value in the array will be the max temparture for the next day.
+
+//1 Understanding the problem
+//With two arrays doe we need to implement the functionality twice
+//Could I use a template literal to add each new piece to the string
+//Could I add strings together to create one long string
+//No, Merge the array twice
+
+//2 Breaking up into sub-problems
+//Merge two arrays
+//Loop through the arrays and addt hem to a template literal
+//Return the string
+
+const temp1 = [17, 21, 23];
+const temp2 = [12, 5, -5, 0, 4];
+const temperatures = temp1.concat(temp2);
+console.log(temperatures);
+
+const printForecast = function (temparray) {
+  let forecast = '';
+  for (let i = 0; i < temparray.length - 1; i++) {
+    forecast += `${temparray[i]} degrees in ${[i + 1]} days. `;
+  }
+  console.log(forecast);
+};
+
+printForecast(temperatures);
+
+/*
 const temp1 = [17, 18, 19];
 
 const printForecast = function(temperature){
@@ -123,3 +156,4 @@ const printForecast = function(temperature){
 }
 
 printForecast(temp1);
+*/
