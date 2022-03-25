@@ -91,25 +91,35 @@ console.log(amplitude);
 console.log(measureKelvin()); 
 */
 
-const calcTempAmplitude = function (temp1, temp2) {
-  const temps = temp1.concat(temp2);
-  console.log(temps);
+// const calcTempAmplitude = function (temp1, temp2) {
+//   const temps = temp1.concat(temp2);
+//   console.log(temps);
 
-  let max = 0;
-  let min = 0;
-  for (let i = 0; i < temps.length; i++) {
-    const curTemp = temps[i];
-    //continue makes it so that the rest of the iteration will not be finished and skip to the next iteration (if it matches the condition)
-    if (typeof curTemp !== 'number') continue;
+//   let max = 0;
+//   let min = 0;
+//   for (let i = 0; i < temps.length; i++) {
+//     const curTemp = temps[i];
+//     //continue makes it so that the rest of the iteration will not be finished and skip to the next iteration (if it matches the condition)
+//     if (typeof curTemp !== 'number') continue;
 
-    debugger;
-    if (curTemp > max) max = curTemp;
-    if (curTemp < min) min = curTemp;
+//     debugger;
+//     if (curTemp > max) max = curTemp;
+//     if (curTemp < min) min = curTemp;
+//   }
+//   console.log(max, min);
+//   return max - min;
+// };
+
+// const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
+// //A) Identify
+// console.log(amplitude);
+
+const temp1 = [17, 18, 19];
+
+const printForecast = function(temperature){
+  for(let i = 0; i < temp1.length; i++){
+    console.log(`${temp1[i]} degrees in ${i} days`)
   }
-  console.log(max, min);
-  return max - min;
-};
+}
 
-const amplitude = calcTempAmplitude([3, 5, 1], [9, 4, 5]);
-//A) Identify
-console.log(amplitude);
+printForecast(temp1);
