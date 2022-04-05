@@ -1,6 +1,8 @@
 'use strict';
 
 //Selecting elements
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
 const score0El = document.getElementById('score--0');
 const score1El = document.getElementById('score--1');
 const current0El = document.getElementById('current--0');
@@ -9,10 +11,106 @@ const diceEl = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+let scores = [0, 0];
+let playing = true;
+let currentScore = 0;
+let activePlayer = 0;
+
+//Starting conditions
+score0El.textContent = 0;
+score1El.textContent = 0;
+diceEl.classList.add('hidden');
+
+//functions
+const switchPlayer = function () {
+  //restore the current score to zero for the next round/player
+  currentScore = 0;
+  //set the currentscore text on the screen back to zero
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  //ternary operator to switch the value of the active player to the opposite
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
+
+//Event handlers
+btnRoll.addEventListener('click', function () {
+  //If game state is active
+  if (playing) {
+    //1. Generate random dice roll
+    let diceRoll = Math.trunc(Math.random() * 6 + 1);
+
+    //2. Show the corresponding dice
+    diceEl.classList.remove('hidden');
+    diceEl.src = `dice-${diceRoll}.png`;
+
+    //3. Check if we rolled 1
+    if (diceRoll !== 1) {
+      // Add dice to current score
+      currentScore += diceRoll;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      //restore score to zero and switch player
+      switchPlayer();
+    }
+    //Check which player is active
+  }
+});
+
+//Hold the score
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    //1. add current score to active players total score
+    //for example scores[1] = scores[1] += currentScore
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    //2. check if players score is >= 100
+    if (scores[activePlayer] >= 10) {
+      //change the state of the game to (false / not playing)
+      playing = false;
+      //hide the dice when the game is won
+      diceEl.classList.add('hidden');
+
+      //change bg color by adding winner class and remove the active class
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      switchPlayer();
+    }
+    //Finish the game
+    //If not => 100 then switch player
+  }
+});
+
+btnNew.addEventListener('click', function () {
+  playing = true;
+  scores = [0, 0];
+  currentScore = 0;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  document.getElementById('current--0').textContent = 0;
+  document.getElementById('current--1').textContent = 0;
+  document.querySelector('.player--0').classList.remove('player--winner');
+  document.querySelector('.player--1').classList.remove('player--winner');
+  document.querySelector('.player--0').classList.add('player--active');
+  document.querySelector('.player--1').classList.remove('player--active');
+  console.log(scores);
+});
+
+/* 
+//Experiment I made
 const player = document.querySelectorAll('.player--active');
+console.log(player);
 let currentScore0 = 0;
 let currentScore1 = 0;
-let bool = true;
+let active = true;
 
 console.log(player);
 //Starting conditions
@@ -33,19 +131,20 @@ btnRoll.addEventListener('click', function () {
   diceEl.classList.remove('hidden');
   diceEl.src = `dice-${diceRoll}.png`;
 
-  //3. Check for rolled 1: if true switch to next player
+  //3. Check if the rolled dice does not have the value of 1
   if (diceRoll !== 1) {
-    //Add dice to the current score
-    if (bool) {
+    //Check if player 1 is active
+    if (active) {
+      //active true = add score to player 1
       current0El.textContent = currentScore0 += diceRoll;
     } else {
+      //active false = add score to player 2
       current1El.textContent = currentScore1 += diceRoll;
     }
+    //if the score is 1 change the active boolean to the opposite
   } else {
-    bool = !bool;
-    console.log(bool);
+
   }
   //Check which player is active
 });
-
-//btnHold.addEventListener('click');
+  */
