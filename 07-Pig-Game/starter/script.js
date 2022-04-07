@@ -11,17 +11,31 @@ const diceEl = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
-let scores = [0, 0];
-let playing = true;
-let currentScore = 0;
-let activePlayer = 0;
 
-//Starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+//Declaring empty variables
+let scores, playing, currentScore, activePlayer;
 
 //functions
+const init = function () {
+  //Set starting conditions for the game
+  scores = [0, 0];
+  playing = true;
+  currentScore = 0;
+  activePlayer = 0;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  diceEl.classList.add('hidden');
+  document.getElementById('current--0').textContent = 0;
+  document.getElementById('current--1').textContent = 0;
+  document.querySelector('.player--0').classList.remove('player--winner');
+  document.querySelector('.player--1').classList.remove('player--winner');
+  document.querySelector('.player--0').classList.add('player--active');
+  document.querySelector('.player--1').classList.remove('player--active');
+};
+
+//On opening game run init function to set everyting to start values
+init();
+
 const switchPlayer = function () {
   //restore the current score to zero for the next round/player
   currentScore = 0;
@@ -60,6 +74,7 @@ btnRoll.addEventListener('click', function () {
 
 //Hold the score
 btnHold.addEventListener('click', function () {
+  //if game state is active
   if (playing) {
     //1. add current score to active players total score
     //for example scores[1] = scores[1] += currentScore
@@ -68,8 +83,8 @@ btnHold.addEventListener('click', function () {
       scores[activePlayer];
 
     //2. check if players score is >= 100
-    if (scores[activePlayer] >= 10) {
-      //change the state of the game to (false / not playing)
+    if (scores[activePlayer] >= 100) {
+      //change the state of the game to (false / not playing) so the hold and roll buttons dont work anymore unless we do a new game.
       playing = false;
       //hide the dice when the game is won
       diceEl.classList.add('hidden');
@@ -84,25 +99,10 @@ btnHold.addEventListener('click', function () {
     } else {
       switchPlayer();
     }
-    //Finish the game
-    //If not => 100 then switch player
   }
 });
 
-btnNew.addEventListener('click', function () {
-  playing = true;
-  scores = [0, 0];
-  currentScore = 0;
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-  document.getElementById('current--0').textContent = 0;
-  document.getElementById('current--1').textContent = 0;
-  document.querySelector('.player--0').classList.remove('player--winner');
-  document.querySelector('.player--1').classList.remove('player--winner');
-  document.querySelector('.player--0').classList.add('player--active');
-  document.querySelector('.player--1').classList.remove('player--active');
-  console.log(scores);
-});
+btnNew.addEventListener('click', init);
 
 /* 
 //Experiment I made
