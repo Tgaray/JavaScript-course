@@ -87,6 +87,7 @@ function deleteShoppingCart() {
 }
  */
 
+/* 
 //var is the one you can find in the window object (type window click enter in console to see the window object), there you see the var is hoisted and visible as x: 1
 var x = 1;
 let y = 2;
@@ -95,3 +96,55 @@ const z = 3;
 console.log(x === window.x);
 console.log(y === window.y);
 console.log(z === window.z);
+ */
+
+/* 
+//Lesson 97 The this keyword in practice
+
+//This without 'use strict' calls the window object, in strict mode this is  undefined
+console.log(this);
+
+const calcAge = function (birthYear) {
+  console.log(2022 - birthYear);
+  // in strict mode this is undefined, it is its own this within this function though
+  console.log(this);
+};
+
+calcAge(1990);
+
+//now lets see what happens in an arrow function, in this case also window because that is the parent of this function because there is no function around it (it used the this of its parent called lexical this)
+const calcAgeArrow = birthYear => {
+  console.log(2022 - birthYear);
+  // in strict mode this is undefined, its not its own this
+  console.log(this);
+};
+
+calcAgeArrow(1990);
+
+//in an object/function this will be the object that is calling the this keyword
+const Theron = {
+  year: 1990,
+  calcAge: function () {
+    console.log(this);
+    console.log(2022 - this.year);
+  },
+};
+
+//This gets the object because The Theron object was calling the method with this inside of it hence this refers to that object
+Theron.calcAge();
+
+//Another example
+const yietta = {
+  year: 1994,
+};
+
+//borrowing the calcAge method
+yietta.calcAge = Theron.calcAge;
+//This in this case is matilda so matilda is calling the method and therefor the this keyword points to the matilda object in this case
+yietta.calcAge();
+
+//storing a method in a new variable
+const f = Theron.calcAge;
+//this now is a regular function call and makes the this undefined
+f();
+ */
