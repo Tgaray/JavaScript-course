@@ -151,16 +151,17 @@ f();
 
 //Lesson 98 Functions vs Arrow functions
 
+/*
 const theron = {
   firstName: 'Theron',
   year: 1990,
   calcAge: function () {
     console.log(2022 - this.year);
-
-    //Solution 1 (pre ES6)
-    //set the self outside of the function so we still have access to it (go up in parent scope)
-    //self or that
-    /*     
+*/
+//Solution 1 (pre ES6)
+//set the self outside of the function so we still have access to it (go up in parent scope)
+//self or that
+/*     
     const self = this;
     const isMillenial = function () {
       console.log(self);
@@ -168,7 +169,7 @@ const theron = {
     };
     isMillenial(); 
     */
-
+/*
     //Solution 2 (Modern solution)
     //Arrow function does not need the extra self/this variable because it goes up to the parent object (theron) to retrieve the this
     const isMillenial = () => {
@@ -177,8 +178,9 @@ const theron = {
     };
     isMillenial();
   },
-
-  //this in an arrow function does not get its own this keyword (lexical) this of parent but there is no parent in this case so undefined because it uses the this from the window object in this case. Best practice, never use an arrow function as a method.
+*/
+//this in an arrow function does not get its own this keyword (lexical) this of parent but there is no parent in this case so undefined because it uses the this from the window object in this case. Best practice, never use an arrow function as a method.
+/*
   greet: () => {
     console.log(this);
     console.log(`Hey ${this.firstName}`);
@@ -202,3 +204,27 @@ const addArrow = (a, b) => {
   return a + b;
 };
 addArrow(6, 8);
+
+ */
+
+/*
+//Lesson 99 Primitives vs Objects
+
+//Primitives (Number, String, Boolean, Undefined, Null, Symbol, BigInt)
+let age = 31;
+let oldAge = age;
+age = 32;
+console.log(age);
+console.log(oldAge);
+
+//Object (Object literal, arrays, functions) also reference types
+const me = {
+  name: 'Theron',
+  age: 32,
+};
+const friend = me;
+friend.age = 28;
+//Both get age 28 because the the value is changed in the reference for the same object that is stored in the heap not in the callstack like a primitive.
+console.log('Friend', friend);
+console.log('Me', me);
+*/
