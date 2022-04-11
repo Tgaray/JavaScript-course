@@ -228,3 +228,46 @@ friend.age = 28;
 console.log('Friend', friend);
 console.log('Me', me);
 */
+
+//Lesson 100 primitives vs objects in practice
+
+//Each primitive value is stored in its own place in the stack
+let lastName = 'Garay';
+let oldlastName = lastName;
+lastName = 'Chrysostomou';
+console.log(lastName, oldlastName);
+
+//Objects store their reference in the heap and they will be changed and cought for everytime the reference is called and presented that way everywhere
+const theron = {
+  firstName: 'Theron',
+  lastName: 'Garay',
+  age: 31,
+};
+//new object but actually just copying the reference
+const marriedTheron = theron;
+marriedTheron.lastName = 'Chrysostomou';
+//both get last name Chrysostomou because they have the same reference so no new object is created in the heap
+console.log('Before marriage:', theron);
+console.log('Before marriage:', marriedTheron);
+//changing the object when its a const is not possible (it will get a new reference) but the values inside it like the last name in this case can change
+
+//Copying objects
+const theron2 = {
+  firstName: 'Theron',
+  lastName: 'Garay',
+  age: 31,
+  family: ['Igor', 'Rian', 'Stacho', 'Yma', 'Nel', 'Iwan', 'Aurelie'],
+};
+
+//Object.assign, this merges two objects and creates a new one
+
+//Merge an empty new object with theron2 this creates a new object
+const theronCopy = Object.assign({}, theron2);
+//theron2 gets married
+theronCopy.lastName = 'Chrysostomou';
+//When a new reference/object is created with the newly assigned theronCopy
+console.log(theron2, theronCopy);
+
+//theronCopy is just a shallow copy though becase an array is an object in itself and is 'deeper' and this does not change when we copy the first reference to make a copy of it because the array is an (deeper)object that will be still coming from the reference:
+theronCopy.family.push('Syair', 'Yietta');
+console.log(theron2, theronCopy);
