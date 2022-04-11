@@ -148,3 +148,57 @@ const f = Theron.calcAge;
 //this now is a regular function call and makes the this undefined
 f();
  */
+
+//Lesson 98 Functions vs Arrow functions
+
+const theron = {
+  firstName: 'Theron',
+  year: 1990,
+  calcAge: function () {
+    console.log(2022 - this.year);
+
+    //Solution 1 (pre ES6)
+    //set the self outside of the function so we still have access to it (go up in parent scope)
+    //self or that
+    /*     
+    const self = this;
+    const isMillenial = function () {
+      console.log(self);
+      console.log(self.year >= 1981 && self.year <= 1996);
+    };
+    isMillenial(); 
+    */
+
+    //Solution 2 (Modern solution)
+    //Arrow function does not need the extra self/this variable because it goes up to the parent object (theron) to retrieve the this
+    const isMillenial = () => {
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
+  },
+
+  //this in an arrow function does not get its own this keyword (lexical) this of parent but there is no parent in this case so undefined because it uses the this from the window object in this case. Best practice, never use an arrow function as a method.
+  greet: () => {
+    console.log(this);
+    console.log(`Hey ${this.firstName}`);
+  },
+};
+
+theron.greet();
+theron.calcAge();
+
+//Arguments keyword
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+addExpr(2, 5);
+addExpr(3, 7);
+
+//the arguments keyword does not work in an arrow function
+const addArrow = (a, b) => {
+  console.log(arguments);
+  return a + b;
+};
+addArrow(6, 8);
