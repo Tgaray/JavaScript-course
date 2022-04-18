@@ -15,6 +15,23 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  //Passing in one argument (an object) and splitting the properties of the object up in their seperate property value pairs
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
 
   openingHours: {
     thu: {
@@ -32,7 +49,80 @@ const restaurant = {
   },
 };
 
+/* 
+//Lesson 105 The spread operator
+
+//Usually to add to an array
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+//Adding with a spread array is much easier (since ES6), basically taking out all the elements in the array and adding them without having to handwrite them all
+const goodNewArr = [1, 2, ...arr];
+console.log(goodNewArr);
+
+//also able to pass as arguments for example:
+//This is good if we need the elements of an array individually
+console.log(...goodNewArr);
+
+//More useful example, add a food item to the mainmenu of the restaurant object, this will be a completely new array
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+//Use case shallow copies
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+//Mergue two arrays together
+const fullMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(fullMenu);
+
+//Actually spread operators work in iterables (arrays, strings, maps, sets but not objects)
+const string = 'Theron';
+const letters = [...string, ' ', 'G.'];
+console.log(letters);
+console.log(...string);
+
+//An example of passing a spread in a function as parameters
+const ingredients = ['Basilicum', 'Balsamico', 'Tomato sauce'];
+restaurant.orderPasta(...ingredients);
+
+//Escaping the apostrof with \ so it does not become the end of the string (prettier makes the single into a double quote so the single quote is escaped)
+const ingredientsCustomer = [
+  prompt("Let's make pasta! Ingredient 1?"),
+  prompt('Ingredient 2?'),
+  prompt('Ingredient 3?'),
+];
+console.log(ingredientsCustomer);
+restaurant.orderPasta(...ingredientsCustomer);
+
+//Now also works with objects since ES2018 even though objects are not iterables
+//Real world example
+const newRestaurant = { foundedIn: 1990, ...restaurant, founder: 'Guiseppe' };
+console.log(newRestaurant);
+
+//Shallow copy of an object
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+*/
+
+/* 
 //Lesson 104 Destructuring Objects
+
+//Calling a function and passing in an object with options so we can destructure with the arguments in the function right away. look at orderDelivery function.
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via Del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+//Take the default values already filled in behind the arguments if they are not present in the function call
+restaurant.orderDelivery({
+  address: 'Via Del Sole, 21',
+  starterIndex: 2,
+});
 
 //create three brand new values based on the restaurant object
 const { name, openingHours, categories } = restaurant;
@@ -46,6 +136,32 @@ const {
 } = restaurant;
 console.log(restaurantName, openingHours, tags);
 
+//Default values
+//example of setting a default value in this case an empty array, useful when you dont know what the data looks like
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
+
+//Mutating variables
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+//for an object a destructuring assignment to mutate variables has to be wrapped in ()
+({ a, b } = obj);
+console.log(a, b);
+
+//Now mutating for nested objects
+const {
+  fri: { open, close },
+} = openingHours;
+console.log(open, close);
+
+//Reassigning values
+const {
+  sat: { open: o, close: c },
+} = openingHours;
+console.log(o, c);
+
+ */
 //Lesson 103 Destructuring Arrays
 /* 
 const arr = [2, 3, 4];
