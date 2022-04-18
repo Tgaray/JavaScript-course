@@ -32,6 +32,20 @@ const restaurant = {
   },
 };
 
+//Lesson 104 Destructuring Objects
+
+//create three brand new values based on the restaurant object
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+
+//Changing the variable names, especially useful when dealing with third party data
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, openingHours, tags);
+
 //Lesson 103 Destructuring Arrays
 /* 
 const arr = [2, 3, 4];
