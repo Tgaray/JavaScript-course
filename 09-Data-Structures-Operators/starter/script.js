@@ -33,6 +33,11 @@ const restaurant = {
     );
   },
 
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -48,6 +53,103 @@ const restaurant = {
     },
   },
 };
+
+/* 
+//Lesson 108 Nullish Coalescing Operator
+
+restaurant.numGuests = 0;
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+//Nullish: null and undefined (not 0 or '')
+//0 and '' are in thise case truthy values
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+ */
+
+/* 
+//Lesson 107 Short circuiting && and ||
+
+//Logical operators can use any datatype and can return any datatype, and they do a short circuit evaluation
+//If the first value is a truthy value it will return that
+console.log(3 || 'Theron');
+console.log('' || 'Theron');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+//more practicle example
+const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guest1);
+
+//restaurant.numGuests = 23;
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+//Short circuiting AND operator (with a truthy the last value is logged)
+console.log('--- AND ---');
+console.log(0 && 'Theron');
+console.log(7 && 'Theron');
+console.log('Hello' && 23 && null && 'Theron');
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('Mushrooms', 'Spinach');
+}
+restaurant.orderPizza && restaurant.orderPizza('Mushrooms', 'Spinach');
+
+ */
+/* 
+//Lesson 106 Rest operator
+
+//1) Destructuring
+
+//SPREAD because ... of the right side of assignment = operator
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
+
+//REST because on the left side of the assignment = operator
+//CALLED Rest of the elements not used in the restructuring assignment
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+
+//The rest has to be the last element (otherwise unclear until when it will have to work), only one per restructuring possible
+const [pizza, , risotto, ...otherfood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherfood);
+
+//Opening hours
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+//2) Functions res pattern adds the rest
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+add(2, 4);
+add(1, 3, 5, 6);
+add(5, 3, 2, 34, 1, 102);
+const x = [23, 5, 7];
+//packing the values into an array that we pass on to the function
+add(...x);
+
+//Function with parameters with resting as much parameters as we want to
+restaurant.orderPizza(
+  'Mushrooms',
+  'Tomato sauce',
+  'Garlic',
+  'Union',
+  'Cheese',
+  'Flower',
+  'Dough'
+);
+//Only one parameter, this one will not pass on the rest parameter because there are no other parameters
+restaurant.orderPizza('Mushrooms');
+*/
 
 /* 
 //Lesson 105 The spread operator
