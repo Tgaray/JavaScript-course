@@ -55,6 +55,84 @@ const restaurant = {
 };
 
 //110 Coding Challenge #1
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+/* 
+/// CODING CHALLENGE 1 ///
+
+//1 Two arrays with both teams
+const [players1, players2] = game.players;
+console.log(players1);
+console.log(players2);
+//2 One array for the goalkeeper and one for the rest of the fieldplayers
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+//3 One array for all the players of both teams
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+//4 One array with players plus three new players
+const players1Final = [...players1, 'Jimmyboy', 'Jimbo', 'Jimmy'];
+console.log(players1Final);
+//5 create three variables based on the team1/x/team2 values in the object. Destructuring by assigning the entire 1.object and 2. selecting the right property 3. and destructuring to seperate variables
+const {
+  odds: { team1, x, team2 },
+} = game;
+console.log(team1, x, team2);
+//6 print seperate players names (Not from an array) to the console
+const printGoal = function (...playerNames) {
+  for (let i = 0; i < playerNames.length; i++) {
+    console.log(playerNames[i]);
+  }
+};
+printGoal('Jimmyboy', 'Jimbo', 'Jimmy', game.score, game.scored);
+printGoal('Jimmyboy', game.score, ...game.scored);
+//7 Console.log team with lower odd is more likely to win (without if/else or ternary operator)
+//Explained: we want the console.log to be put out if the first comparison is true
+
+//Writes to the console (NOT SHORT CIRCUITED BECAUSE ITS TRUE)
+team1 < team2 && console.log('Team 1 is  likely to win');
+//Does not write to the console (BECAUSE ITS FALSE)
+team2 < team1 && console.log('Team 1 is  likely to win');
+*/
 
 /* 
 // 109 Logical assignment operator
@@ -82,12 +160,12 @@ rest1.numGuests ??= 10;
 rest2.numGuests ??= 10;
 
 //Logical and operator (rest2.owner is truthy in and it goes for falsy)
-// rest1.owner = rest1.owner && '<ANONYMOUS';
-// rest2.owner = rest2.owner && '<ANONYMOUS';
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
 
 //Shorter way of writing the above
-rest1.owner &&= '<ANONYMOUS';
-rest2.owner &&= '<ANONYMOUS';
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
 
 console.log(rest1);
 console.log(rest2);
