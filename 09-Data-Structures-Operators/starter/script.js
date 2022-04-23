@@ -103,20 +103,25 @@ const game = {
 const [players1, players2] = game.players;
 console.log(players1);
 console.log(players2);
+
 //2 One array for the goalkeeper and one for the rest of the fieldplayers
 const [gk, ...fieldPlayers] = players1;
 console.log(gk, fieldPlayers);
+
 //3 One array for all the players of both teams
 const allPlayers = [...players1, ...players2];
 console.log(allPlayers);
+
 //4 One array with players plus three new players
 const players1Final = [...players1, 'Jimmyboy', 'Jimbo', 'Jimmy'];
 console.log(players1Final);
+
 //5 create three variables based on the team1/x/team2 values in the object. Destructuring by assigning the entire 1.object and 2. selecting the right property 3. and destructuring to seperate variables
 const {
   odds: { team1, x, team2 },
 } = game;
 console.log(team1, x, team2);
+
 //6 print seperate players names (Not from an array) to the console
 const printGoal = function (...playerNames) {
   for (let i = 0; i < playerNames.length; i++) {
@@ -125,6 +130,7 @@ const printGoal = function (...playerNames) {
 };
 printGoal('Jimmyboy', 'Jimbo', 'Jimmy', game.score, game.scored);
 printGoal('Jimmyboy', game.score, ...game.scored);
+
 //7 Console.log team with lower odd is more likely to win (without if/else or ternary operator)
 //Explained: we want the console.log to be put out if the first comparison is true
 
