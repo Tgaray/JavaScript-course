@@ -54,6 +54,45 @@ const restaurant = {
   },
 };
 
+//110 Coding Challenge #1
+
+/* 
+// 109 Logical assignment operator
+const rest1 = {
+  name: 'Capri',
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+//Not short circuited
+//rest1.numGuests = rest2.numGuests || 10;
+//Did short circuit because, no numGuests
+//rest2.numGuests = rest1.numGuests || 10;
+
+//Same thing but now with logical assignment operator
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+//Nullish assignment operator (assign a value if the value null or  undefined)
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+//Logical and operator (rest2.owner is truthy in and it goes for falsy)
+// rest1.owner = rest1.owner && '<ANONYMOUS';
+// rest2.owner = rest2.owner && '<ANONYMOUS';
+
+//Shorter way of writing the above
+rest1.owner &&= '<ANONYMOUS';
+rest2.owner &&= '<ANONYMOUS';
+
+console.log(rest1);
+console.log(rest2);
+*/
+
 /* 
 //Lesson 108 Nullish Coalescing Operator
 
