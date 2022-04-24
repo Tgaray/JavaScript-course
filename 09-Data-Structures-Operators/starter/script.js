@@ -4,6 +4,27 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const hours = {
+  [weekdays[2]]: {
+    open: 11,
+    close: 20,
+  },
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -12,49 +33,94 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  order: function (starterIndex, mainIndex) {
+  //Lesson 112 ES6 enhanced object literals
+  //1 include an object into another object
+  hours,
+  //2 methods without ": function"
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
   //Passing in one argument (an object) and splitting the properties of the object up in their seperate property value pairs
-  orderDelivery: function ({
-    starterIndex = 1,
-    mainIndex = 0,
-    time = '20:00',
-    address,
-  }) {
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
     console.log(
       `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
 
-  orderPizza: function (mainIngredient, ...otherIngredients) {
+  orderPizza(mainIngredient, ...otherIngredients) {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 };
 
-//110 Coding Challenge #1
+/* 
+//Lesson 113 optional chaining (?.)
+//This can get really messy especially if you have a lot of conditionals
+if (restaurant.hours && restaurant.hours.mon)
+  console.log(restaurant.hours.mon.open);
+
+//Without optional chaining
+//console.log(restaurant.hours.mon.open.open);
+//With optional chaining
+//Only if the object in front of the questionmark is available then the open property will be read
+console.log(restaurant.hours.mon?.open);
+//same as example above but with chaining
+console.log(restaurant.hours?.mon?.open);
+//Easier way of checking if something is available
+
+//Example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+//for-of-loop to go through array
+for (const day of days) {
+  console.log(day);
+  //const open = restaurant.hours[day]?.open || 'closed';
+  // || does not work with falsy / 0 so better to use ??
+  const open = restaurant.hours[day]?.open ?? 'closed';
+  const close = restaurant.hours[day]?.close;
+  console.log(`On ${day}, we open at ${open} and close at ${close}`);
+}
+
+//conditional chaining also works for methods
+//Does exist
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+//Does not exist
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+//conditional chaining also works for arrays
+const users = [{ firstName: 'Theron', email: 'therongaray@gmail.com' }];
+console.log(users[0]?.firstName ?? 'No first name');
+console.log(users[0]?.lastName ?? 'No last name');
+
+//Without optional chaining we would have to write something like this:
+if(users.length > 0) console.log(users[0].firstName); else console.log('No first name');
+ */
+
+/* 
+//Lesson 111 Looping arrays the for-of loop
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+//for-of-loop you dont need the elaborate setup (start,stop,step)
+//the item (you can name it whatever) is the element/value in the current iteration of the loop from the array
+for (const item of menu) console.log(item);
+
+//to get the current index from a for-of-loop
+for (const [item, element] of menu.entries()) {
+  //Old way of destructuring the array
+  //  console.log(`${item[0] + 1}: ${item[1]}`);
+  //New way
+  console.log(`${item + 1}: ${element}`);
+}
+console.log([...menu.entries()]);
+*/
+
+/* 
+/// CODING CHALLENGE 1 ///
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -96,9 +162,6 @@ const game = {
   },
 };
 
-/* 
-/// CODING CHALLENGE 1 ///
-
 //1 Two arrays with both teams
 const [players1, players2] = game.players;
 console.log(players1);
@@ -138,6 +201,7 @@ printGoal('Jimmyboy', game.score, ...game.scored);
 team1 < team2 && console.log('Team 1 is  likely to win');
 //Does not write to the console (BECAUSE ITS FALSE)
 team2 < team1 && console.log('Team 1 is  likely to win');
+team1 > team2 && console.log('Team 2 is  likely to win');
 */
 
 /* 
