@@ -60,6 +60,36 @@ const restaurant = {
 };
 
 /* 
+//Lesson 114 looping objects (indirectly)
+
+//Property NAMES
+const properties = Object.keys(hours);
+console.log(properties);
+
+let openStr = `We are open ${properties.length} days: `;
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+//Property VALUES
+const values = Object.values(hours);
+console.log(values);
+
+//Entire object
+const entries = Object.entries(hours);
+console.log(entries);
+//Destructuring the entries and destructuring the values by their property names right away
+for (const [key, { open, close }] of entries) {
+  //log each key and value
+  console.log(key, open, close);
+  //log keys and values
+  console.log(`On ${key} we open at ${open} and close at ${close}.`);
+}
+*/
+
+/* 
 //Lesson 113 optional chaining (?.)
 //This can get really messy especially if you have a lot of conditionals
 if (restaurant.hours && restaurant.hours.mon)
