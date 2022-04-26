@@ -60,6 +60,71 @@ const restaurant = {
 };
 
 /* 
+/// CODING CHALLENGE 2 ///
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+//1 Log players and their goals
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player} `);
+}
+
+//2 Average of odds
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
+
+//3 Use loop to pass the game odds object into the loop, destructure the object in the team properties and corresponding values
+for (const [team, odd] of Object.entries(game.odds)) {
+  //Use terniary operator to check if its a draw then use string draw otherwise Victory and match the team1 or team2 odds property to the value of team1 or team2
+  const teamString = team === 'x' ? 'draw' : `Victory ${game[team]}`;
+  //Log each result from the game.odds object
+  console.log(`Odd of victory ${teamString}: ${odd}`);
+}
+*/
+
+/* 
 //Lesson 114 looping objects (indirectly)
 
 //Property NAMES
