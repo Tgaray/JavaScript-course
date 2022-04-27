@@ -127,6 +127,7 @@ console.log(rest.size);
 console.log(rest.get(arr));
 */
 
+/*
 //Lesson 116 Sets
 
 //Iterable (duplicates removed)
