@@ -57,11 +57,76 @@ const restaurant = {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-};
-
-//Lesson 117 Maps
+}; /*
 
 /* 
+//Lesson 117 Maps
+const rest = new Map();
+//To fill map use set
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+rest.set(2, 'Eindhoven, Netherlands');
+rest.set(3, 'Lisbon, Portugal');
+console.log(rest.set(3, 'Lisbon, Portugal'));
+
+//Allows to chain (.set again) and different data types
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('closed', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are closed :(');
+console.log(rest);
+
+//to get data from the map use get
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+//Create something fun with the map
+//const currentTime = 8;
+const currentTime = 21;
+console.log(
+  //Returns the we are open string because we input a true or false based on the check and *get* it from the map
+  //The power of booleans as map keys
+  rest.get(currentTime > rest.get('open') && currentTime < rest.get('closed'))
+);
+
+//has keys
+console.log(rest.has('categories'));
+//delete
+rest.delete(2);
+console.log(rest);
+//size
+console.log(rest.size);
+//clear
+//console.log(rest.clear);
+
+//Using arrays or objects as map keys
+rest.set([1, 2], 'Test');
+console.log(rest);
+console.log(rest.size);
+//Now to get the data based on the above array (cant do it because the two arrays are different objects)
+console.log(rest.get([1, 2]));
+
+//To make the above work we have to actually make the array and then use that array
+//Create the array first
+const arr = [1, 2];
+//Using arrays or objects as map keys
+rest.set(arr, 'Test');
+console.log(rest);
+console.log(rest.size);
+//Now to get the data based on the above array and show the string Test
+console.log(rest.get(arr));
+//This works because they reference to the same array in the memory
+
+//Can also be useful with dom elements which are just a special kind of object
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+console.log(rest.get(arr));
+*/
+
 //Lesson 116 Sets
 
 //Iterable (duplicates removed)
