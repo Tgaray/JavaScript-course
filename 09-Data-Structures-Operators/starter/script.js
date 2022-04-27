@@ -59,6 +59,62 @@ const restaurant = {
   },
 };
 
+//Lesson 117 Maps
+
+/* 
+//Lesson 116 Sets
+
+//Iterable (duplicates removed)
+const orderSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta']);
+console.log(orderSet);
+
+//String is also iterable so string set possible
+console.log(new Set('Theron'));
+
+//How to work with sets (get the size) unique values that will be cooked
+console.log(orderSet.size);
+//Check if a value is present in the set
+console.log(orderSet.has('Pizza'));
+console.log(orderSet.has('Bread'));
+//adding new elements to the set
+orderSet.add('Bread');
+orderSet.add('Garlic Bread');
+orderSet.add('Bread');
+orderSet.delete('Garlic Bread');
+//orderSet.clear();
+console.log(orderSet.has('Bread'), orderSet);
+
+//Retreive values out of a set (we can not use an index like with an array [1]) but you can loop a set
+for (const order of orderSet) console.log(order);
+
+//Big use case for sets (mainly to remove duplicates from arrays), Example
+const staff = [
+  'Waiter',
+  'Chef',
+  'Manager',
+  'Waiter',
+  'Chef',
+  'Waiter',
+  'Reception',
+];
+//Find out which different positions there are int his array (so no duplicates)
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(
+  new Set([
+    'Waiter',
+    'Chef',
+    'Manager',
+    'Waiter',
+    'Chef',
+    'Waiter',
+    'Reception',
+  ]).size
+);
+
+console.log(new Set('TheronGaray').size);
+*/
+
 /* 
 /// CODING CHALLENGE 2 ///
 
