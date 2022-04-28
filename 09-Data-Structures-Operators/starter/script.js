@@ -57,7 +57,54 @@ const restaurant = {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-}; /*
+};
+
+//Lesson 118 Maps iteration (Array of arrays)
+const question = new Map([
+  ['question', 'what is the best programming language in the world'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+//Similar structure as Object.entries() also array of arrays
+//Convert object to map
+console.log(Object.entries(hours));
+//converted the object to an iterable map
+const hoursMap = new Map(Object.entries(hours));
+console.log(hoursMap);
+
+//Quiz app
+console.log(question.get('question'));
+//Iterating on a map
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+//const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+
+if (answer === 3) {
+  console.log(`Nice JavaScript is the best coding language you are right`);
+} else {
+  console.log(
+    `You have to be kidding right? That is not the best coding language`
+  );
+}
+
+//Another way to do the above with the map
+console.log(question.get(question.get('correct') === answer));
+
+//Converting a map back to an array (again array of arrays)
+console.log([...question]);
+//console.log(question.entries());
+console.log(...question.keys());
+console.log(...question.values());
 
 /* 
 //Lesson 117 Maps
