@@ -59,6 +59,47 @@ const restaurant = {
   },
 };
 
+/// CODING CHALLENGE 3 ///
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+/*
+//1
+//Create an array 'events' of the different game events no duplicates (set?)
+//Set
+const events = [...new Set([...gameEvents.values()])];
+
+//2
+//Remove the yellow card
+gameEvents.delete(64);
+
+//3
+const time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+//4
+for (const [time, event] of gameEvents) {
+  time < 45
+    ? console.log(`[FIRST HALF] ${time}: ${event}`)
+    : console.log(`[SECOND HALF] ${time}: ${event}`);
+}
+*/
+
+/* 
 //Lesson 118 Maps iteration (Array of arrays)
 const question = new Map([
   ['question', 'what is the best programming language in the world'],
@@ -105,6 +146,7 @@ console.log([...question]);
 //console.log(question.entries());
 console.log(...question.keys());
 console.log(...question.values());
+*/
 
 /* 
 //Lesson 117 Maps
