@@ -59,6 +59,64 @@ const restaurant = {
   },
 };
 
+//Lesson 122 Working with strings
+
+/* 
+//Lesson 121 Working with strings
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+console.log(airline.length);
+console.log('B737'.length);
+
+//strings also have methods
+//first occurence of this index
+console.log(airline.indexOf('r'));
+//last occurence
+console.log(airline.lastIndexOf('r'));
+//Entire words
+console.log(airline.indexOf('Air'));
+//Slice from this position onwards
+console.log(airline.slice(4));
+console.log(airline.slice(4, 10));
+//finding the ending by looking for the indexOf a character
+console.log(airline.slice(0, airline.indexOf(' ')));
+//slicing the last word +1 for the space
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+//more options, negative starts from the end (extracting from the end)
+console.log(airline.slice(-2));
+//start at one and cut off the last character as end parameter
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  //B and E are the middle seats
+  //take the final character
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('You are in a middle seat');
+  } else {
+    console.log('You are in a window seat');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('22A');
+checkMiddleSeat('05E');
+checkMiddleSeat('23C');
+
+//String are primitives but they have methods
+console.log(new String('Theron'));
+//This is what happens behind the scenes so methods work on the string its being built into an object temporarily
+console.log(typeof new String('Theron'));
+//Another example of what happens behind the scenes (the object resolved results again in a string)
+console.log(typeof new String('Theron').slice(1));
+*/
+
+/*
 /// CODING CHALLENGE 3 ///
 
 const gameEvents = new Map([
@@ -75,7 +133,7 @@ const gameEvents = new Map([
   [92, '🔶 Yellow card'],
 ]);
 
-/*
+
 //1
 //Create an array 'events' of the different game events no duplicates (set?)
 //Set
