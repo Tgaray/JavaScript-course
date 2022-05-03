@@ -59,7 +59,74 @@ const restaurant = {
   },
 };
 
+/* 
 //Lesson 122 Working with strings
+const airline = 'TAP Air Portugal';
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+//Fix capitalisation in name
+const passenger = 'tHeRon';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+//Check E-mail (E-mails should still be valid with capitalisation differences)
+const email = 'hello@gmail.com';
+const loginEmail = ' Hello@Gmail.Com \n';
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+//All in one go
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+//Replacing
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+const announcement = 'All passengers come to boarding 23. boarding 23!';
+console.log(announcement.replace('boarding', 'gate'));
+//regular expression (in the future solvable with replaceAll)
+console.log(announcement.replace(/boarding/g, 'gate'));
+
+//Three methods that return booleans (inclued startsWith endsWith)
+const plane = 'A320neo';
+console.log(plane.includes('A32'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('A32'));
+console.log(plane.startsWith('32'));
+console.log(plane.endsWith('Boeing'));
+console.log(plane.endsWith('neo'));
+
+const newPlane = 'Airbus A320neo';
+if (newPlane.startsWith('Airbus') && newPlane.endsWith('neo')) {
+  console.log(
+    'Correct start and end for the plane name, part of the new Airbus family'
+  );
+}
+
+//Practices example
+const checkBaggage = function (items) {
+  //First make everything lowercase to check it to make it more fault tolerant
+  const baggage = items.toLowerCase();
+  console.log(baggage);
+
+  //check if it contains certain words
+  if (baggage.includes('gun') || baggage.includes('knife')) {
+    console.log('You are not allowed to bring that aboard the plane');
+  } else {
+    console.log('You are allowed to bring your luggage on the plane');
+  }
+};
+
+checkBaggage('I have a laptop, some Food, and a pocket Knife');
+checkBaggage('I some snacks and a camera and socks');
+checkBaggage('I have a gun for protection and some snacks');
+*/
 
 /* 
 //Lesson 121 Working with strings
