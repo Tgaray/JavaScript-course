@@ -59,6 +59,71 @@ const restaurant = {
   },
 };
 
+//Lesson 123 Working with strings
+
+//Split splits everything up by a character and puts them in seperate indexes in an array
+console.log('a+very+nice+string'.split('+'));
+console.log('Theron Garay'.split(' '));
+const [firstName, lastName] = 'Theron Garay'.split(' ');
+console.log(firstName, lastName);
+
+//Join, joining seperate values into one string (join them with spaces in between)
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+//Function to capitalize every first letter in a name
+const capitalizeName1 = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(namesUpper.join(' '));
+};
+capitalizeName1('Jessica ann smith davis');
+capitalizeName1('theron garay');
+
+//Another example function to capitalize every first letter in a name
+const capitalizeName2 = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+capitalizeName2('Jessica ann smith davis');
+capitalizeName2('theron garay');
+
+//Padding a string to achieve a certain amount of characters in a string
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Theron'.padStart(20, '+').padEnd(30, '+'));
+
+//More real world example of padding (credit card for example)
+const maskedCreditCard = function (number) {
+  //convert number to string, this happens when one of the operants is a '' string it converts everything to a string
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+console.log(maskedCreditCard(5124223346));
+console.log(maskedCreditCard(5124234332345436));
+console.log(maskedCreditCard('5124905509345486'));
+
+//Repeat, longer string with repetitions of the same string
+const message2 = 'Bad weather... All Departures Delayed...';
+console.log(message2.repeat(4));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)} `);
+};
+planesInLine(9);
+planesInLine(5);
+planesInLine(11);
+
 /* 
 //Lesson 122 Working with strings
 const airline = 'TAP Air Portugal';
