@@ -4,6 +4,28 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+//Lesson 125 string methods practice
+
+for (const flight of flights.split('+')) {
+  //deconstruct the array into seperate variables
+  const [type, from, to, time] = flight.split(';');
+  //log the seperate variables according to how they should look
+  console.log(
+    `${
+      type.includes('Delayed')
+        ? `🔴 ${type.replace(/_/g, ' ')}`
+        : `${type.replace(/_/g, ' ')}`
+    } from ${from.toUpperCase().slice(0, 3)} to ${to
+      .toUpperCase()
+      .slice(0, 3)} (${time})`
+  );
+}
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const hours = {
@@ -59,6 +81,7 @@ const restaurant = {
   },
 };
 
+/* 
 //Lesson 123 Working with strings
 
 //Split splits everything up by a character and puts them in seperate indexes in an array
@@ -123,6 +146,7 @@ const planesInLine = function (n) {
 planesInLine(9);
 planesInLine(5);
 planesInLine(11);
+*/
 
 /// CODING CHALLENGE 4 ///
 
