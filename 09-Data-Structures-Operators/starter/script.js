@@ -7,17 +7,15 @@ const flights =
 //Lesson 125 string methods practice
 
 for (const flight of flights.split('+')) {
-  //deconstruct the array into seperate variables
+  //Deconstruct the array into seperate variables
   const [type, from, to, time] = flight.split(';');
-  //log the seperate variables according to how they should look
+  //Replace the _ with a space
+  const space = type.replace(/_/g, ' ');
+  //Log the seperate variables according to how they should look
   console.log(
-    `${
-      type.includes('Delayed')
-        ? `🔴 ${type.replace(/_/g, ' ')}`
-        : `${type.replace(/_/g, ' ')}`
-    } from ${from.toUpperCase().slice(0, 3)} to ${to
+    `${type.includes('_Delayed') ? `🔴${space}` : `${space}`} from ${from
       .toUpperCase()
-      .slice(0, 3)} (${time})`
+      .slice(0, 3)} to ${to.toUpperCase().slice(0, 3)} (${time})`
   );
 }
 
