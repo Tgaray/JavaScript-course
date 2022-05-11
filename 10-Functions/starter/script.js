@@ -1,6 +1,43 @@
 'use strict';
 
+/* 
 //Lesson 131 Functions accepting callback functions
+
+//Creating our higher order functions (functions that accept another function)
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+//This transformers function will be calling the lower level function
+const transformer = function (str, fn) {
+  //The original string as it is received through the parameter
+  console.log(`Original string: ${str}`);
+  //call the lower function and pass along the string parameter into that function to get the transformed string
+  console.log(`Transformed string: ${fn(str)}`);
+  //Check which function executed the transformation by logging the function name tot he console
+  console.log(`Transformed by: ${fn.name}`);
+};
+
+//Passing the callback function into the transformer
+transformer('JavaScript is the best!', upperFirstWord);
+transformer('JavaScript is the best!', oneWord);
+
+//Js uses callbacks all the time
+const high5 = function () {
+  console.log('Body was clicked');
+};
+//Callback based on an eventlistener (the eventlistener is the higher order function)
+document.body.addEventListener('click', high5);
+
+//For each of the values in the arry the callback will be called
+['Yo', 'No', 'Go'].forEach(high5);
+
+ */
 
 /* 
 //Lesson 129 how passing arguments into functions work (primitives and objects in function context)
