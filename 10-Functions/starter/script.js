@@ -1,5 +1,36 @@
 'use strict';
 
+//Lesson 132 Functions that return functions
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+//storing the greet function in a variable
+const greeterHey = greet('Hey');
+//GreeterHey (variable) is now a function if we call it with a name it will return the function inside aswell with the inside defined parameter
+greeterHey('Theron');
+greeterHey('Yietta');
+//This works because of closures more on that later
+
+//We can also do it in one go (first call the outside function with the correct parameters and then the return function with its own parameters, both will be usable)
+greet('Wassup')('Levy');
+
+const greetArrowF = greeting => {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterArrowF = greetArrowF('Hey');
+greeterArrowF('Stacho');
+
+//Even more compact/better version (a bit more confusion but one arrow function returning another arrow function)
+const greetArrowBetter = greeting => name => console.log(`${greeting} ${name}`);
+greetArrowBetter('Hallo')('Job');
+
 /* 
 //Lesson 131 Functions accepting callback functions
 
