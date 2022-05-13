@@ -1,5 +1,72 @@
 'use strict';
 
+//Lesson 133 Call and apply methods (how we can set the this key word manually and why)
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  //advanced method literal writing without function instead of book: function(){}
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+//this calls the lufthansa object because that is the object on which the book method is called
+lufthansa.book(239, 'Theron Garay');
+lufthansa.book(952, 'Yietta Chrysostomou');
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+  //we dont just want to duplicate the book method from the lufthansa object but put it in a variable
+};
+
+//first class function = a function as a value (taking the method from the lufthansa object)
+const book = lufthansa.book;
+//This does not work because in a regular function call which is what we do below the this keyword points to undefined (in strict mode), its not a method anymore of the object but a copy of the method as its own funtion
+//book(23, 'Levy Verhagen');
+
+//How do we tell JS that we want to use this method on the new eurowings object
+//By telling javascript we explicitly what the this keyword should look like (call apply and find)
+
+//Call method
+//with the call method the first param is exactly what we want the this keyword to point to
+//With the call function we call the book method on a specified object this allows us to set the this keyword manually
+book.call(eurowings, 23, 'Levy Verhagen');
+console.log(eurowings);
+
+//we can do the same with lufthansa
+book.call(lufthansa, 239, 'Stacho Garay');
+console.log(lufthansa);
+
+//The same properties needed as the other objects because they get used in the book method
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'SAL',
+  bookings: [],
+  //we dont just want to duplicate the book method from the lufthansa object but put it in a variable
+};
+
+book.call(swiss, 808, 'Yma Garay');
+console.log(swiss);
+
+//Apply method (does same as call) but will take an array to pass elements into the function
+const flightData = [83, 'Igor Garay'];
+const flightData1 = [13, 'Iwan Garay'];
+
+//apply does not get used a lot anymore in modern javascript because there is a better way (call with a spread operator see below)
+book.apply(swiss, flightData);
+console.log(swiss, 'test met apply');
+
+book.call(swiss, ...flightData1);
+console.log(swiss, 'test met call plus spread operator');
+
+/* 
 //Lesson 132 Functions that return functions
 
 const greet = function (greeting) {
@@ -30,6 +97,7 @@ greeterArrowF('Stacho');
 //Even more compact/better version (a bit more confusion but one arrow function returning another arrow function)
 const greetArrowBetter = greeting => name => console.log(`${greeting} ${name}`);
 greetArrowBetter('Hallo')('Job');
+*/
 
 /* 
 //Lesson 131 Functions accepting callback functions
