@@ -1,5 +1,6 @@
 'use strict';
 
+/* 
 //Lesson 133 Call and apply methods (how we can set the this key word manually and why)
 const lufthansa = {
   airline: 'Lufthansa',
@@ -65,6 +66,84 @@ console.log(swiss, 'test met apply');
 
 book.call(swiss, ...flightData1);
 console.log(swiss, 'test met call plus spread operator');
+
+//134 the bind method
+//book.call(eurowings, 23, 'Levy Verhagen');
+
+//This will return a new function with the this keyword also set to eurowings
+const bookEW = book.bind(eurowings);
+//Creating a booking function for each of the airlines with their own this keywords bound
+const bookLH = book.bind(lufthansa);
+const bookSA = book.bind(swiss);
+//The parameters are simply back to the number and name because it alraedy knows the 'this' as it is bound
+bookEW(40, 'Syair Jansen');
+bookLH(22, 'Tim Duncan');
+bookSA(43, 'Kawhi Leonard');
+
+//Function for a specific flightnumber (by defining the default first parameter -> 23), so it now only needs the name
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Giannis Antetokounmpo');
+bookEW23('Jrue Holiday');
+
+//Bind also useful to combine event listener with objects (which is this calling?)
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  //The this keyword points to the button not to the object (because that is where the eventlistener function is triggered)
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+//But out here the this keyword would be pointed towards lufthansa
+lufthansa.buyPlane();
+
+//the this is attached to the button because that is the thing that calls the event
+//So which should we use here call or bind? The call passes into the existing function but we want to return a new one so we can call it with this otherwise we would still use this on the event listener
+
+//Before
+//document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+
+//After
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+//So the above instead of binding the this to the event binds the this to the object
+
+//Partial application (means we can preset parameters)
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+//In this case we dont even care about the this keyword (because we will preset the rate so it always uses that rate)
+//usually the first word in the bind is what the this keyword points towards but in this case we dont care about that because it is preset
+const addVat = addTax.bind(null, 0.23);
+//So the above addVat essentially does the following: addVat value => value + value * 0.23;
+console.log(addVat(100));
+console.log(addVat(1000));
+//The order is important if you want to preset the rate it has to be the first parameter so you can use null because we dont care about the this keyword in this case
+//You could argue we could do this with preset/default parameters but in this case we make a much more specific function to specify the value added tax
+
+//Challenge create the above but with a function that returns a function
+const addTaxRAte = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+//We use the preset parameter on the first function to call the second function with the value
+const addVat2 = addTaxRAte(0.23);
+console.log(addVat2(100));
+console.log(addVat2(1000));
+
+//Now also as an arrow function
+const addTaxRate1 = rate => {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVat3 = addTaxRate1(0.23);
+console.log(addVat3(100));
+console.log(addVat3(1000));
+*/
 
 /* 
 //Lesson 132 Functions that return functions
