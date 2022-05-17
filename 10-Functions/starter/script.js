@@ -1,5 +1,25 @@
 'use strict';
 
+//136 Immediately invoked function expressions (only run once functions)
+//This is a pattern but not that used anymore because you can create a block around something you want to scope {}
+//But still useful when you want to run a piece of code just once and this is still used
+
+//This is run twice but that is not what we want we dont want to save it anywhere and only execute once
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce();
+runOnce();
+
+//Turn it into an expression (trick javascript) by surrounding the function with () and () at the end to call it right away.
+//Also a function value or IIFE for short (Immediately invoked function expression)
+(function () {
+  console.log('This will never run again once more');
+})();
+
+//With arrow function (because it has no name it will only run once)
+(() => console.log('This will ALSO never run again'))();
+
 // Coding Challenge #1
 
 /* 
