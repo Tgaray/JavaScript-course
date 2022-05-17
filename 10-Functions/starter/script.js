@@ -33,6 +33,7 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
+/* 
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -72,11 +73,16 @@ const poll = {
 };
 
 //We need to bind the this keyword to the object instead of the event(listener) button with bind
-
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 console.log(poll);
+
+//Creating new object containing array
+poll.displayResults.call({ answers: [5, 2, 3] });
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [5, 2, 3, 4, 5] });
+*/
 
 /* 
 //Lesson 133 Call and apply methods (how we can set the this key word manually and why)
