@@ -1,5 +1,31 @@
 'use strict';
 
+//137 Closures (happen automatically in certain situations)
+
+//Example
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+//Global context now also contains the booker variable
+//After executing the secureBooking function (and storing it in the variable) it is no longer on the call stack and does not exist in the execution context anymore (because it finished long ago)
+//The original environment where the function was first created is now gone along with the return function inside (this is odd at first because we can still use the booker function, see below with this return function)
+//Booker continues to have access
+const booker = secureBooking();
+
+//To execute booker when the variable is made a new execution context is created in the global scope and executable in the callstack
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+/*
 //136 Immediately invoked function expressions (only run once functions)
 //This is a pattern but not that used anymore because you can create a block around something you want to scope {}
 //But still useful when you want to run a piece of code just once and this is still used
@@ -19,6 +45,7 @@ runOnce();
 
 //With arrow function (because it has no name it will only run once)
 (() => console.log('This will ALSO never run again'))();
+*/
 
 // Coding Challenge #1
 
