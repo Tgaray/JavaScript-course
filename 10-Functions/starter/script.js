@@ -1,5 +1,64 @@
 'use strict';
 
+/*
+//138 More closure examples
+
+//Example1
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+//At this point in time the f value got the a from the g function
+//closure g
+console.dir(f);
+
+//Reassigning f function
+h();
+f();
+//Now contains the value b instead of a because it was reassigned by the h function
+//closure h
+console.dir(f);
+
+//Example 2
+const boardPassengers = function (n, wait) {
+  //if this one is off it will close over this variable and go to the global scope perGroup if that is turned on (see line above: boardPassengers(180, 3);)
+  const perGroup = n / 3;
+
+  //timer takes two parameters a function and a time in milliseconds
+  //This callback function was able (through closure) to acces all the function variables even after it was already executed
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers.`);
+    console.log(`There are three groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`We will start boarding in ${wait} seconds.`);
+};
+
+//if i turn off the perGroup in the boardPassengers function and turn the below perGroup on it will use this value for the $perGroup variable call inside the callback function
+//const perGroup = 1000;
+boardPassengers(180, 3);
+
+//Call back function that calls later (waits to execute)
+setTimeout(function () {
+  console.log('TIMER');
+}, 8000);
+*/
+
+/*
 //137 Closures (happen automatically in certain situations)
 
 //Example
@@ -24,6 +83,7 @@ booker();
 booker();
 
 console.dir(booker);
+*/
 
 /*
 //136 Immediately invoked function expressions (only run once functions)
