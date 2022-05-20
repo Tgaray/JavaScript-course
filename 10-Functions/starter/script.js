@@ -1,5 +1,18 @@
 'use strict';
 
+// Coding Challenge #2
+
+(function () {
+  //This is executed before and this header variable is long gone but still usable because its stored as a closure and still usable by the callback function below
+  //A good way of thinking about it is 'this header is in the backpack of this function'
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
+
 /*
 //138 More closure examples
 
