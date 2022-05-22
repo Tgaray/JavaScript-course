@@ -1,5 +1,6 @@
 'use strict';
 
+/*
 // Coding Challenge #2
 
 (function () {
@@ -12,6 +13,7 @@
     header.style.color = 'blue';
   });
 })();
+*/
 
 /*
 //138 More closure examples
