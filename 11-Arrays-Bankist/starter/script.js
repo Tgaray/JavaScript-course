@@ -78,5 +78,47 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //Lesson 142 simple array methods
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
+//SLICE
 //returns a new array
 console.log(arr.slice(2));
+//with an end parameter
+console.log(arr.slice(2, 4));
+//start with slicing at the end
+console.log(arr.slice(-2));
+//last one
+console.log(arr.slice(-1));
+//from the second and down from the last two
+console.log(arr.slice(1, -2));
+//entire array
+console.log(arr.slice());
+//spread operator does same
+console.log([...arr]);
+
+//SPLICE (change original array)
+//console.log(arr.splice(2));
+//to remove the last element of the array
+arr.splice(-1);
+//the original array is changed splice gives it the original array
+console.log(arr);
+//the second parameters it he number of elements to delete
+arr.splice(1, 2);
+//the original array is changed splice gives it the original array
+console.log(arr);
+
+//REVERSE
+arr = ['a', 'b', 'c', 'd', 'e', 'f'];
+const arr2 = ['j', 'i', 'a', 'c', 'x'];
+//Reverse also changes the original array
+console.log(arr2.reverse());
+//to check if the original is changed
+console.log(arr2);
+
+//CONCAT
+//adding two arrays together
+const letters = arr.concat(arr2);
+console.log(letters);
+//same as spread two arrays togethers
+console.log([...arr, ...arr2]);
+
+//JOIN
+console.log(letters.join(' - '));
