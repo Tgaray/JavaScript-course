@@ -122,3 +122,22 @@ console.log([...arr, ...arr2]);
 
 //JOIN
 console.log(letters.join(' - '));
+
+//Lesson 143 the new at method
+
+const arr1 = [23, 11, 64];
+//log value at position 1
+console.log(arr1[1]);
+//log value at position 1
+console.log(arr1.at(1));
+
+//unique about at is... easier to manipulate like this (lets say length is unkown) getting last element
+//arrays are zero based so subtracting one means you take the length minus 1 because thats the index you want 0, 1, 2
+console.log(arr1[arr1.length - 1]);
+//another way with slice
+console.log(arr1.slice(-1)[0]);
+//another with at (in this case the -1 works from the right side of the array) start counting from the end downwards
+console.log(arr1.at(-1)); //64
+console.log(arr1.at(-2)); //11
+//at also works on strings
+console.log('Theron'.at(2));
