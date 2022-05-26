@@ -75,6 +75,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+/*
 //Lesson 142 simple array methods
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -122,7 +123,9 @@ console.log([...arr, ...arr2]);
 
 //JOIN
 console.log(letters.join(' - '));
+*/
 
+/*
 //Lesson 143 the new at method
 
 const arr1 = [23, 11, 64];
@@ -141,3 +144,63 @@ console.log(arr1.at(-1)); //64
 console.log(arr1.at(-2)); //11
 //at also works on strings
 console.log('Theron'.at(2));
+*/
+
+/*
+//Lesson 144 Looping arrays forEach
+
+//deposits or withdrawals
+const movements1 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log('===== FOR LOOP =====');
+//for of loop vs for each
+for (const move of movements1) {
+  if (move > 0) {
+    console.log(`You deposited ${move}`);
+  } else {
+    //math abs remove the sign take the absolute value
+    console.log(`You withdrew ${Math.abs(move)}`);
+  }
+}
+
+//Now with foreach (esier way) higher order function that calls callback function
+console.log('===== FOR EACH =====');
+//In each iteration the callback will call the value as a parameter
+movements1.forEach(function (move) {
+  if (move > 0) {
+    console.log(`You deposited ${move}`);
+  } else {
+    //math abs remove the sign take the absolute value
+    console.log(`You withdrew ${Math.abs(move)}`);
+  }
+});
+// 0: function(200)
+// 1: function(450)
+// 2: function(400)
+// ...
+
+//what if you want to use the index to get the number connected tot he value (with for we do that as follows)
+console.log('===== FOR LOOP WITH INDEX =====');
+for (const [i, move] of movements1.entries()) {
+  if (move > 0) {
+    console.log(`Movement ${i + 1}: you deposited ${move}`);
+  } else {
+    //math abs remove the sign take the absolute value
+    console.log(`Movement ${i + 1}: you withdrew ${Math.abs(move)}`);
+  }
+}
+
+//Same in the for each with parameters, for each passes in the current element the index and the entire array
+//Current element / index / entire array
+console.log('===== FOR EACH WITH INDEX =====');
+movements1.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: you deposited ${mov}`);
+  } else {
+    //math abs remove the sign take the absolute value
+    console.log(`Movement ${i + 1}: you withdrew ${Math.abs(mov)}`);
+  }
+});
+*/
+
+//Lesson 145 forEach with maps and sets
