@@ -203,4 +203,26 @@ movements1.forEach(function (mov, i, arr) {
 });
 */
 
+/*
 //Lesson 145 forEach with maps and sets
+
+const currencies1 = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+//for each with maps
+currencies1.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+//for each with set
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR', 'USD']);
+console.log(currenciesUnique);
+//A set does not have keys so the value and the key are the same
+currenciesUnique.forEach(function (value, key, set) {
+  console.log(`${key}: ${value}`);
+});
+//The key could have been omitted but the developers want the for each to work the same always so it is clear that is why it still works but just duplicates the value in sets
+*/
