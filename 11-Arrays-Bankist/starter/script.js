@@ -61,6 +61,31 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+//Better to work with array and pass that into the actual function than work with global variable its more directed
+const displayMovements = function (movements) {
+  //Clear out prior values and empty entire container
+  containerMovements.innerHTML = '';
+
+  movements.forEach(function (mov, i) {
+    //Ternary condition to choose between deposit and withdrawal
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__value">${mov}</div>
+    </div>
+    `;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+console.log(containerMovements.innerHTML);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -226,3 +251,5 @@ currenciesUnique.forEach(function (value, key, set) {
 });
 //The key could have been omitted but the developers want the for each to work the same always so it is clear that is why it still works but just duplicates the value in sets
 */
+
+//Lesson 146 Project: "Bankist App"
