@@ -86,6 +86,23 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 console.log(containerMovements.innerHTML);
 
+//no need to return something here because we just want to do some work on the object and added a username key to the object which we can just check with a console.log(accounts) to see if it is added but we do not need to return anything
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => /*return*/ name[0])
+      .join('')
+      .toUpperCase();
+  });
+};
+
+//Passing the accounts array into the function to be able to call each account
+createUsernames(accounts);
+//This is a forEach so we edit the original object, this is a side-effect we want in this case.
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -293,4 +310,71 @@ const checkDogs = function (dogsArr1, dogsArr2) {
 
 checkDogs(dogsJulia, dogsKate);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+*/
+
+/*
+//Lesson 150 data transformations - map array method
+
+const euroToUsd = 1.1;
+
+const movements1 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//Mapping the money movements from the movements1 array and creates a brand new array with the mapped movements
+const movementsUSD = movements1.map(function (mov) {
+  return mov * euroToUsd;
+});
+
+//This way of doing things with the map is more like functional programming (modern way of doing stuff)
+const movementsUSD1 = movements1.map(function (mov) {
+  //map 23 to all the spots in the looped through movements1 array and create a brand new array from it in thise case movementsUSD1
+  return 23;
+});
+
+//Simplyfying with an arrow function (a bit less readable)
+//in an arrow function its basically like you write a return right after the arrow
+const movementsUSDarrow = movements1.map(mov => mov * euroToUsd);
+
+console.log(movements1);
+console.log(movementsUSD);
+console.log(movementsUSD1);
+console.log(movementsUSDarrow);
+
+//This is more the old way of doing things manually creating a new variable
+const movementsUSDfor = [];
+for (const move of movements1) movementsUSDfor.push(move * euroToUsd);
+console.log(movementsUSDfor);
+
+//Return instead of console log returns the actual result into the array movementsDescriptions1
+const movementDescriptions1 = movements1.map(function (mov, i, map) {
+  if (mov > 0) {
+    return `Movement ${i + 1}: you deposited ${mov}`;
+  } else {
+    //math abs remove the sign take the absolute value
+    return `Movement ${i + 1}: you withdrew ${Math.abs(mov)}`;
+  }
+});
+
+//Or as an arrow function
+const movementDescriptions2 = movements1.map((mov, i, map) => {
+  if (mov > 0) {
+    return `Movement ${i + 1}: you deposited ${mov}`;
+  } else {
+    //math abs remove the sign take the absolute value
+    return `Movement ${i + 1}: you withdrew ${Math.abs(mov)}`;
+  }
+});
+
+//With ternary operator instead of if else
+const movementDescriptions3 = movements1.map(
+  (mov, i) =>
+    `Movement ${i + 1}: you ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(
+  movementDescriptions1,
+  movementDescriptions2,
+  movementDescriptions3
+);
 */
