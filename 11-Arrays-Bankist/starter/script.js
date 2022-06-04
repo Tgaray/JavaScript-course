@@ -378,3 +378,27 @@ console.log(
   movementDescriptions3
 );
 */
+
+//Lesson 152 The filter method
+//Better example / more functional / rather use methods over the for loop because you can chain methods
+const deposits = movements.filter(function (mov) {
+  //filter all the movements that are bigger than one so not the withdrawals
+  return mov > 0;
+});
+
+console.log(movements);
+console.log(deposits);
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+const withdrawals = movements.filter(function (mov) {
+  //Less than zero for negative values i.e. withdrawals
+  return mov < 0;
+});
+console.log(withdrawals);
+
+//or with an arrow function
+const withdrawals1 = movements.filter(mov => mov < 0);
+console.log(withdrawals1);
