@@ -86,6 +86,13 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 console.log(containerMovements.innerHTML);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `€ ${balance}`;
+};
+
+calcDisplayBalance(account1.movements);
+
 //no need to return something here because we just want to do some work on the object and added a username key to the object which we can just check with a console.log(accounts) to see if it is added but we do not need to return anything
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -113,7 +120,9 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [
+  200, 450, -400, 3000, -650, -130, 70, 1300,
+]; /* initial value of the accumulator*/ /*0);
 
 /////////////////////////////////////////////////
 
@@ -379,6 +388,7 @@ console.log(
 );
 */
 
+/*
 //Lesson 152 The filter method
 //Better example / more functional / rather use methods over the for loop because you can chain methods
 const deposits = movements.filter(function (mov) {
@@ -402,3 +412,34 @@ console.log(withdrawals);
 //or with an arrow function
 const withdrawals1 = movements.filter(mov => mov < 0);
 console.log(withdrawals1);
+*/
+
+/*
+
+//Lesson 153 the reduce method, reduce has four parameters accumulator/currentelement/index/array
+
+console.log(movements);
+
+//Accumulator is like a snowball
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, */
+console.log(balance);
+
+const balance1 = movements.reduce((acc1, cur) => acc1 + cur, 0);
+console.log(balance1);
+
+//With a for loop also does the same as reducing to one value (but then you need an external variable but if you need more than one for loop this starts to become problematic) a function that returns a value avoids the external variable
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+//Getting the maximum value of the movements array
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, */ /* always just go with the first value of the array */ /* movements[0]);
+console.log(max);
+
+*/
