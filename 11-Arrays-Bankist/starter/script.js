@@ -174,7 +174,7 @@ console.log([...arr, ...arr2]);
 
 //JOIN
 console.log(letters.join(' - '));
-*/
+*/ /*
 
 /*
 //Lesson 143 the new at method
@@ -195,7 +195,7 @@ console.log(arr1.at(-1)); //64
 console.log(arr1.at(-2)); //11
 //at also works on strings
 console.log('Theron'.at(2));
-*/
+*/ /*
 
 /*
 //Lesson 144 Looping arrays forEach
@@ -252,7 +252,7 @@ movements1.forEach(function (mov, i, arr) {
     console.log(`Movement ${i + 1}: you withdrew ${Math.abs(mov)}`);
   }
 });
-*/
+*/ /* always just go with the first value of the array */ /* movements[0]);
 
 /*
 //Lesson 145 forEach with maps and sets
@@ -425,6 +425,7 @@ const balance = movements.reduce(function (acc, cur, i, arr) {
   console.log(`Iteration ${i}: ${acc}`);
   return acc + cur;
 }, */
+/*
 console.log(balance);
 
 const balance1 = movements.reduce((acc1, cur) => acc1 + cur, 0);
@@ -439,7 +440,6 @@ console.log(balance2);
 const max = movements.reduce((acc, mov) => {
   if (acc > mov) return acc;
   else return mov;
-}, */ /* always just go with the first value of the array */ /* movements[0]);
+}, 
 console.log(max);
-
 */
