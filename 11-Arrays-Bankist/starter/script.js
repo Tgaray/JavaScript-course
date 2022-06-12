@@ -75,7 +75,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">€ ${mov}</div>
     </div>
     `;
 
@@ -92,6 +92,31 @@ const calcDisplayBalance = function (movements) {
 };
 
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, move) => acc + move, 0);
+  labelSumIn.textContent = `€ ${incomes}`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, move) => acc + move, 0);
+  labelSumOut.textContent = `€ ${Math.abs(out)}`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    //filter out interest only equal to or above 1
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}`;
+};
+
+calcDisplaySummary(account1.movements);
 
 //no need to return something here because we just want to do some work on the object and added a username key to the object which we can just check with a console.log(accounts) to see if it is added but we do not need to return anything
 const createUsernames = function (accs) {
@@ -339,14 +364,15 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
+/*
 const calcAverageHumanAge = function (ages) {
   const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
   console.log(humanAges);
   const adults = humanAges.filter(dog => dog >= 18);
   console.log(adults);
 
-  /*const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
-  console.log(average); */
+  //const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+  //console.log(average);
 
   const average = adults.reduce(
     (acc, age, i, arr) => acc + age / arr.length,
@@ -364,6 +390,7 @@ const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(avg1, avg2);
+*/
 
 /*
 //Lesson 150 data transformations - map array method
@@ -486,4 +513,29 @@ const max = movements.reduce((acc, mov) => {
   else return mov;
 }, 
 console.log(max);
+*/
+
+/*
+//Lesson 155 Magic of chaining methods
+const euroToUsd = 1.1;
+
+//PIPELINE of methods (and how to check the array at each method step)
+const totalDepositsUSD = movements
+  //.filter(mov => mov > 0)
+  .filter((mov, i, arr) => {
+    console.log(arr);
+    return mov > 0;
+  })
+  //.map(mov => mov * euroToUsd)
+  .map((mov, i, arr) => {
+    console.log(arr);
+    return mov * euroToUsd;
+  })
+  //.reduce((acc, mov) => acc + mov, 0);
+  .reduce((acc, mov, i, arr) => {
+    console.log(arr);
+    return acc + mov;
+  }, 0);
+console.log(totalDepositsUSD);
+//see rest of this assignment with calcDisplaySummary function
 */
