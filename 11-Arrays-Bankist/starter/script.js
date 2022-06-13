@@ -382,6 +382,18 @@ const calcAverageHumanAge = function (ages) {
 
   return average;
 };
+*/
+
+/*
+//CODING CHALLENGE #3
+
+//Use arrow function and method chaining to make coding challenge #2
+const calcAverageHumanAge = ages =>
+  ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(dog => dog >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+//because there is no array variable we use the fourth param in the reduce method which gives us back the array and use length on that
 
 // const dogsJulia = [5, 2, 4, 1, 15, 8, 3];
 // const dogsKate = [16, 6, 10, 5, 6, 1, 4];
