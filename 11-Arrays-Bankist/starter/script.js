@@ -551,3 +551,19 @@ const totalDepositsUSD = movements
 console.log(totalDepositsUSD);
 //see rest of this assignment with calcDisplaySummary function
 */
+
+//Lesson 157 the Find method, used to find based on a condition within an array
+//mov the current element of the array
+//=> return
+//then the condition
+//The find method will return the first element in the array that satisfies this condition
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+//looping over the accounts and find the one you need
+//acc is the current element in the looping
+//loop through an object in this case
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
