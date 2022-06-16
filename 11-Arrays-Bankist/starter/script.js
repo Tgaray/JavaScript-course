@@ -83,40 +83,34 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-console.log(containerMovements.innerHTML);
+//console.log(containerMovements.innerHTML);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `€ ${balance}`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, move) => acc + move, 0);
   labelSumIn.textContent = `€ ${incomes}`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, move) => acc + move, 0);
   labelSumOut.textContent = `€ ${Math.abs(out)}`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     //filter out interest only equal to or above 1
     .filter((int, i, arr) => {
-      console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}`;
+  labelSumInterest.textContent = `€ ${interest}`;
 };
-
-calcDisplaySummary(account1.movements);
 
 //no need to return something here because we just want to do some work on the object and added a username key to the object which we can just check with a console.log(accounts) to see if it is added but we do not need to return anything
 const createUsernames = function (accs) {
@@ -125,8 +119,7 @@ const createUsernames = function (accs) {
       .toLowerCase()
       .split(' ')
       .map(name => /*return*/ name[0])
-      .join('')
-      .toUpperCase();
+      .join('');
   });
 };
 
@@ -134,6 +127,41 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 //This is a forEach so we edit the original object, this is a side-effect we want in this case.
 console.log(accounts);
+
+//Current account
+let currentAccount;
+
+//Event handlers (submit reloads page)
+
+btnLogin.addEventListener('click', function (e) {
+  //Prevent form from submitting
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  //if currentAccount exists (currentAccount && currentAccount.pin would also work)
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    //Clear input fields (works to summarize if the value is the same for both inputs)
+    inputLoginUsername.value = inputLoginPin.value = '';
+    //Make the input field lose its focus with blur() method
+    inputLoginPin.blur();
+    inputLoginUsername.blur();
+    //Display movements
+    displayMovements(currentAccount.movements);
+    //Display balance
+    calcDisplayBalance(currentAccount.movements);
+    //Display summary
+    calcDisplaySummary(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -552,6 +580,7 @@ console.log(totalDepositsUSD);
 //see rest of this assignment with calcDisplaySummary function
 */
 
+/*
 //Lesson 157 the Find method, used to find based on a condition within an array
 //mov the current element of the array
 //=> return
@@ -567,3 +596,4 @@ console.log(accounts);
 //loop through an object in this case
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
+*/
