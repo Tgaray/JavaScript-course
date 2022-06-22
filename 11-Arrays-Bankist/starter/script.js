@@ -194,6 +194,20 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    //Add movement
+    currentAccount.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -651,3 +665,35 @@ console.log(accounts);
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
+
+/* */
+//Lesson 161 some and every
+
+console.log(movements);
+
+//EQUALITY -> INCLUDES
+
+//Includes can only test for equality and returns a true or false
+console.log(movements.includes(-130));
+//Rather use includes than this but this amounts to the same
+console.log(movements.some(mov => mov === -130));
+
+//CONDITION -> SOME
+
+//Any value larger than 0 means there was a deposit
+const anyDeposits1 = movements.some(mov => mov > 0);
+console.log(anyDeposits1);
+
+const anyDeposits2 = movements.some(mov => mov > 5000);
+console.log(anyDeposits2);
+
+//CONDITION -> EVERY
+console.log(movements.every(mov => mov > 0));
+//account that only has positive movements:
+console.log(account4.movements.every(mov => mov > 0));
+
+//Separate callback, so easy to reuse (dont repeat yourself)
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
