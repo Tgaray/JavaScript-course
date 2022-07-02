@@ -666,7 +666,7 @@ const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
 
-/* */
+/* 
 //Lesson 161 some and every
 
 console.log(movements);
@@ -697,3 +697,38 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+*/
+
+//Lesson 162 flat and flatMap
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+//flat can be used to combine nested arrays into one array (it only goes one level deep)
+//it has no callback function
+console.log(arr.flat());
+
+//Deeper nested array (flat only goes one level deep unless you provide a number in the function for the levels)
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+//Example of use (of creating an array that contains other arrays)
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+//So now we want to flatten those nested arrays and its values into one array
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+//Adding them all together
+const overalBalance1 = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance1);
+
+//Simpler way of doing this all with chaining
+const overalBalance2 = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
+
+//flatMap combines flat and map
+const overalBalance3 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance3);
