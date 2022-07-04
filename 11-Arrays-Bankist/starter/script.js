@@ -62,11 +62,14 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //Better to work with array and pass that into the actual function than work with global variable its more directed
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   //Clear out prior values and empty entire container
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  //Use slice to create a copy of the data (ascending a - b)
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     //Ternary condition to choose between deposit and withdrawal
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
@@ -229,6 +232,17 @@ btnClose.addEventListener('click', function (e) {
 
   //Empty input fields
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+//state variable outside of the function to retain its state
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  //do the opposite of the sorted state true/false
+  displayMovements(currentAccount.movements, !sorted);
+  //then change the sorted state
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -700,6 +714,8 @@ console.log(movements.filter(deposit));
 
 */
 
+/*
+
 //Lesson 162 flat and flatMap
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 //flat can be used to combine nested arrays into one array (it only goes one level deep)
@@ -732,3 +748,40 @@ const overalBalance3 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance3);
+
+*/
+
+/*
+//163 Sorting arrays
+const owners = ['Jonas', 'Zach', 'Theron', 'Marta', 'Adam'];
+console.log(owners.sort());
+
+console.log(movements);
+//converts to strings and then sorts on the first characters not ideal for numbers
+console.log(movements.sort());
+
+//To do it with numbers (with a compare callback function in the sort method)
+console.log(movements);
+
+//return < 0, A, B (keep order)
+//return > 0, B, A (switch order)
+
+//Ascending order
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+//Improved version of the above if a is less than b it will be a negative number if a is more than b it will be a positive number
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+//Descending order
+movements.sort((a, b) => {
+  //ascending order
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+//Improved version of the above if a is less than b it will be a negative number if a is more than b it will be a positive number
+movements.sort((a, b) => b - a);
+console.log(movements);
+*/
