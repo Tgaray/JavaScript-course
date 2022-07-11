@@ -785,3 +785,54 @@ movements.sort((a, b) => {
 movements.sort((a, b) => b - a);
 console.log(movements);
 */
+
+//164 How to programmatically create and fill arrays
+
+//Manually create and fill arrays:
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+//Programmatically creating and filling arrays
+const x = new Array(7);
+console.log(x);
+//still empty with map
+console.log(x.map(() => 5));
+
+//Possible with fill method (paramter fill value, parameter start from, end parameter)
+x.fill(1, 3, 6);
+console.log(x);
+
+const array1 = [1, 2, 3, 4, 5, 6, 7];
+array1.fill(23, 4, 6);
+console.log(array1);
+
+//array.from (array in this case is the function like on line 793)
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+//In this case we do not use the first parameter because we only need the second one
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+//100 random dice rolls
+const randomRolls = Array.from({ length: 100 }, () =>
+  Math.floor(Math.random() * (6 - 1 + 1) + 1)
+);
+console.log(randomRolls);
+
+//This only works if you are logged in because querySelectorAll works when selecting the actual elements
+//Event handler so it will do it only when called upon otherwise it will not work on what is loaded right away when not logged in for example
+labelBalance.addEventListener('click', function () {
+  //we can create arrays "from" other things
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  //movementsUI is its own array now so this works
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  movementsUI2.from({ length: 100 }, el =>
+    Number(el.textContent.replace('€', ''))
+  );
+});
