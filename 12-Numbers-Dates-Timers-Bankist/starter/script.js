@@ -293,6 +293,7 @@ console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0));
 */
 
+/*
 //Sqaure root
 console.log(Math.sqrt(25));
 console.log(25 ** (1 / 2));
@@ -345,3 +346,43 @@ console.log((2.7).toFixed(0)); //to fixed returns a string
 console.log((2.7).toFixed(3));
 console.log((2.345).toFixed(2));
 console.log(+(2.345).toFixed(2)); //converting to number with +
+*/
+
+/*
+// Lesson 172 Remainder operator (modulo)
+//Remainder
+console.log(5 % 2);
+//Divide
+console.log(5 / 2); // 5 = 2 * 2 + 1 <- +1 is the remainder
+console.log(8 % 3);
+console.log(8 / 3); // 8 = 2 * 3 + 2 <- +2 is the remainder
+
+//if divisible by 2 the remainder is 0
+console.log(6 % 2);
+console.log(6 / 2);
+//if divisible by odd number the remainder is something else
+console.log(7 % 2);
+console.log(7 / 2);
+
+//is completely divisible or not? so does it result in zero or not.
+const isEven1 = n => n % 2 === 0;
+console.log(isEven1(4));
+console.log(isEven1(7));
+
+const isEven2 = n => (n % 2 === 0 ? 'even' : 'odd');
+console.log(isEven2(4));
+console.log(isEven2(7));
+
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    // 0, 2, 4, 6 every other row
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    // 0, 3, 6, 9 every third row
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+
+//Good to use for every nth time adjustments
+*/
+
+//Lesson 173 Numeric seperators
