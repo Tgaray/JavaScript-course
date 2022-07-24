@@ -385,6 +385,7 @@ labelBalance.addEventListener('click', function () {
 //Good to use for every nth time adjustments
 */
 
+/*
 //Lesson 173 Numeric seperators _
 
 //287,460,000,000
@@ -404,3 +405,62 @@ console.log(PI);
 console.log(Number('230000'));
 //Not parseable because of _
 console.log(Number('230_000'));
+*/
+
+/*
+//Lesson 174 bigInt
+
+//bigInt introduced in ES2020, ints represented in 64 bits (64 1’s or 0’s to represent a number, only 53 are used for the actual numbers the rest are for the position of the decimal point and the sign). So there is a limit on how big numbers can be.
+
+//working with 2 because its base 2 only 1's and 0's
+console.log(2 ** 53 - 1);
+//even stored in JS as special value
+console.log(Number.MAX_SAFE_INTEGER);
+//check js cannot represent these following numbers accurately same output but incorrect every time
+//Unsafe numbers
+console.log(2 ** 53 + 0);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+//bigInt is new primitive numbers as large as you want
+//without the n at the end (not bigInt)
+console.log(9023048902323452346234634562345234523453456);
+//with bigInt n indicator
+console.log(9023048902323452346234634562345234523453456n);
+//With bigInt function should prob still only be used with smaller numbers, otherwise not accurate number represented
+console.log(BigInt(9023048902));
+//operations work the same as usual
+console.log(10000n + 10000n);
+console.log(234123523465354745675687567856780n * 10000000n);
+//cannot mix bigInts with regular numbers
+const huge = 201209032480192834909238n;
+const num = 23;
+//console.log(huge * num);
+console.log(huge * BigInt(num));
+//Also math operations are not going to work
+//console.log(Math.sqrt(16n));
+console.log(Math.sqrt(16));
+
+//Two excpetions to this
+
+//1 logical operators
+console.log('/// LOGICAL OPERATORS ///');
+//this works
+console.log(20n > 15);
+//this does not work because no type coercion
+console.log(20n === 20);
+console.log(typeof 20n);
+//but this does
+console.log(20 == 20);
+
+//2 string concatenations
+console.log('/// STRING CONCATENATONS ///');
+//the number is converted to a string
+console.log(huge + ' is REALLY big!!!');
+
+//Divisons
+//cuts the decimal part off
+console.log(11n / 3n);
+//returns the infinite number
+console.log(10 / 3);
+*/
