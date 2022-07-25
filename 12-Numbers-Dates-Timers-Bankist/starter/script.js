@@ -464,3 +464,48 @@ console.log(11n / 3n);
 //returns the infinite number
 console.log(10 / 3);
 */
+
+/*
+//Lesson 175 creating dates
+const now = new Date();
+console.log(now);
+
+//Parsing date (generally a bad idea not very reliable)
+console.log(new Date('Sun Jul 24 2022 17:15:24'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+//our own date time creation into constructor
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+//Month with 30 days autocorrect to next day (goes to december 1st)
+console.log(new Date(2037, 10, 31));
+//with three days over month length (december 3rd)
+console.log(new Date(2037, 10, 33));
+//Passing in 0 (jan first 1970, unix time)
+console.log(new Date(0));
+//Passing in days hours minutes seconds times 1000 to convert to miliseconds
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+*/
+
+//Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth()); // zero based so 10 is november
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+//Generate date time string
+console.log(future.toISOString());
+//timestamp of time that has passed since january first 1970
+console.log(future.getTime());
+//reversing it
+console.log(new Date(2142253380000));
+//timestamp for right now
+console.log(Date.now());
+console.log(new Date(1658676743308));
+//setting functions
+future.setFullYear(2040);
+console.log(future);
+//There are also setMonth, setDay, setHour, setMinute
