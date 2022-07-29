@@ -295,14 +295,17 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    //simulate delay for loan approval
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    //Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      //Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -619,7 +622,8 @@ console.log(days1);
 //for weird edge cases with daylights saving time and other edge cases use moments.js
 */
 
-//Lesson 177 operations with dates
+/*
+//Lesson 178 operations with numbers
 
 const num = 3884764.23;
 
@@ -638,3 +642,32 @@ console.log(
   navigator.language,
   new Intl.NumberFormat(navigator.language, options1).format(num)
 );
+*/
+
+/*
+//Lesson 180 setTimeout and SetInterval
+
+//This is an example of asynchronous Javascript
+
+//the arrow function in this case is an argument for the setTimeOut function for execution in the future. When that future arrives is what we specify at the end in milliseconds
+
+//It is possible to cancel the timeout
+const ingredients = ['olives', 'spinach', 'chicken', 'mozarella'];
+
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  3000,
+  ...ingredients
+);
+//This log simply gets executed so the settimeout before is not blocking
+console.log('Waiting...');
+
+//It is possible to cancel the timeout and not execute the pizzaTimer setTimeout function
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+//setInterval function for interval of repetitive execution of functions
+setInterval(function () {
+  const now = new Date();
+  console.log(now.getHours(), now.getMinutes(), now.getSeconds());
+}, 1000);
+*/
