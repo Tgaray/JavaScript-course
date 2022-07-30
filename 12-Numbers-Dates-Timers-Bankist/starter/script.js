@@ -193,14 +193,47 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+//Logout timer function
+const startLogOutTimer = function () {
+  //Execute this function right away and then after each second to go down to zero
+  const tick = function () {
+    //the minutes
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    //the remainder of the minutes are the seconds
+    const sec = String(time % 60).padStart(2, 0);
+
+    // each callback call print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // when timer is at zero seconds stop timer and logout
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    //Decrease 1s (decrease after if)
+    time--;
+  };
+
+  // set time to five minutes
+  let time = 300;
+
+  // call timer every second and first time before setInterval timer to go down to zero
+  tick();
+  const timer = setInterval(tick, 1000);
+  //When you login to another account there is already a timer running so return the timer to stop it first.
+  return timer;
+};
+
 ///////////////////////////////////////
-// Event handlers
-let currentAccount;
+// Event handlers (we need these to persist between logins to see the status) that is why they need to be in the parent scope
+let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 //EXPERIMENTING WITH INTERNATIONAL API
 const now = new Date();
@@ -257,6 +290,13 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    //If there is already a timer we need to clear it to have one running at a time
+    if (timer) {
+      clearInterval(timer);
+    }
+    //Start new logout timer
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -286,6 +326,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     //Update UI
     updateUI(currentAccount);
+
+    //Reset (global)timer after activity to stay logged in
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -305,6 +349,10 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+
+      //Reset (global)timer after activity to stay logged in
+      clearInterval(timer);
+      timer = startLogOutTimer();
     }, 2500);
   }
   inputLoanAmount.value = '';
