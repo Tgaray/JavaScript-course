@@ -34,6 +34,7 @@ document.addEventListener('keydown', function (e) {
 ///////////// TESTS ///////////////
 ///////////////////////////////////
 
+//Lesson 186 Dom selecting, creating, deleting
 /// SELECTING ELEMENTS ///
 
 //Selecting the document (entire HTML)
@@ -86,4 +87,60 @@ document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', function () {
     message.remove();
+    //before .remove was a thing you had to remove children like this
+    //message.parentElement.removeChild(message);
   });
+
+//Lesson 187 Styles, Attributes, Classes
+
+/// STYLES ///
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+message.style.padding = '10px 0';
+//using style property only works for setting inline styles not reading whats defined in the stylesheet
+console.log(message.style.height);
+//So it works for an inline style like:
+console.log(message.style.backgroundColor);
+//But we can also get styles from the sylesheet using computed
+console.log(getComputedStyle(message));
+//You get a large list of properties on this element and you can select which you need:
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+//ParseFloat to get the number out of the string to adjust it
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+//CSS custom properties defined in the :root (document element)
+//with name of property, and value
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+/// ATTRIBUTES ///
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+//Setting attributes
+logo.alt = 'Beautiful minimalist logo';
+
+//Non standard attributes
+console.log(logo.designer); // undefined because this is not a standard property
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company', 'Bankist');
+
+//For the relative URL other than src for absolute url for example, use get attribute
+console.log(logo.getAttribute('src'));
+//same for hrefs on links
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href); //absolute
+console.log(link.getAttribute('href')); //relative
+
+//Data attributes (stored in datasets)
+console.log(logo.dataset.versionNumber);
+
+/// CLASSES ///
+logo.classList.add('c');
+logo.classList.remove('c');
+logo.classList.toggle('c');
+logo.classList.contains('c');
+//Don't use this only allows for 1 class and overwrites all other classes
+logo.className = 'jonas';
