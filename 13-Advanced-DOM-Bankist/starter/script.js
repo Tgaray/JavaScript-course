@@ -34,6 +34,7 @@ document.addEventListener('keydown', function (e) {
 ///////////// TESTS ///////////////
 ///////////////////////////////////
 
+/*
 //Lesson 186 Dom selecting, creating, deleting
 /// SELECTING ELEMENTS ///
 
@@ -90,7 +91,9 @@ document
     //before .remove was a thing you had to remove children like this
     //message.parentElement.removeChild(message);
   });
+*/
 
+/*
 //Lesson 187 Styles, Attributes, Classes
 
 /// STYLES ///
@@ -138,9 +141,47 @@ console.log(link.getAttribute('href')); //relative
 console.log(logo.dataset.versionNumber);
 
 /// CLASSES ///
+//adding and removing does not interfere with already existing classes
 logo.classList.add('c');
 logo.classList.remove('c');
 logo.classList.toggle('c');
-logo.classList.contains('c');
+logo.classList.contains('c'); // not includes like in arrays
+
 //Don't use this only allows for 1 class and overwrites all other classes
 logo.className = 'jonas';
+*/
+
+//Lesson 188 Smooth scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  //the Y element of the button boundingbox changes as we scroll in the viewport
+  console.log(e.target.getBoundingClientRect());
+  //currentscroll position
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  //height and width of viewport
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  //Scrolling (relative to viewport or document? think about because sizes change make relative to make work, so add the currentscrollposition to make it relative)
+  //This is to make it scroll to the right place
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  //to make the above smooth
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
