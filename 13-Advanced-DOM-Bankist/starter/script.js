@@ -183,5 +183,36 @@ btnScrollTo.addEventListener('click', function (e) {
   //   behavior: 'smooth',
   // });
 
+  //new way of doing this
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+/*
+//Lesson 189 types of events and event handlers
+
+//An event is basically a signal that something happened triggered by a DOM node. Anything of importance on a webpage triggers an event. We can listen to when these events happen and execute some code.
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D');
+
+  //after event we can remove eventlistener, if you only want to listen to the event once
+  //h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+//or after three seconds have passed remove the eventlistener
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+//For each event there is an ON.. variant
+//However this is dated/old school
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
+// };
+
+//eventlistener is better for two reasons
+//1 add multiple event listeners to the same event
+//2 can actually remove an eventlistener if we dont need it anymore (we need name function)
+*/
