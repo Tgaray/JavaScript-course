@@ -216,3 +216,45 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 //1 add multiple event listeners to the same event
 //2 can actually remove an eventlistener if we dont need it anymore (we need name function)
 */
+
+//Lesson 190 + 191 Event Propagation: Bubbling and Capturing / Event propagation in practice
+
+// rgb(255, 255, 255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+console.log(randomColor(0, 255));
+
+//Clicking on this child of nav__links changes both colors
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget); // shows what the clickable event target is
+  console.log(this, 'LINK');
+  console.log(this === e.currentTarget);
+
+  //stopping the propagation
+  //e.stopPropagation();
+});
+
+//Then clicking on the part of the nav__links that is not nav__link only changes the bg in this parent element
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget); // shows what the clickable event target is
+  console.log(this, 'CONTAINER');
+  console.log(this === e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV', e.target, e.currentTarget); // shows what the clickable event target is
+    console.log(this, 'NAV');
+    console.log(this === e.currentTarget);
+  },
+  true //listening to capturing events so this nav will be first to show up
+);
+
+//The target is the same and bubbles up. there is only one target. e.target but when you see the currentTarget (same as This) it shows.
