@@ -217,6 +217,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 //2 can actually remove an eventlistener if we dont need it anymore (we need name function)
 */
 
+/*
 //Lesson 190 + 191 Event Propagation: Bubbling and Capturing / Event propagation in practice
 
 // rgb(255, 255, 255)
@@ -258,3 +259,4 @@ document.querySelector('.nav').addEventListener(
 );
 
 //The target is the same and bubbles up. there is only one target. e.target but when you see the currentTarget (same as This) it shows.
+*/
