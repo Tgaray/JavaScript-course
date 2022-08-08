@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -27,6 +29,63 @@ overlay.addEventListener('click', closeModal);
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
+  }
+});
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  //the Y element of the button boundingbox changes as we scroll in the viewport
+  console.log(e.target.getBoundingClientRect());
+  //currentscroll position
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  //height and width of viewport
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  //Scrolling (relative to viewport or document? think about because sizes change make relative to make work, so add the currentscrollposition to make it relative)
+  //This is to make it scroll to the right place
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  //to make the above smooth
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  //new way of doing this
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////
+// Page navigation (Event delegation)
+
+//Below not the cleanest solution if you had 10.000 buttons because the event function would be created for each element this is where you want to use event delegation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+//Delegate the event from the overlaying container (nav__links that is where the one event is generated and it bubbles up to the selected targt)
+//1. Add event listener to common parent element
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //2 Determine what element originated the event
+  //Matching the right target element strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
 
@@ -151,6 +210,7 @@ logo.classList.contains('c'); // not includes like in arrays
 logo.className = 'jonas';
 */
 
+/*
 //Lesson 188 Smooth scrolling
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
@@ -186,6 +246,7 @@ btnScrollTo.addEventListener('click', function (e) {
   //new way of doing this
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+*/
 
 /*
 //Lesson 189 types of events and event handlers
