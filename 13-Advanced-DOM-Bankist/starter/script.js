@@ -321,3 +321,39 @@ document.querySelector('.nav').addEventListener(
 
 //The target is the same and bubbles up. there is only one target. e.target but when you see the currentTarget (same as This) it shows.
 */
+
+/*
+//193 - DOM traversing
+const h1 = document.querySelector('h1');
+
+//Going downwards: children
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes); //all child nodes
+console.log(h1.children); //direct children
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+//Upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+2;
+
+//Not direct parent or far away in DOM tree (often used)
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+//closest is the opposite of querySelector (upwards to parents)
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+//Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+//Up and down (in this case HTML collection)
+console.log(h1.parentElement.children);
+//Looping over the collection/array
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
+*/
