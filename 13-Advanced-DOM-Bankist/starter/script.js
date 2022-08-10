@@ -89,6 +89,34 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+//Lesson 194 - building a Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  //get the closest complete tab (so not <span>) to the target that is clicked
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  //ignore clicks with null so not on one of the tabs but that do trigger the event (the container for example does not have a tab as a parent for closest to work) by using a 'Guard clause':
+  if (!clicked) return; //finish function early
+
+  //Active tab
+  //before we add the active class remove it everywhere
+
+  //Remove active classes everywhere so we can assign it to the clicked element
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  //Activate content area
+  clicked.classList.add('operations__tab--active');
+  console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
 ///////////////////////////////////
 ///////////// TESTS ///////////////
 ///////////////////////////////////
