@@ -119,16 +119,16 @@ tabsContainer.addEventListener('click', function (e) {
 
 //Lesson 195 Passing Arguments to Event Handlers
 //Menu fade animation (this works on the entire nav because events bubble up)
-const handleHover = function (e, opacity) {
+const handleHover = function (e) {
   console.log(this, e.currentTarget);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
     const logo = link.closest('.nav').querySelector('img');
     siblings.forEach(el => {
-      if (el !== link) el.style.opacity = opacity;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = opacity;
+    logo.style.opacity = this;
   }
 };
 
@@ -141,8 +141,21 @@ const handleHover = function (e, opacity) {
 // });
 
 //The above is better done with binding the function (The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments)
+//Passing argument into handler (With bind)
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+//Lesson 196 Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+//Scroll event not efficient fires a lot every scroll
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
 
 ///////////////////////////////////
 ///////////// TESTS ///////////////
