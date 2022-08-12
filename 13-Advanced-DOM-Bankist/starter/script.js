@@ -111,7 +111,7 @@ tabsContainer.addEventListener('click', function (e) {
 
   //Activate content area
   clicked.classList.add('operations__tab--active');
-  console.log(clicked.dataset.tab);
+  //console.log(clicked.dataset.tab);
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
@@ -120,7 +120,7 @@ tabsContainer.addEventListener('click', function (e) {
 //Lesson 195 Passing Arguments to Event Handlers
 //Menu fade animation (this works on the entire nav because events bubble up)
 const handleHover = function (e) {
-  console.log(this, e.currentTarget);
+  //console.log(this, e.currentTarget);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -132,6 +132,7 @@ const handleHover = function (e) {
   }
 };
 
+/*
 //To callback a function with arguments you have to create a function that calls another function pass in the event and the extra arguments needed
 // nav.addEventListener('mouseover', function (e) {
 //   handleHover(e, 0.5);
@@ -149,13 +150,51 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 const initialCoords = section1.getBoundingClientRect();
 console.log(initialCoords);
 
-//Scroll event not efficient fires a lot every scroll
+//Scroll event not efficient fires a lot every scroll (bad performance)
 window.addEventListener('scroll', function () {
   console.log(window.scrollY);
 
   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 });
+*/
+
+//Lesson 197 A Better Way: The Intersection Observer API
+/*
+//Callback gets called every time each time our callback element is intersecting the root element (root null is viewport) at the threshold we defined
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+//options to check if the target is intersecting with the root (null = viewport), 10% intersection ratio
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2],
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+*/
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
 
 ///////////////////////////////////
 ///////////// TESTS ///////////////
