@@ -178,17 +178,21 @@ const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
 */
 
+//Sticky nav done right
+//Select the header and the height of the nav
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+//console.log(navHeight);
 
+//Create callback function to check the first entry of the intersectionobserver change the class if the entry is triggered
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
+  //console.log(entry);
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 };
 
+//Use the headerobserver to check for the intersection and execute the class changes based on the right options
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
