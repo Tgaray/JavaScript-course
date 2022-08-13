@@ -206,7 +206,7 @@ const allSections = document.querySelectorAll('.section');
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  //console.log(entry);
   if (!entry.isIntersecting) return;
   entry.target.classList.remove('section--hidden');
 
@@ -223,6 +223,38 @@ allSections.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+//Lesson 199 lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  //console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  //replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  //Directly loading defeats purpose of showing that the images are lazy loaded
+  //entry.target.classList.remove('lazy-img');
+
+  //after loading event is called then remove lazy class to show the transition
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  //stop observing images after they are loaded
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  //make the images load a bit earlier in the background
+  rootMargin: '+200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
 
 ///////////////////////////////////
 ///////////// TESTS ///////////////
