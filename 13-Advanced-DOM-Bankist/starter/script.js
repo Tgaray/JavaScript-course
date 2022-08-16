@@ -133,50 +133,101 @@ const handleHover = function (e) {
 };
 
 //Lesson 200 Building a slider component part 1
-const slides = document.querySelectorAll('.slide');
-const btnLeft = document.querySelector('.slider__btn--left');
-const btnRight = document.querySelector('.slider__btn--right');
-let curSlide = 0;
-const maxSlide = slides.length;
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotContainer = document.querySelector('.dots');
 
-// const slider = document.querySelector('.slider');
-// slider.style.transform = 'scale(0.3) translateX(-1200px)';
-// slider.style.overflow = 'visible';
+  let curSlide = 0;
+  const maxSlide = slides.length;
 
-const goToSlide = function (slide) {
-  slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
-  );
+  //Make slider smaller so its easier to see images next to each other
+  // const slider = document.querySelector('.slider');
+  // slider.style.transform = 'scale(0.3) translateX(-1200px)';
+  // slider.style.overflow = 'visible';
+
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  //Next slide
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+      console.log(curSlide);
+    } else {
+      curSlide++;
+      console.log(curSlide);
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+      console.log(curSlide);
+    } else {
+      curSlide--;
+      console.log(curSlide);
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const init = function () {
+    createDots();
+    activateDot(0);
+    goToSlide(0);
+  };
+  init();
+
+  //Event handlers
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    console.log(e);
+    //normal way
+    if (e.key === 'ArrowLeft') prevSlide();
+    //short circuiting way
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      //destructuring slide from target because its already slide
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
 };
-goToSlide(0);
-
-//Next slide
-const nextSlide = function () {
-  if (curSlide === maxSlide - 1) {
-    curSlide = 0;
-    console.log(curSlide);
-  } else {
-    curSlide++;
-    console.log(curSlide);
-  }
-
-  goToSlide(curSlide);
-};
-
-const prevSlide = function () {
-  if (curSlide === 0) {
-    curSlide = maxSlide - 1;
-    console.log(curSlide);
-  } else {
-    curSlide--;
-    console.log(curSlide);
-  }
-
-  goToSlide(curSlide);
-};
-
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
+slider();
 
 /*
 //To callback a function with arguments you have to create a function that calls another function pass in the event and the extra arguments needed
