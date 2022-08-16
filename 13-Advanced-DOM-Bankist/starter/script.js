@@ -132,6 +132,52 @@ const handleHover = function (e) {
   }
 };
 
+//Lesson 200 Building a slider component part 1
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+let curSlide = 0;
+const maxSlide = slides.length;
+
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.3) translateX(-1200px)';
+// slider.style.overflow = 'visible';
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+goToSlide(0);
+
+//Next slide
+const nextSlide = function () {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+    console.log(curSlide);
+  } else {
+    curSlide++;
+    console.log(curSlide);
+  }
+
+  goToSlide(curSlide);
+};
+
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1;
+    console.log(curSlide);
+  } else {
+    curSlide--;
+    console.log(curSlide);
+  }
+
+  goToSlide(curSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
+
 /*
 //To callback a function with arguments you have to create a function that calls another function pass in the event and the extra arguments needed
 // nav.addEventListener('mouseover', function (e) {
@@ -221,7 +267,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  //section.classList.add('section--hidden');
 });
 
 //Lesson 199 lazy loading images
