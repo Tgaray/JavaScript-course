@@ -211,7 +211,7 @@ const slider = function () {
   btnLeft.addEventListener('click', prevSlide);
 
   document.addEventListener('keydown', function (e) {
-    console.log(e);
+    //console.log(e);
     //normal way
     if (e.key === 'ArrowLeft') prevSlide();
     //short circuiting way
@@ -230,6 +230,7 @@ const slider = function () {
 slider();
 
 /*
+//Lesson 196 hover nav sticky scroll nav
 //To callback a function with arguments you have to create a function that calls another function pass in the event and the extra arguments needed
 // nav.addEventListener('mouseover', function (e) {
 //   handleHover(e, 0.5);
@@ -237,6 +238,7 @@ slider();
 // nav.addEventListener('mouseout', function (e) {
 //   handleHover(e, 1);
 // });
+*/
 
 //The above is better done with binding the function (The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments)
 //Passing argument into handler (With bind)
@@ -245,16 +247,15 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 //Lesson 196 Sticky navigation
 const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
+//console.log(initialCoords);
 
 //Scroll event not efficient fires a lot every scroll (bad performance)
 window.addEventListener('scroll', function () {
-  console.log(window.scrollY);
+  //console.log(window.scrollY);
 
   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 });
-*/
 
 //Lesson 197 A Better Way: The Intersection Observer API
 /*
