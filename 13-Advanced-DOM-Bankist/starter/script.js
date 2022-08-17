@@ -621,3 +621,25 @@ console.log(h1.parentElement.children);
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
 */
+
+/*
+//Lesson 202 lifecycle DOM events
+
+//you can see the dom event in the google chrome network tab aswell and change speeds, no need to listen to DOMContentLoaded event if script tag is at the end of the HTML
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+//When complete page is finished loading then this load event is fired (css included)
+window.addEventListener('load', function (e) {
+  console.log('The website is fully loaded!', e);
+});
+
+//Right before closing a tab an event can fire. Lets say you want to check something. Or make sure the person really wants to close the tab or something.
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   //return value has to be empty string to show confirmation popup
+//   e.returnValue = '';
+// });
+*/
