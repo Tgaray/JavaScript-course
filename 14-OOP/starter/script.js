@@ -68,3 +68,30 @@ console.log(jonas.species, theron.species);
 //Own properties are properties declared directly on the object (class) itself not later assigned
 console.log(jonas.hasOwnProperty('firstName')); //true
 console.log(jonas.hasOwnProperty('species')); //false
+
+//Lesson 211 Prototypal Inheritance on Built-in Objects
+console.log(jonas.__proto__);
+//.object.prototype
+console.log(jonas.__proto__.__proto__); //prototype property of object (usually top of scope chain)
+console.log(jonas.__proto__.__proto__.__proto__); //null
+
+console.dir(Person.prototype.constructor);
+
+//array prototypes
+const arr = [3, 1, 1, 3, 5, 2, 3, 4, 5];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); //true
+console.log(arr.__proto__.__proto__); //prototype property of object (usually top of scope chain)
+
+//Adding new methods to the array prototpye so all other arrays inherit it
+//Bad habit to do (can introduce bugs)
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(h1); // almost six levels to this prototype chain: HTMLHeadingElement, HTMLelement, element, Node, EventTarget, Object
+
+//Functions are objects and so we can call functions/methods on functions
+console.dir(x => x + 1);
