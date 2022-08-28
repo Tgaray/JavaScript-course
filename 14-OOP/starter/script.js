@@ -95,3 +95,30 @@ console.dir(h1); // almost six levels to this prototype chain: HTMLHeadingElemen
 
 //Functions are objects and so we can call functions/methods on functions
 console.dir(x => x + 1);
+
+//Coding challenge #1
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+const car1 = new Car('Tesla', 30);
+const car2 = new Car('Rivian', 20);
+
+Car.prototype.accelerate = function (speed) {
+  this.speed += 10;
+  console.log(`The ${this.make} is going at ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function (speed) {
+  this.speed -= 5;
+  console.log(`The ${this.make} is going at ${this.speed} km/h`);
+};
+
+car1.accelerate();
+car2.brake();
+car1.accelerate();
+car2.brake();
+car1.accelerate();
+car2.brake();
+car1.brake();
