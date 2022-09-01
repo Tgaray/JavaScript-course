@@ -122,3 +122,46 @@ car2.brake();
 car1.accelerate();
 car2.brake();
 car1.brake();
+
+// ES6 Classes (are still functions)
+
+//class expression
+//const personCL = class {};
+
+//class declaration
+class PersonCL {
+  //similar to construtor function but inside this class
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  //methods inside a class so added on its .prototype
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+const stacho = new PersonCL('Stacho', 1994);
+console.log(stacho);
+stacho.calcAge();
+console.log(stacho.__proto__ === PersonCL.prototype);
+
+//Can add this to the class
+// PersonCL.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+stacho.greet();
+
+//1. Classes r not hoisted (you can not use a class before is declared in the code unlike methods/functions)
+//2. Classes are first class citizens (can pass into functions or return them from functions)
+//3. Classes are executed in strict mode
+
+//Which to use constructor functions or classes?
+//Neither are depricated what is your personal preference
+//Classes are fine to use aslong as you know everything in this section like prototypal inheritance
+//A class is preferable because it keeps everything gathered in a code block unlike constructors
