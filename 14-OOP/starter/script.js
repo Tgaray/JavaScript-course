@@ -131,8 +131,8 @@ car1.brake();
 //class declaration
 class PersonCL {
   //similar to construtor function but inside this class
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -142,11 +142,26 @@ class PersonCL {
   }
 
   greet() {
-    console.log(`Hey ${this.firstName}`);
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2022 - this.birthYear;
+  }
+
+  set fullName(name) {
+    console.log(name);
+    //to avoid naming conflict add _
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
   }
 }
 
-const stacho = new PersonCL('Stacho', 1994);
+const stacho = new PersonCL('Stacho Garay', 1994);
 console.log(stacho);
 stacho.calcAge();
 console.log(stacho.__proto__ === PersonCL.prototype);
@@ -165,3 +180,30 @@ stacho.greet();
 //Neither are depricated what is your personal preference
 //Classes are fine to use aslong as you know everything in this section like prototypal inheritance
 //A class is preferable because it keeps everything gathered in a code block unlike constructors
+
+//Getters and setters also work in classes in thise case to check a full name with a space
+const Levy = new PersonCL('Levy Verhagen', 1990);
+
+//Every object in JS can have getter and setter functions get and set values
+const account = {
+  owner: 'Theron',
+  movements: [200, 530, 120, 300],
+
+  //getter
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  //setter must have at least one param
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+//getter is written just as a property of the object
+console.log(account.latest);
+console.log((account.latest = 140));
+console.log(account.movements);
+
+//Classes also have getters and setters
+console.log(stacho.age);
