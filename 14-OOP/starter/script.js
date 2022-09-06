@@ -207,3 +207,27 @@ console.log(account.movements);
 
 //Classes also have getters and setters
 console.log(stacho.age);
+
+//Lesson 116 - Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const yma = Object.create(PersonProto);
+console.log(yma);
+yma.name = 'Yma';
+yma.birthYear = 1988;
+yma.calcAge();
+console.log(yma.__proto__ === PersonProto);
+
+//Better way, have a function to create object instance
+const marin = Object.create(PersonProto);
+marin.init('Marin', 2002);
+marin.calcAge();
