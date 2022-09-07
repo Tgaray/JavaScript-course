@@ -96,7 +96,9 @@ console.dir(h1); // almost six levels to this prototype chain: HTMLHeadingElemen
 //Functions are objects and so we can call functions/methods on functions
 console.dir(x => x + 1);
 
-//Coding challenge #1
+// =======================================
+// ========= Coding challenge #1 =========
+// =======================================
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -220,6 +222,7 @@ const PersonProto = {
   },
 };
 
+//Passing in the prototype of the object into this instance so it inherits it
 const yma = Object.create(PersonProto);
 console.log(yma);
 yma.name = 'Yma';
@@ -231,3 +234,40 @@ console.log(yma.__proto__ === PersonProto);
 const marin = Object.create(PersonProto);
 marin.init('Marin', 2002);
 marin.calcAge();
+
+// =======================================
+// ========= Coding challenge #2 =========
+// =======================================
+class VehicleCL {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`The ${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`The ${this.make} is going at ${this.speed} km/h`);
+  }
+
+  //getter
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  //setter must have at least one param
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const tesla = new VehicleCL('Telsa', 120);
+console.log(tesla.speedUS);
+tesla.accelerate();
+tesla.brake();
+tesla.speedUS = 70;
+console.log(tesla);
