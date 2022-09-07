@@ -138,7 +138,7 @@ class PersonCL {
     this.birthYear = birthYear;
   }
 
-  //methods inside a class so added on its .prototype
+  //methods inside a class so added on its .prototype (instance methods)
   calcAge() {
     console.log(2022 - this.birthYear);
   }
@@ -160,6 +160,12 @@ class PersonCL {
 
   get fullName() {
     return this._fullName;
+  }
+
+  //Static method
+  static hey() {
+    console.log('Hey there 🔥');
+    console.log(this);
   }
 }
 
@@ -209,6 +215,25 @@ console.log(account.movements);
 
 //Classes also have getters and setters
 console.log(stacho.age);
+
+//lesson 215 static methods
+//from is not a function (its attached to the entire constructor not to the prototype)
+//From is in the array namespace
+console.log(Array.from(document.querySelectorAll('h1')));
+//Another example that is in the same namespace from the internationalisation lecture
+//Namespace only available on its own constructor
+console.log(Number.parseFloat('31'));
+
+//Adding a static method
+Person.hey = function () {
+  console.log('Hey there 🔥');
+  console.log(this);
+};
+
+Person.hey();
+//The hey static method is not inherited so we cannot call it on another constructor
+//stacho.hey();
+PersonCL.hey(); //With this one the this keyword points to the entire class because it was added as a static tot he personCL class
 
 //Lesson 116 - Object.create
 const PersonProto = {
