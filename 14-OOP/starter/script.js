@@ -96,35 +96,6 @@ console.dir(h1); // almost six levels to this prototype chain: HTMLHeadingElemen
 //Functions are objects and so we can call functions/methods on functions
 console.dir(x => x + 1);
 
-// =======================================
-// ========= Coding challenge #1 =========
-// =======================================
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
-
-const car1 = new Car('Tesla', 30);
-const car2 = new Car('Rivian', 20);
-
-Car.prototype.accelerate = function (speed) {
-  this.speed += 10;
-  console.log(`The ${this.make} is going at ${this.speed} km/h`);
-};
-
-Car.prototype.brake = function (speed) {
-  this.speed -= 5;
-  console.log(`The ${this.make} is going at ${this.speed} km/h`);
-};
-
-car1.accelerate();
-car2.brake();
-car1.accelerate();
-car2.brake();
-car1.accelerate();
-car2.brake();
-car1.brake();
-
 // ES6 Classes (are still functions)
 
 //class expression
@@ -260,6 +231,76 @@ const marin = Object.create(PersonProto);
 marin.init('Marin', 2002);
 marin.calcAge();
 
+//Lesson 218 Inheritance between "classes": constructor functions
+const Student = function (firstName, birthYear, course) {
+  // A lot of duplicate code with the person prototype
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+
+  //So better to pass this as param to call Person class and then pass in the needed other params:
+  Person.call(this, firstName, birthYear);
+
+  this.course = course;
+};
+
+//Linking prototypes
+//Important to create object at this point in the code
+//With this the student.prototype inherits the person prototype
+Student.prototype = Object.create(Person.prototype); //Will return an empty object
+//We have to create this connection here before we add any more methods tot he prototype of students
+//If this was done afther the introduce() function the object.create would override the methods already added
+//Why use object.create because we dont want to be the same so not = we want to inherit from the Person prototype (extra's)
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const dom = new Student('Dom', 2000, 'Computer Science');
+console.log(dom);
+dom.introduce();
+//Using from the person prototype with the student class because they are linked see line (312)
+dom.calcAge(); //Method look-up in the prototype inheritance chain
+console.log(dom.__proto__);
+console.log(dom.__proto__.__proto__);
+
+//Both true because we linked the prototypes together
+console.log(dom instanceof Student);
+console.log(dom instanceof Person);
+console.log(dom instanceof Object);
+
+//Use/Change the prototype Student as the constructor
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+
+// =======================================
+// ========= Coding challenge #1 =========
+// =======================================
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+const car1 = new Car('Tesla', 30);
+const car2 = new Car('Rivian', 20);
+
+Car.prototype.accelerate = function (speed) {
+  this.speed += 10;
+  console.log(`The ${this.make} is going at ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function (speed) {
+  this.speed -= 5;
+  console.log(`The ${this.make} is going at ${this.speed} km/h`);
+};
+
+car1.accelerate();
+car2.brake();
+car1.accelerate();
+car2.brake();
+car1.accelerate();
+car2.brake();
+car1.brake();
+
 // =======================================
 // ========= Coding challenge #2 =========
 // =======================================
@@ -296,3 +337,48 @@ tesla.accelerate();
 tesla.brake();
 tesla.speedUS = 70;
 console.log(tesla);
+
+// =======================================
+// ========= Coding challenge #3 =========
+// =======================================
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed); // call params from Car
+  this.charge = charge;
+};
+
+//Linking prototypes
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+  console.log(
+    `The ${this.make} is going at ${this.speed} km/h and has the ${this.charge}% battery life`
+  );
+};
+
+//This function overrides the parent accelerate function from Car
+EV.prototype.accelerate = function (speed, chargeTo) {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `The ${this.make} is going at ${this.speed} km/h and has the ${this.charge}% battery life`
+  );
+};
+
+//This function overrides the parent brake function from Car
+EV.prototype.brake = function (speed, chargteTo) {
+  this.speed -= 20;
+  this.charge += 0.5;
+  console.log(
+    `The ${this.make} is going at ${this.speed} km/h and has the ${this.charge}% battery life`
+  );
+};
+
+const nio = new EV('NIO', 120, 23);
+//console.log(nio, 'Startpoint');
+nio.chargeBattery(90);
+//console.log(nio, 'Chargedbattery');
+nio.accelerate();
+//console.log(nio, 'Accelrate');
+nio.brake();
+//console.log(nio, 'Brake');
