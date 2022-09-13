@@ -382,3 +382,34 @@ nio.accelerate();
 //console.log(nio, 'Accelrate');
 nio.brake();
 //console.log(nio, 'Brake');
+
+//Lesson 220 Inheritance between Classes: Es6 Classes
+//make student class inherit from the PersonCL class (with extends)
+class StudentCL extends PersonCL {
+  //still need a constructor that receives the same params as the parent class
+  constructor(fullName, birthYear, course) {
+    //with the super function we basically call the constructor function of the parent class and pass in the params from the parent constructor function
+    //Always needs to happen first! Creates the this keyword
+    super(fullName, birthYear);
+    this.course = course; // we are adding to the student class ontop of whats already inherited from the PersonCl class
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  //Student specific calcAge function
+  calcAge() {
+    console.log(
+      `I'm ${
+        2022 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2022 - this.birthYear + 10
+      } years old`
+    );
+  }
+}
+
+const tim = new StudentCL('Tim Tom', 2000, 'Computer Science'); //even without constructor this would work because of the link to the parent class PersonCl
+tim.introduce();
+tim.calcAge();
