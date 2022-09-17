@@ -413,3 +413,71 @@ class StudentCL extends PersonCL {
 const tim = new StudentCL('Tim Tom', 2000, 'Computer Science'); //even without constructor this would work because of the link to the parent class PersonCl
 tim.introduce();
 tim.calcAge();
+
+//Lesson 221 Inheritance between classes: Object.create
+const job = Object.create(PersonProto);
+
+//Student proto inherits from the prototype PersonProto
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const daan = Object.create(StudentProto);
+daan.init('Daan', 1996, 'Computer Science');
+daan.introduce();
+daan.calcAge();
+
+//Lesson 222
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = []; //movements is an empty array
+    this.locale = navigator.languague;
+    console.log(`Thanks for opening a new account, ${owner}`);
+  }
+
+  //public interface of our objects
+  deposit(value) {
+    this.movements.push(value);
+  }
+
+  withdraw(value) {
+    this.deposit(-value);
+  }
+
+  approveLoan(value) {
+    return true;
+  }
+
+  requestLoan(value) {
+    if (this.approveLoan(value)) {
+      this.deposit(value);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Theron', 'EUR', 8888);
+console.log(acc1);
+
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+console.log(acc1);
+
+//this you want to make private
+console.log(acc1.pin);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000); // should be internal method to approve not a public one like the others
+
+//to see data encapsulation follow the next lectures. To see how we can make certain public interfaces not public
