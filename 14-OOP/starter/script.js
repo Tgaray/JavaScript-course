@@ -434,50 +434,94 @@ daan.introduce();
 daan.calcAge();
 
 //Lesson 222
+
+//Lesson 223 Encapsulation: protected properties
+//JS does not yet support real data privacy and encapsulation but there is a proposal under way to add truly private class fields and methods so in this lecture we fake it
+// _movements is not truly private but protected (team knows not supposed to be touched)
+
+//Lesson 224 Encapsulation: Private class fields and methods
+// 1. Public fields
+// 2. Private fields
+// 3. Public methods
+// 4. Private methods
+// 5. There is also the static version
+
 class Account {
+  // 1. public fields (instances) ferencable with this keyword
+  locale = navigator.language;
+
+  // 2. private fields (with #) available on the instances themselves not on a prototype
+  #movements = [];
+  #pin; //cannot define a private field inside a contructor so empty one before
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = []; //movements is an empty array
-    this.locale = navigator.languague;
+    this.#pin = pin;
+    // this._movements = []; //movements is an empty array //Made into public field
+    // this.locale = navigator.languague; //Made into public field
+
     console.log(`Thanks for opening a new account, ${owner}`);
   }
 
+  //3. Public methods
   //public interface of our objects
+  getMovements() {
+    return this.#movements;
+  }
+
+  _approveLoan(value) {
+    return true;
+  }
+
   deposit(value) {
-    this.movements.push(value);
+    this.#movements.push(value);
   }
 
   withdraw(value) {
     this.deposit(-value);
   }
 
-  approveLoan(value) {
-    return true;
+  //only available on the class itself not on all instances
+  static helper() {
+    console.log('Helper');
   }
 
   requestLoan(value) {
-    if (this.approveLoan(value)) {
+    if (this._approveLoan(value)) {
       this.deposit(value);
       console.log(`Loan approved`);
     }
   }
+
+  //4. Private methods (not supported yet)
+  //   #approveLoan(value) {
+  //     return true;
+  //   }
 }
 
 const acc1 = new Account('Theron', 'EUR', 8888);
 console.log(acc1);
 
-// acc1.movements.push(250);
-// acc1.movements.push(-140);
-
+//Only google chrome supports private fields atm
+// acc1._movements.push(250);
+// acc1._movements.push(-140);
 acc1.deposit(250);
 acc1.withdraw(140);
 console.log(acc1);
+console.log(acc1.getMovements());
 
 //this you want to make private
-console.log(acc1.pin);
+// console.log(acc1.#pin);
 acc1.requestLoan(1000);
-acc1.approveLoan(1000); // should be internal method to approve not a public one like the others
+acc1._approveLoan(1000); // should be internal method to approve not a public one like the others
+
+//syntax error we cant acces the variable outside of the location of the private fields
+// console.log(acc1.#movements);
+// console.log(acc1.#pin);
+// acc1.#approveLoan(1000); // seen as a field not a method yet (private methods not yet supported)
 
 //to see data encapsulation follow the next lectures. To see how we can make certain public interfaces not public
+
+//5. static functions (only work on the class itself not on instances)
+Account.helper();
