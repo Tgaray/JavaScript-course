@@ -476,10 +476,12 @@ class Account {
 
   deposit(value) {
     this.#movements.push(value);
+    return this; //This makes the method chainable because it returns the instance on which the chain is called
   }
 
   withdraw(value) {
     this.deposit(-value);
+    return this; //This makes the method chainable because it returns the instance on which the chain is called
   }
 
   //only available on the class itself not on all instances
@@ -491,6 +493,7 @@ class Account {
     if (this._approveLoan(value)) {
       this.deposit(value);
       console.log(`Loan approved`);
+      return this; //This makes the method chainable because it returns the instance on which the chain is called
     }
   }
 
@@ -525,3 +528,7 @@ acc1._approveLoan(1000); // should be internal method to approve not a public on
 
 //5. static functions (only work on the class itself not on instances)
 Account.helper();
+
+//lesson 225 Chaining methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
