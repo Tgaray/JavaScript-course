@@ -532,3 +532,60 @@ Account.helper();
 //lesson 225 Chaining methods
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
 console.log(acc1.getMovements());
+
+// =======================================
+// ========= Coding challenge #4 =========
+// =======================================
+
+class EVCLASS extends VehicleCL {
+  #charge;
+
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    console.log(
+      `The ${this.make} is going at ${this.speed} km/h and has the ${this.charge}% battery life`
+    );
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `The ${this.make} is going at ${this.speed} km/h and has the ${
+        this.#charge
+      }% battery life`
+    );
+    return this;
+  }
+
+  brake() {
+    this.speed -= 20;
+    this.#charge += 0.5;
+    console.log(
+      `The ${this.make} is going at ${this.speed} km/h and has the ${
+        this.#charge
+      }% battery life`
+    );
+    return this;
+  }
+}
+
+const cybertruck = new EVCLASS('Cybertruck', 120, 23);
+console.log(cybertruck);
+
+cybertruck.chargeBattery(90);
+console.log(cybertruck, 'Chargedbattery');
+cybertruck.accelerate();
+console.log(cybertruck, 'Accelrate');
+cybertruck.brake();
+console.log(cybertruck, 'Brake');
+cybertruck.chargeBattery(10).brake().brake().brake().accelerate();
+console.log(cybertruck, 'Chained methods result');
+
+console.log(cybertruck.speedUS);
