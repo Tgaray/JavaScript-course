@@ -3,6 +3,7 @@
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  clicks = 0;
 
   constructor(coords, distance, duration) {
     this.coords = coords; //[lat, lng]
@@ -17,6 +18,10 @@ class Workout {
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
   }
 }
 
@@ -71,6 +76,7 @@ class App {
   //Private class field properties for the map and mapEvents (properties created for all instances of the app class)
   #map;
   #mapEvent;
+  #mapZoomLevel = 13;
   #workouts = [];
 
   //No inputs needed so the constructor can remain empty for now
@@ -83,6 +89,8 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
     //Select change event for changed inputfields, no need to bind this because this is not used anywhere
     inputType.addEventListener('change', this._toggleElevationField);
+    //Eventlistener for the workout container that is clicked
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -108,7 +116,7 @@ class App {
     const coords = [latitude, longitude];
 
     console.log(this);
-    this.#map = L.map('map').setView(coords, 15);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
@@ -274,6 +282,30 @@ class App {
 
     //afterend places the new workout ahead of the older/prior one
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    //Click in an element and bubbles up to the closest workout class so the closest will be within the actual clicked workout element.
+    const workoutEl = e.target.closest('.workout');
+    console.log(workoutEl);
+
+    //guard clause when there is not workout
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      work => work.id === workoutEl.dataset.id
+    );
+    console.log(workout);
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+    //using the public interface
+    workout.click();
   }
 }
 
