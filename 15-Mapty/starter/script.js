@@ -84,7 +84,11 @@ class App {
   //So we can execute getPosition right away in the constructor
   //Event listeners are added because they need to be listening/executable right away.
   constructor() {
+    //Get users position
     this._getPosition();
+    //Get workouts data from local storage
+    this._getLocalStorage();
+    //Attach event handlers
     //event handler will always have the this element of the dom to which it is attached. Which is not what we want we want it to be bound to the class (App object).
     form.addEventListener('submit', this._newWorkout.bind(this));
     //Select change event for changed inputfields, no need to bind this because this is not used anywhere
@@ -111,11 +115,10 @@ class App {
     //destructuring the geolocation object lat and long into variables
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+    //console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
     const coords = [latitude, longitude];
 
-    console.log(this);
     this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -125,6 +128,11 @@ class App {
 
     //Handling clicks on map
     this.#map.on('click', this._showForm.bind(this));
+
+    //load map first then render the marker, here it does work because the map has to be loaded first (not in the getlocal storage function because that loads right away) Async Javascript.
+    this.#workouts.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(mapE) {
@@ -199,7 +207,6 @@ class App {
 
     //Add new object to workout array
     this.#workouts.push(workout);
-    console.log(workout);
 
     //Render workout on map as marker
     this._renderWorkoutMarker(workout);
@@ -209,6 +216,9 @@ class App {
 
     //Hide form + clear input fields
     this._hideForm();
+
+    // Set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -287,7 +297,6 @@ class App {
   _moveToPopup(e) {
     //Click in an element and bubbles up to the closest workout class so the closest will be within the actual clicked workout element.
     const workoutEl = e.target.closest('.workout');
-    console.log(workoutEl);
 
     //guard clause when there is not workout
     if (!workoutEl) return;
@@ -295,7 +304,6 @@ class App {
     const workout = this.#workouts.find(
       work => work.id === workoutEl.dataset.id
     );
-    console.log(workout);
 
     this.#map.setView(workout.coords, this.#mapZoomLevel, {
       animate: true,
@@ -305,7 +313,39 @@ class App {
     });
 
     //using the public interface
-    workout.click();
+    // workout.click();
+  }
+
+  //Function to add workouts to local storage.
+  _setLocalStorage() {
+    //set workouts to localStorage API in the browser and it has to be a key value pair so stringify an object
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  _getLocalStorage() {
+    //get workouts from localStorage API to display in the browser again as an object (so parse).
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    //guard clause if there is no data
+    if (!data) return;
+
+    //restoring the array with the available data that is stored in the browser cache
+    this.#workouts = data;
+    //lOOP over the array without creating a new array. By using the seperately created method so we do not have to duplicate code.
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+      //marker does not work because it is trying to add the marker right away but it needs to wait for the map to load. Async JS.
+      //so renderworkoutmarker should be at the end of the load map function instead.
+      //this._renderWorkoutMarker(work);
+    });
+  }
+
+  //to be able to use this method in the console to reset the data
+  reset() {
+    localStorage.removeItem('workouts');
+    //location is a big object that has the method to reload the page.
+    //by using app.reset()
+    location.reload();
   }
 }
 
