@@ -50,6 +50,8 @@
 // getCountryData('holland');
 // getCountryData('portugal');
 // //Modern way to do ajax requests is through promises
+
+/*
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -126,5 +128,15 @@ setTimeout(() => {
     }, 1000);
   }, 1000);
 }, 1000);
+*/
 
 //solved with promises and fetch (since ES6)
+
+// const request = new XMLHttpRequest();
+// request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
+// //async send request method to call the data, after that is done it will emit the load event
+// request.send();
+
+//Promise stored in request variable / an object that is a placeholder for the future result of an async operation.
+const request = fetch('https://restcountries.com/v3.1/name/portugal');
+console.log(request);
