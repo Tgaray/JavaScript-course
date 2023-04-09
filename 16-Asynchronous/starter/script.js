@@ -51,7 +51,6 @@
 // getCountryData('portugal');
 // //Modern way to do ajax requests is through promises
 
-/*
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -112,23 +111,22 @@ const getCountryAndNeighbour = function (country) {
   });
 };
 
-getCountryAndNeighbour('france');
-//Modern way to do ajax requests is through promises
+// getCountryAndNeighbour('france');
+// //Modern way to do ajax requests is through promises
 
-//nested callbacks = callback hell (hard to reason about, hard to maintain)
-setTimeout(() => {
-  console.log('1 second has passed');
-  setTimeout(() => {
-    console.log('2 second has passed');
-    setTimeout(() => {
-      console.log('3 second has passed');
-      setTimeout(() => {
-        console.log('4 second has passed');
-      }, 1000);
-    }, 1000);
-  }, 1000);
-}, 1000);
-*/
+// //nested callbacks = callback hell (hard to reason about, hard to maintain)
+// setTimeout(() => {
+//   console.log('1 second has passed');
+//   setTimeout(() => {
+//     console.log('2 second has passed');
+//     setTimeout(() => {
+//       console.log('3 second has passed');
+//       setTimeout(() => {
+//         console.log('4 second has passed');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
 
 //solved with promises and fetch (since ES6)
 
@@ -137,6 +135,35 @@ setTimeout(() => {
 // //async send request method to call the data, after that is done it will emit the load event
 // request.send();
 
+//Lesson 252 - consuming promises
+
 //Promise stored in request variable / an object that is a placeholder for the future result of an async operation.
 const request = fetch('https://restcountries.com/v3.1/name/portugal');
 console.log(request);
+
+// const getCountryData = function (country) {
+//   //Handling a fufilled Promise
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       //.json is available on all the responses through a fetch (resolve values)
+//       //The json returns it's own promise, json to be able to actually read the data from the response object
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0]);
+//     });
+// };
+
+const getCountryData = function (country) {
+  //Handling a fufilled Promise (SIMPLIFIED VERSION OF THE ABOVE ONE)
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    //.json is available on all the responses through a fetch (resolve values)
+    //The json returns it's own promise, json to be able to actually read the data from the response object
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+//This is a way better solution than the code from line 11 to 47 and also better than callback hell on lines 117 to 129
+
+getCountryData('Portugal');
