@@ -75,9 +75,14 @@ const renderCountry = function (data, className = '') {
       `;
   console.log(html);
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;
 };
 
+//To render an error
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+};
 // const getCountryAndNeighbour = function (country) {
 //   //old school way of doing ajax requests ajax call #1
 //   const request = new XMLHttpRequest();
@@ -165,7 +170,10 @@ const getCountryData = function (country) {
     //.json is available on all the responses through a fetch (resolve values)
     //The json returns it's own promise, json to be able to actually read the data from the response object
     //These two thens are already a sequential chain of promises
-    .then(response => response.json())
+    .then(
+      response => response.json()
+      //err => alert(err) // catching the error as a second argument of the response but you have to do this for every response so also on line 183 there is a better way to handle erros globally by adding a catch method
+    )
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0];
@@ -178,8 +186,21 @@ const getCountryData = function (country) {
     //then(data => alert(data)); this is the fulfilled data in the commented out example it's 23
     //This is where we can handle the succes value of the prior promise
     .then(response => response.json())
-    .then(data => renderCountry(data[0], 'neighbour'));
+    .then(data => renderCountry(data[0], 'neighbour'))
+    .catch(err => {
+      console.error(`${err} 😡`);
+      renderError(`Something went wrong 😡 ${err.message}. Try again!`);
+    })
+    .finally(() => {
+      //contains code that always has to be executed at the end, only works on promises also an error promise like the catch so it will always follow a catch
+      countriesContainer.style.opacity = 1;
+    });
 };
 //This is a way better solution than the code from line 11 to 47 and also better than callback hell on lines 117 to 129
 
-getCountryData('germany');
+btn.addEventListener('click', function () {
+  getCountryData('germany');
+});
+
+//No country was found with this name
+// getCountryData('dasdfasdf');
