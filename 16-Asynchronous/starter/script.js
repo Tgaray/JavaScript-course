@@ -162,30 +162,77 @@ console.log(request);
 //     });
 // };
 
+//Helper function to fetch the url and return a response in json format so we can reduce redundant code
+const getJSON = function (url, errorMsg = 'something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`); // passes down the response error message tot he catch while skipping the in between thens
+    return response.json();
+  });
+};
+
+// !!! Exmaple without helper function filled with redundant code !!!
 //Lesson 253 - Chaining promises (two sequential ajax calls)
+// const getCountryData = function (country) {
+//   //Handling a fufilled Promise (SIMPLIFIED VERSION OF THE ABOVE ONE)
+//   //Country 1 (ajax request 1)
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     //.json is available on all the responses through a fetch (resolve values)
+//     //The json returns it's own promise, json to be able to actually read the data from the response object
+//     //These two thens are already a sequential chain of promises
+//     .then(response => {
+//       console.log(response);
+
+//       //err => alert(err) // catching the error as a second argument of the response but you have to do this for every response so also on line 183 there is a better way to handle erros globally by adding a catch method
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`); // passes down the response error message tot he catch while skipping the in between thens
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//       //const neighbour = data[0].borders[0];
+//       const neighbour = 'adsdfasdf';
+//       if (!neighbour) return;
+//       //Country 2 (ajax request 2)
+//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+//       //we could also return something simple as return 23; in this case this value will be the fulfillment of the promise.
+//     })
+//     //then(data => alert(data)); this is the fulfilled data in the commented out example it's 23
+//     //This is where we can handle the succes value of the prior promise
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`); // passes down the response error message tot he catch while skipping the in between thens
+//       return response.json();
+//     })
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err} 😡`);
+//       renderError(`Something went wrong 😡 ${err.message}. Try again!`);
+//     })
+//     .finally(() => {
+//       //contains code that always has to be executed at the end, only works on promises also an error promise like the catch so it will always follow a catch
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+//Better version of the getCOuntryData function with the use of the getJSON helper function
 const getCountryData = function (country) {
-  //Handling a fufilled Promise (SIMPLIFIED VERSION OF THE ABOVE ONE)
-  //Country 1 (ajax request 1)
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    //.json is available on all the responses through a fetch (resolve values)
-    //The json returns it's own promise, json to be able to actually read the data from the response object
-    //These two thens are already a sequential chain of promises
-    .then(
-      response => response.json()
-      //err => alert(err) // catching the error as a second argument of the response but you have to do this for every response so also on line 183 there is a better way to handle erros globally by adding a catch method
-    )
+  //Call helper getJSON function to fetch/and make json of the request
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0];
 
-      if (!neighbour) return;
+      //What if a country does not exist:
+      //const neighbour = 'adsdfasdf';
+
+      //But what if a country has no neighbour we should handle this aswell (like australia)
+      if (!neighbour) throw new Error('No neighbour found');
       //Country 2 (ajax request 2)
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        'Country not found'
+      );
       //we could also return something simple as return 23; in this case this value will be the fulfillment of the promise.
     })
-    //then(data => alert(data)); this is the fulfilled data in the commented out example it's 23
-    //This is where we can handle the succes value of the prior promise
-    .then(response => response.json())
     .then(data => renderCountry(data[0], 'neighbour'))
     .catch(err => {
       console.error(`${err} 😡`);
@@ -196,11 +243,13 @@ const getCountryData = function (country) {
       countriesContainer.style.opacity = 1;
     });
 };
-//This is a way better solution than the code from line 11 to 47 and also better than callback hell on lines 117 to 129
 
+//This is a way better solution than the code from line 11 to 47 and also better than callback hell on lines 117 to 129
 btn.addEventListener('click', function () {
-  getCountryData('germany');
+  getCountryData('Germany');
 });
 
 //No country was found with this name
-// getCountryData('dasdfasdf');
+//The promise does not get rejected right away which is what we want so we have to do that manually
+//Lesson 255 - throwing errors manually
+//getCountryData('dasdfasdf');
