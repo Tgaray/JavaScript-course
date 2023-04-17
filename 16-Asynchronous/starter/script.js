@@ -310,19 +310,83 @@ GOOD LUCK 😀
 
 //Any top level code should be run first (outside a callback)
 //#1 Top level console.log (these will run first)
-console.log('Test start');
-//#3 then the items from the callback queue
-setTimeout(() => console.log('0 sec timer'), 0);
-//Promise.resolve allows us to build a promise that can be emedietly resolved
-//#2 Then the promise will run second because it goes to the micro task queue
-Promise.resolve('Resolved promise 1').then(res => console.log(res));
-//#1 Top  level code console.log (these will run first)
+// console.log('Test start');
+// //#3 then the items from the callback queue
+// setTimeout(() => console.log('0 sec timer'), 0);
+// //Promise.resolve allows us to build a promise that can be emedietly resolved
+// //#2 Then the promise will run second because it goes to the micro task queue
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// //#1 Top  level code console.log (these will run first)
 
-//If the microtask takes a long time the 0 seconds will actually be delayed because its behind them in the callback stack
-Promise.resolve('Resolved promise 2').then(res => {
-  //looping over large number to take a lot of time
-  for (let i = 0; i < 1000000000; i++) {}
-  //This means you cannot to high precision things with setTimeouts
-  console.log(res);
-});
-console.log('Test end');
+// //If the microtask takes a long time the 0 seconds will actually be delayed because its behind them in the callback stack
+// Promise.resolve('Resolved promise 2').then(res => {
+//   //looping over large number to take a lot of time
+//   for (let i = 0; i < 1000000000; i++) {}
+//   //This means you cannot to high precision things with setTimeouts
+//   console.log(res);
+// });
+// console.log('Test end');
+
+// //Lesson 259 Building a simple promise
+// //Building a promise is like building a special object it takes only one param, the executor function which will execute as soon as the promise constructor runs in doing so it will take two more parameters, resolve and reject
+// //We will store the result in a variable lotteryPromise
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   //async behavior we will try to handle with the promise
+//   //This log is the first microtask
+//   console.log('Lottery draw is pending 🔮');
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       //string when promise is resolved
+//       resolve('You win 😇');
+//     } else {
+//       //create the error object
+//       reject(new Error('You lose 🥪'));
+//     }
+//   }, 2000);
+// });
+
+// //In practice you usually just consume promises (like below) but good to know how they are built
+// lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
+
+// //We often only build promises to update old callback (hell) based code into promises (promisifying)
+// //Promisifying setTimeout
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+
+// wait(1)
+//   .then(() => {
+//     console.log('I waited for 1 seconds');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     console.log('I waited for 2 seconds');
+//     return wait(3);
+//   })
+//   .then(() => {
+//     console.log('I waited for 3 seconds');
+//     return wait(4);
+//   })
+//   .then(() => console.log('I waited for 4 seconds'));
+
+// //The above we could do to avoid the following:
+// // //nested callbacks = callback hell (hard to reason about, hard to maintain)
+// // setTimeout(() => {
+// //   console.log('1 second has passed');
+// //   setTimeout(() => {
+// //     console.log('2 second has passed');
+// //     setTimeout(() => {
+// //       console.log('3 second has passed');
+// //       setTimeout(() => {
+// //         console.log('4 second has passed');
+// //       }, 1000);
+// //     }, 1000);
+// //   }, 1000);
+// // }, 1000);
+
+// //Easy way to create a promise that resolves or rejects right away
+// //You can see the abc resolve quickly because it is in the microtask queue the abc is the second microtask including all the lines from 330 to 392
+// Promise.resolve('abc').then(x => console.log(x));
+// Promise.reject(new Error('Problem!')).catch(x => console.error(x));
