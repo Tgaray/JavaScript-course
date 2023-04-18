@@ -304,7 +304,7 @@ GOOD LUCK 😀
 //     .catch(err => console.error(`😡 ${err.message}`));
 // };
 
-// whereAmI(52.508, 13.381);
+//whereAmI(52.508, 13.381);
 //whereAmI(19.037, 72.873);
 //whereAmI(-33.933, 18.474);
 
@@ -390,3 +390,54 @@ GOOD LUCK 😀
 // //You can see the abc resolve quickly because it is in the microtask queue the abc is the second microtask including all the lines from 330 to 392
 // Promise.resolve('abc').then(x => console.log(x));
 // Promise.reject(new Error('Problem!')).catch(x => console.error(x));
+
+// //Lesson 260 - Promisifying the geolocation API
+// // const getPosition = function () {
+// //   return new Promise(function (resolve, reject) {
+// //     navigator.geolocation.getCurrentPosition(
+// //       position => resolve(position),
+// //       err => reject(err)
+// //     );
+// //   });
+// // };
+
+// //Even simpler version of the promisified version above
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// getPosition().then(pos => console.log(pos));
+
+// //Code from coding challenge that uses lat long to use the geolocation now
+// //No need for parameters anymore because we built a function for the geolocation
+// const whereAmI = function () {
+//   getPosition()
+//     .then(pos => {
+//       //destructure the coordinates
+//       const { latitude: lat, longitude: lng } = pos.coords;
+
+//       //Return the fetch PROMISE and then handle it with the then handler below
+//       return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+//     })
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Problem with geocoding (${response.status})`); // passes down the response error message tot he catch while skipping the in between thens
+//       return response.json();
+//     })
+//     .then(data => {
+//       console.log(`You are in ${data.city}, ${data.country}`);
+
+//       return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`); // passes down the response error message tot he catch while skipping the in between thens
+//       return response.json();
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => console.error(`😡 ${err.message}`));
+// };
+
+// btn.addEventListener('click', whereAmI);
