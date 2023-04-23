@@ -467,46 +467,46 @@ TEST DATA: Images in the img folder. Test the error handler by passing a wrong i
 GOOD LUCK 😀
 */
 
-const wait = function (seconds) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, seconds * 1000);
-  });
-};
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
 
-const imgContainer = document.querySelector('div.images');
+// const imgContainer = document.querySelector('div.images');
 
-const createImage = function (imgPath) {
-  return new Promise(function (resolve, reject) {
-    const img = document.createElement('img');
-    img.src = `${imgPath}`;
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement('img');
+//     img.src = `${imgPath}`;
 
-    img.addEventListener('load', function () {
-      imgContainer.append(img);
-      resolve(img);
-    });
+//     img.addEventListener('load', function () {
+//       imgContainer.append(img);
+//       resolve(img);
+//     });
 
-    img.addEventListener('error', function () {
-      reject(new Error('Image not found'));
-    });
-  });
-};
+//     img.addEventListener('error', function () {
+//       reject(new Error('Image not found'));
+//     });
+//   });
+// };
 
-let currentIMG;
+// let currentIMG;
 
-createImage('img/img-1.jpg')
-  .then(img => {
-    currentIMG = img;
-    console.log('Image 1 is loaded');
-    return wait(2);
-  })
-  .then(() => {
-    currentIMG.style.display = 'none';
-    return createImage('img/img-2.jpg');
-  })
-  .then(img => {
-    currentIMG = img;
-    console.log('Image 2 is loaded');
-    return wait(2);
-  })
-  .then(() => (currentIMG.style.display = 'none'))
-  .catch(err => console.error(err));
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentIMG = img;
+//     console.log('Image 1 is loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentIMG.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentIMG = img;
+//     console.log('Image 2 is loaded');
+//     return wait(2);
+//   })
+//   .then(() => (currentIMG.style.display = 'none'))
+//   .catch(err => console.error(err));
