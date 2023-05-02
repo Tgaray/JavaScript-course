@@ -524,30 +524,49 @@ const getPosition = function () {
 //now an async function - this function can keep running in the bg while performing the code that is inside.
 //Can have one or more awaits
 const whereAmI = async function () {
-  //Geolocation
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
-  console.log(pos.coords);
+  try {
+    //Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    console.log(pos.coords);
 
-  //Reverse geocoding
-  console.log(lat, lng);
-  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+    //Reverse geocoding
+    console.log(lat, lng);
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error(`Problem getting location data 😉`);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
 
-  //Country data
-  //await will wait at this point until the promise is fufilled (data has been fetched in this case) not blocking main thread of execution
-  const res = await fetch(
-    `https://restcountries.com/v3.1/name/${dataGeo.country}`
-  ); // will be resolve value of the promise
-  console.log(res);
-  const data = await res.json();
-  console.log(data);
-  renderCountry(data[0]); //all without chaining callbacks (with thens)
+    //Country data
+    //await will wait at this point until the promise is fufilled (data has been fetched in this case) not blocking main thread of execution
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+    ); // will be resolve value of the promise
+    if (!resGeo.ok) throw new Error(`Problem getting Country 😉`);
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+  } catch (error) {
+    console.error(error);
+    renderError(`${error.message} 😉`);
+  } //all without chaining callbacks (with thens)
   //the above is essentially the same as:
   // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res));
 };
 
 whereAmI();
+whereAmI();
+whereAmI();
 //first will be printed first and then the response from whereAmI (so async)
 console.log('FIRST');
+
+//Lesson 263 - error handling with try... catch
+// //Example
+// try {
+//   let y = 1;
+//   const xasdfxb = 2;
+//   xasdfxb = 3;
+// } catch (err) {
+//   alert(err.message);
+// }
