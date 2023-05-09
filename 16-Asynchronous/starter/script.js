@@ -528,14 +528,12 @@ const whereAmI = async function () {
     //Geolocation
     const pos = await getPosition();
     const { latitude: lat, longitude: lng } = pos.coords;
-    console.log(pos.coords);
 
     //Reverse geocoding
     console.log(lat, lng);
     const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
     if (!resGeo.ok) throw new Error(`Problem getting location data 😉`);
     const dataGeo = await resGeo.json();
-    console.log(dataGeo);
 
     //Country data
     //await will wait at this point until the promise is fufilled (data has been fetched in this case) not blocking main thread of execution
@@ -543,23 +541,44 @@ const whereAmI = async function () {
       `https://restcountries.com/v3.1/name/${dataGeo.country}`
     ); // will be resolve value of the promise
     if (!resGeo.ok) throw new Error(`Problem getting Country 😉`);
-    console.log(res);
     const data = await res.json();
-    console.log(data);
     renderCountry(data[0]);
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
   } catch (error) {
-    console.error(error);
     renderError(`${error.message} 😉`);
   } //all without chaining callbacks (with thens)
   //the above is essentially the same as:
   // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res));
+
+  //reject promise returned from async function
+  throw err;
 };
 
-whereAmI();
-whereAmI();
-whereAmI();
+console.log('1: I will get the location');
+//Async function that runs in the background so JS moves right tot he next line but in this case async awaits always returns a promise, so the promise is pending betwee the two console.logs
+// const city = whereAmI();
+// console.log(city);
+//But to get the fufilled value of the promise we want to use then
+
+// whereAmI()
+//   .then(city => console.log(`2: ${city}`))
+//   .catch(err => console.error(`2: ${err.message}`))
+//   .finally(() => console.log('3: Finished getting the location'));
+
 //first will be printed first and then the response from whereAmI (so async)
-console.log('FIRST');
+// console.log('FIRST');
+
+//Above we are combining the old and new ways of writing async functions/code
+//With iffy (immediate revoked function calls) we solve this in this case with an async iffy
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message}`);
+  }
+  console.log('3: Finished getting the location');
+})();
 
 //Lesson 263 - error handling with try... catch
 // //Example
