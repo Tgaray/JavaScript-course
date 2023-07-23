@@ -658,3 +658,90 @@ Promise.any([
 ])
   .then(res => console.log(res))
   .catch(err => console.log(err));
+
+//Coding challenge #3 basically making an async version of coding challenge #2 with extra's
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 4000);
+  });
+};
+
+const imgContainer = document.querySelector('div.images');
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = `${imgPath}`;
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
+  });
+};
+
+//Part1
+//Old code challenge #2 non async code
+// let currentIMG;
+
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentIMG = img;
+//     console.log('Image 1 is loaded');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentIMG.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentIMG = img;
+//     console.log('Image 2 is loaded');
+//     return wait(2);
+//   })
+//   .then(() => (currentIMG.style.display = 'none'))
+//   .catch(err => console.error(err));
+
+const loadNpause = async function () {
+  try {
+    //load image1
+    let img = await createImage('img/img-1.jpg');
+    console.log('Image 1 is loaded');
+    await wait(2);
+    img.style.display = 'none';
+
+    //load image2
+    img = await createImage('img/img-2.jpg');
+    console.log('Image 2 is loaded');
+    await wait(2);
+    img.style.display = 'none';
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// loadNpause();
+
+//Part2
+const loadAll = async function (imgArr) {
+  try {
+    //arrow function is returning something
+    //async will return promise and not always the value we are interested in
+    const imgs = imgArr.map(async img => await createImage(img));
+    console.log(imgs);
+
+    //Promise.all is perfect to take out all the promises and store the image elements (instead of promises) into an array
+    const imgsEl = await Promise.all(imgs);
+    console.log(imgsEl);
+    //then loop over array and add the parallel class to it
+    imgsEl.forEach(img => img.classList.add('parallel'));
+  } catch (err) {
+    console.error(err);
+  }
+};
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
