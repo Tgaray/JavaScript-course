@@ -570,15 +570,15 @@ console.log('1: I will get the location');
 
 //Above we are combining the old and new ways of writing async functions/code
 //With iffy (immediate invoked function calls) we solve this in this case with an async iffy
-(async function () {
-  try {
-    const city = await whereAmI();
-    console.log(`2: ${city}`);
-  } catch (err) {
-    console.error(`2: ${err.message}`);
-  }
-  console.log('3: Finished getting the location');
-})();
+// (async function () {
+//   try {
+//     const city = await whereAmI();
+//     console.log(`2: ${city}`);
+//   } catch (err) {
+//     console.error(`2: ${err.message}`);
+//   }
+//   console.log('3: Finished getting the location');
+// })();
 
 //Lesson 263 - error handling with try... catch
 // //Example
@@ -590,26 +590,71 @@ console.log('1: I will get the location');
 //   alert(err.message);
 // }
 
-const get3Countries = async function (c1, c2, c3) {
-  try {
-    // const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
-    // const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
-    // const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
+// const get3Countries = async function (c1, c2, c3) {
+//   try {
+//     // const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
+//     // const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
+//     // const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
 
-    //As a promise they run at the same time instead of one after the other like above
-    //This will return one promise that runs the promises in parallel
-    const data = await Promise.all([
-      getJSON(`https://restcountries.com/v3.1/name/${c1}`),
-      getJSON(`https://restcountries.com/v3.1/name/${c2}`),
-      getJSON(`https://restcountries.com/v3.1/name/${c3}`),
-    ]);
+//     //As a promise they run at the same time instead of one after the other like above
+//     //This will return one promise that runs the promises in parallel
+//     const data = await Promise.all([
+//       getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+//       getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+//       getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+//     ]);
 
-    // console.log(data1.capital, data2.capital, data3.capital);
-    //console.log(data);
-    console.log(data.map(d => d[0].capital));
-  } catch (err) {
-    console.error(err);
-  }
+//     // console.log(data1.capital, data2.capital, data3.capital);
+//     //console.log(data);
+//     console.log(data.map(d => d[0].capital));
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// get3Countries('portugal', 'canada', 'tanzania');
+
+//Lesson 266 Other promise combinators: race, allSettled and any
+
+//Promise.race
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v3.1/name/mexico`),
+    getJSON(`https://restcountries.com/v3.1/name/egypt`),
+    getJSON(`https://restcountries.com/v3.1/name/italy`),
+  ]);
+  console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long!'));
+    });
+  }, sec * 1000);
 };
 
-get3Countries('portugal', 'canada', 'tanzania');
+Promise.race([
+  getJSON(`https://restcountries.com/v3.1/name/tanzania`),
+  timeout(0.1),
+])
+  .then(res => console.log(res[0]))
+  .catch(err => console.log(err));
+
+//Promise.allSettled (never short circuits like race does)
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.resolve('ERROR'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
+
+//Promise.any but rejected promises are ignored so always a fufilled promise unless all are rejectd
+Promise.any([
+  Promise.resolve('Success'),
+  Promise.resolve('ERROR'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
