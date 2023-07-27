@@ -62,3 +62,55 @@ console.log(lastPost2);
 
 //When one module importas a module with a top level await the importing module will wait for the imported module to finish the blocking code
 //Lets add some blocking code to the shoppingCart.js module (line 5)
+
+// //Lesson 274 - The module pattern (the main goals is to encapsulate functionality / to have private data / and to expose a public API)
+// //The best way to do this is by simply using functions (because give us private data by default and allow us to return values which can become our API)
+// //IIFE in this case immediately invoked function expression (so we don't have to call it separately and only once), all the following data is private because it is in the function
+// const shoppingCart2 = (function () {
+//   const cart = [];
+//   const shippingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 13;
+
+//   const addToCart = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(
+//       `${quantity} ${product} added to cart (shipping costs is ${shippingCost})`
+//     );
+//   };
+//   const orderStock = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(`${quantity} ${product} ordered from supplier`);
+//   };
+
+//   //Public API stuff we want to make public in the return
+//   return {
+//     addToCart,
+//     cart,
+//     totalPrice,
+//     totalQuantity,
+//   };
+// })();
+
+// shoppingCart2.addToCart('apple', 4);
+// shoppingCart2.addToCart('pizza', 2);
+// //We only exported some of the function this we can see:
+// console.log(shoppingCart2);
+// //But we cannot see the private parts :P
+// console.log(shoppingCart2.shippingCost);
+// //Due to closures we can still access all the publicly available data from the "birth" of the function
+// //Relook at closures lecture
+
+//Lesson 275 CommonJS modules
+
+//Export
+export.addToCart function (product, quantity) {
+    cart.push({ product, quantity });
+    console.log(
+      `${quantity} ${product} added to cart (shipping costs is ${shippingCost})`
+    );
+  };
+
+//Import
+const {addToCart} = require('./shoppingCart.js');
+//Hopefull in the long run ES6 will replace this
