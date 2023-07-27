@@ -2,6 +2,11 @@
 //modules are executed in strict mode by default
 console.log('Exporting module');
 
+// //Blocking code (throttle with slow 3G network), so the code in the script.js has to wait for this code to be finished
+// console.log('Start fetching users');
+// await fetch('https://jsonplaceholder.typicode.com/users');
+// console.log('Finish fetching users');
+
 //All top level variables are private within a module
 const shippingCost = 10;
 export const cart = [];
