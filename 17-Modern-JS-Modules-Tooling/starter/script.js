@@ -103,14 +103,35 @@ console.log(lastPost2);
 
 //Lesson 275 CommonJS modules
 
-//Export
-export.addToCart function (product, quantity) {
-    cart.push({ product, quantity });
-    console.log(
-      `${quantity} ${product} added to cart (shipping costs is ${shippingCost})`
-    );
-  };
+// //Export
+// export.addToCart function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(
+//       `${quantity} ${product} added to cart (shipping costs is ${shippingCost})`
+//     );
+//   };
 
-//Import
-const {addToCart} = require('./shoppingCart.js');
-//Hopefull in the long run ES6 will replace this
+// //Import
+// const {addToCart} = require('./shoppingCart.js');
+// //Hopefull in the long run ES6 will replace this
+
+//It's a default export but you can use the same name aswell
+import cloneDeep from '/node_modules/lodash-es/cloneDeep.js';
+
+//Deeply nested object
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+
+//Empty object and merge that with the state (using Lodash is a good idea because manually assigning a deep clone is a lot of work)
+const stateClone = Object.assign({}, state);
+state.user.loggedIn = false;
+console.log(stateClone);
+
+//Clonedeep version from LoDash
+const stateDeepClone = cloneDeep(state); //This shows false because we copy it after we changed the value (move this just a line after the assign on line 131 and it will be true)
+console.log(stateDeepClone);
