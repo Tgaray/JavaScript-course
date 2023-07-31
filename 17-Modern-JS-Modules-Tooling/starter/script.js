@@ -51,14 +51,14 @@ const getLastPost = async function () {
   return { title: data.at(-1).title, text: data.at(-1).body };
 };
 
-//calling an async function will always return a promise not an object (data)
-const lastPost = getLastPost();
-console.log(lastPost);
-//to solve for this we just call the promise like before (however not very clean so lets use top level await)
-// lastPost.then(last => console.log(last));
-//top level await version
-const lastPost2 = await getLastPost();
-console.log(lastPost2);
+// //calling an async function will always return a promise not an object (data)
+// const lastPost = getLastPost();
+// console.log(lastPost);
+// //to solve for this we just call the promise like before (however not very clean so lets use top level await)
+// // lastPost.then(last => console.log(last));
+// //top level await version
+// const lastPost2 = await getLastPost();
+// console.log(lastPost2);
 
 //When one module importas a module with a top level await the importing module will wait for the imported module to finish the blocking code
 //Lets add some blocking code to the shoppingCart.js module (line 5)
@@ -115,8 +115,10 @@ console.log(lastPost2);
 // const {addToCart} = require('./shoppingCart.js');
 // //Hopefull in the long run ES6 will replace this
 
-//It's a default export but you can use the same name aswell
-import cloneDeep from '/node_modules/lodash-es/cloneDeep.js';
+// //It's a default export but you can use the same name aswell
+// import cloneDeep from '/node_modules/lodash-es/cloneDeep.js';
+//In module bundling parcel will automatically choose the files that are needed so you dont have to type an antire path as above
+import cloneDeep from 'lodash-es';
 
 //Deeply nested object
 const state = {
@@ -135,3 +137,7 @@ console.log(stateClone);
 //Clonedeep version from LoDash
 const stateDeepClone = cloneDeep(state); //This shows false because we copy it after we changed the value (move this just a line after the assign on line 131 and it will be true)
 console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept();
+}
