@@ -141,3 +141,26 @@ console.log(stateDeepClone);
 if (module.hot) {
   module.hot.accept();
 }
+
+//Lesson 279 - Babel transpiling and polyfilling
+//Check the below code to see how it is made in the corresponding bundled JS file (that is why you will still find vars etc)
+class Person {
+  greeting = 'Hey';
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+
+const jonas = new Person('Jonas');
+
+console.log(cart.find(el => el.quantity >= 2));
+
+//Polyfilling for new features import library for this
+import 'core-js/stable';
+//instead of importing everything there is we could also cherry pick the features we want to support in older browsers
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+//Polyfilling async functions
+import 'regenerator-runtime/runtime';
