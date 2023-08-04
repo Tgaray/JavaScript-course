@@ -1,5 +1,6 @@
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 17-Modern-JS-Modules-Tooling/starter/node_modules/ordered-binary/.idea/ordered-binary.iml
 17-Modern-JS-Modules-Tooling/starter/node_modules/ordered-binary/.idea/modules.xml
 17-Modern-JS-Modules-Tooling/starter/node_modules/nullthrows/README.md
@@ -8833,6 +8834,8 @@
 18-forkify/starter/node_modules/@parcel/watcher-win32-x64/watcher.node
 18-forkify/starter/node_modules/lightningcss-win32-x64-msvc/lightningcss.win32-x64-msvc.node
 =======
+=======
+>>>>>>> Stashed changes
 
 17-Modern-JS-Modules-Tooling/starter/dist/starter.3464ddca.js.map
 17-Modern-JS-Modules-Tooling/starter/node_modules/.bin/browserslist
@@ -26682,4 +26685,7 @@
 18-forkify/starter/node_modules/yallist/package.json
 18-forkify/starter/node_modules/yallist/README.md
 18-forkify/starter/node_modules/yallist/yallist.js
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
