@@ -32,12 +32,18 @@ const renderSpinner = function (parentEl) {
 
 const showRecipe = async function () {
   try {
+    //Getting the hash
+    const id = window.location.hash.slice(1);
+    console.log(id);
+
+    //Guard clause for when there is no id (that we don't get a never ending spinner and empty id string) then return
+    if (!id) return;
+
     //1 Loading recipe
     //Render spinner
     renderSpinner(recipeContainer);
     const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcd09'
-      // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcf8d'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message}, (${res.status})`);
@@ -157,3 +163,12 @@ const showRecipe = async function () {
 };
 
 showRecipe();
+
+//Kind of duplicate code so better to put in an array
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
+
+//Same as above but in one line and you can add more events to it
+['hashchange', 'load'].forEach(event =>
+  window.addEventListener(event, showRecipe)
+);
