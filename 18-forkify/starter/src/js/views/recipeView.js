@@ -32,6 +32,17 @@ class recipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   };
 
+  //Publisher (in publisher-subscriber pattern) publishes the function that can react to a call from the controller to separate DOM events from the controller
+  addHandlerRender(handler) {
+    //Kind of duplicate code so better to put in an array
+    // window.addEventListener('hashchange', controlRecipes);
+    // window.addEventListener('load', controlRecipes);
+    //Same as above but in one line and you can add more events to it
+    ['hashchange', 'load'].forEach(
+      event => window.addEventListener(event, handler) // we don't know about controlRecipes but about the handler so change it to handler
+    );
+  }
+
   #generateMarkup() {
     return `       
         <figure class="recipe__fig">

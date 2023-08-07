@@ -598,18 +598,14 @@ const controlRecipes = async function() {
         //2 Rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        console.log(err);
     }
 };
-controlRecipes();
-//Kind of duplicate code so better to put in an array
-// window.addEventListener('hashchange', controlRecipes);
-// window.addEventListener('load', controlRecipes);
-//Same as above but in one line and you can add more events to it
-[
-    "hashchange",
-    "load"
-].forEach((event)=>window.addEventListener(event, controlRecipes));
+//Subscriber passes the function as an argument to the view
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"49tUX":[function(require,module,exports) {
 "use strict";
@@ -2721,6 +2717,18 @@ class recipeView {
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     };
+    //Publisher (in publisher-subscriber pattern) publishes the function that can react to a call from the controller to separate DOM events from the controller
+    addHandlerRender(handler) {
+        //Kind of duplicate code so better to put in an array
+        // window.addEventListener('hashchange', controlRecipes);
+        // window.addEventListener('load', controlRecipes);
+        //Same as above but in one line and you can add more events to it
+        [
+            "hashchange",
+            "load"
+        ].forEach((event)=>window.addEventListener(event, handler) // we don't know about controlRecipes but about the handler so change it to handler
+        );
+    }
     #generateMarkup() {
         return `       
         <figure class="recipe__fig">
