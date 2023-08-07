@@ -24,7 +24,7 @@ export const loadRecipe = async function (id) {
     };
     console.log(state.recipe);
   } catch (err) {
-    //Temp error handling
-    console.log(`${err} ☠️`);
+    //throw the error here again, now to the next propagated place so we can use the error message in the view
+    throw err;
   }
 };
