@@ -1,6 +1,6 @@
 // import icons from '../img/icons.svg' //Parcel1
 import icons from 'url:../../img/icons.svg'; //Parcel2
-console.log(icons); // nothing more than the path to the new icons file we want to import
+// console.log(icons); // nothing more than the path to the new icons file we want to import
 import { Fraction } from 'fractional';
 // console.log(Fraction);
 

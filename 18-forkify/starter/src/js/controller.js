@@ -1,19 +1,15 @@
 //Import everything from the model
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-const recipeContainer = document.querySelector('.recipe');
-
-// https://forkify-api.herokuapp.com/v2
-
-///////////////////////////////////////
 const controlRecipes = async function () {
   try {
     //Getting the hash
     const id = window.location.hash.slice(1);
-    console.log(id);
 
     //Guard clause for when there is no id (that we don't get a never ending spinner and empty id string) then return
     if (!id) return;
@@ -30,8 +26,26 @@ const controlRecipes = async function () {
   }
 };
 
-//Subscriber passes the function as an argument to the view
+const controlSearchResults = async function () {
+  try {
+    //1) Get search query
+    const query = searchView.getQuery();
+    //guard clause if there is no query
+    if (!query) return;
+
+    //2) Load search results
+    await model.loadSearchResults(query);
+
+    //3) Render results
+    console.log(model.state.search.results, model.state.search.query);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//Subscriber passes the function as an argument to the correct view subscriber function
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 init();
