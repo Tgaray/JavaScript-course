@@ -1,5 +1,5 @@
 import { async } from 'regenerator-runtime';
-import { API_URL } from './config.js';
+import { API_URL, RES_PER_PAGE } from './config.js';
 import { getJSON } from './helpers.js';
 
 export const state = {
@@ -7,6 +7,8 @@ export const state = {
   search: {
     query: '',
     results: [],
+    page: 1,
+    resultsPerPage: RES_PER_PAGE,
   },
 };
 
@@ -53,4 +55,15 @@ export const loadSearchResults = async function (query) {
     console.error(`${err} 💥💥`);
     throw err; //to propagate error
   }
+};
+
+//not an async function because we already have all the search results loaded when we call this function, all it should do is get the state for and get the data for the page that is being requested
+export const getSearchResultsPage = function (page = state.search.page) {
+  //The page we are on at the moment:
+  state.search.page = page;
+  //calculate the amount (and which of the) items we can display on the page, we don't want to hardcode these
+  const start = (page - 1) * state.search.resultsPerPage; // 0
+  const end = page * state.search.resultsPerPage; // 9
+  //return only the part of the results that we need
+  return state.search.results.slice(start, end);
 };

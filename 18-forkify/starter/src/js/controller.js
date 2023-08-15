@@ -44,7 +44,11 @@ const controlSearchResults = async function () {
 
     // 3) Render results
     // console.log(model.state.search.results, model.state.search.query);
-    resultsView.render(model.state.search.results);
+    //All the results
+    //resultsView.render(model.state.search.results);
+    //Some of the results (10 per page, for pagination)
+    // console.log(model.getSearchResultsPage(1));
+    resultsView.render(model.getSearchResultsPage());
   } catch (err) {
     console.log(err);
   }
