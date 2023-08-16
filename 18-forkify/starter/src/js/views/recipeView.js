@@ -1,8 +1,5 @@
-import View from './View.js';
-
 // import icons from '../img/icons.svg' //Parcel1
 import View from './View.js';
-
 import icons from 'url:../../img/icons.svg'; //Parcel2
 // console.log(icons); // nothing more than the path to the new icons file we want to import
 import { Fraction } from 'fractional';
@@ -22,6 +19,17 @@ class recipeView extends View {
     ['hashchange', 'load'].forEach(
       event => window.addEventListener(event, handler) // we don't know about controlRecipes but about the handler so change it to handler
     );
+  }
+
+  addHandlerUpdateServings(handler) {
+    //see if the button + or - was pressed
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--update-servings'); //or anything inside this element
+      if (!btn) return;
+      const { updateTo } = btn.dataset; //destructured updateTo
+      //only call the handler if the number is greater than zero (servings)
+      if (+updateTo > 0) handler(+updateTo); // convert to number
+    });
   }
 
   _generateMarkup() {
@@ -49,16 +57,22 @@ class recipeView extends View {
             <svg class="recipe__info-icon">
               <use href="${icons}#icon-users"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--people">4</span>
-            <span class="recipe__info-text">${this._data.servings}</span>
+            <span class="recipe__info-data recipe__info-data--people">${
+              this._data.servings
+            }</span>
+            <span class="recipe__info-text"></span>
   
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings - 1
+              }">
                 <svg>
                   <use href="${icons}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings + 1
+              }">
                 <svg>
                   <use href="${icons}#icon-plus-circle"></use>
                 </svg>
@@ -105,22 +119,20 @@ class recipeView extends View {
   }
 
   _generateMarkupIngredient(ing) {
-    ing => {
-      return `          
-        <li class="recipe__ingredient">
-          <svg class="recipe__icon">
-            <use href="${icons}#icon-check"></use>
-          </svg>
-          <div class="recipe__quantity">${
-            ing.quantity ? new Fraction(ing.quantity).toString() : ''
-          }</div>
-          <div class="recipe__description">
-            <span class="recipe__unit">${ing.unit}</span>
-            ${ing.description}
-          </div>
-        </li>
-      `;
-    };
+    return `          
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${icons}#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">${
+          ing.quantity ? new Fraction(ing.quantity).toString() : ''
+        }</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">${ing.unit}</span>
+          ${ing.description}
+        </div>
+      </li>
+    `;
   }
 }
 

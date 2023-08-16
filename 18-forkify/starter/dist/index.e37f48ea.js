@@ -634,9 +634,16 @@ const controlPagination = function(goToPage) {
     // 2) Render NEW pagination buttons
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
+const controlServings = function(newServings) {
+    // 1) Update the recipe servings (in state)
+    _modelJs.updateServings(newServings);
+    // 2) Update the recipe view
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+};
 //Subscriber passes the function as an argument to the correct view subscriber function
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+    (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
@@ -2039,6 +2046,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "getSearchResultsPage", ()=>getSearchResultsPage);
+parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
@@ -2101,6 +2109,14 @@ const getSearchResultsPage = function(page = state.search.page) {
     const end = page * state.search.resultsPerPage; // 9
     //return only the part of the results that we need
     return state.search.results.slice(start, end);
+};
+const updateServings = function(newServings) {
+    state.recipe.ingredients.forEach((ing)=>{
+        ing.quantity = ing.quantity * newServings / state.recipe.servings;
+    // formula: newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
+    });
+    //update the state with the new servings amount
+    state.recipe.servings = newServings;
 };
 
 },{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helpers.js":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
@@ -2759,6 +2775,7 @@ const getJSON = async function(url) {
 };
 
 },{"./config.js":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+// import icons from '../img/icons.svg' //Parcel1
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
@@ -2784,6 +2801,16 @@ class recipeView extends (0, _viewJsDefault.default) {
         ].forEach((event)=>window.addEventListener(event, handler) // we don't know about controlRecipes but about the handler so change it to handler
         );
     }
+    addHandlerUpdateServings(handler) {
+        //see if the button + or - was pressed
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn--update-servings"); //or anything inside this element
+            if (!btn) return;
+            const { updateTo } = btn.dataset; //destructured updateTo
+            //only call the handler if the number is greater than zero (servings)
+            if (+updateTo > 0) handler(+updateTo); // convert to number
+        });
+    }
     _generateMarkup() {
         return `       
         <figure class="recipe__fig">
@@ -2805,16 +2832,16 @@ class recipeView extends (0, _viewJsDefault.default) {
             <svg class="recipe__info-icon">
               <use href="${0, _iconsSvgDefault.default}#icon-users"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--people">4</span>
-            <span class="recipe__info-text">${this._data.servings}</span>
+            <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
+            <span class="recipe__info-text"></span>
   
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings - 1}">
                 <svg>
                   <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings + 1}">
                 <svg>
                   <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
                 </svg>
@@ -2858,20 +2885,18 @@ class recipeView extends (0, _viewJsDefault.default) {
         </div>`;
     }
     _generateMarkupIngredient(ing) {
-        (ing)=>{
-            return `          
-        <li class="recipe__ingredient">
-          <svg class="recipe__icon">
-            <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-          </svg>
-          <div class="recipe__quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
-          <div class="recipe__description">
-            <span class="recipe__unit">${ing.unit}</span>
-            ${ing.description}
-          </div>
-        </li>
-      `;
-        };
+        return `          
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">${ing.unit}</span>
+          ${ing.description}
+        </div>
+      </li>
+    `;
     }
 }
 exports.default = new recipeView();
