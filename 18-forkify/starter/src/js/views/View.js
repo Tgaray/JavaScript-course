@@ -3,13 +3,14 @@ import icons from 'url:../../img/icons.svg'; //Parcel2
 export default class View {
   _data;
 
-  render(data) {
+  render(data, render = true) {
     //Check if data actually exists (if not throw error), we do not have to pass in a message because there is a default parameter
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+    if (!render) return markup;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
