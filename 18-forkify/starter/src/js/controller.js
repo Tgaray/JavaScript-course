@@ -25,15 +25,18 @@ const controlRecipes = async function () {
 
     // 1) Update results view to mark 'active' selected search result
     resultsView.update(model.getSearchResultsPage());
+
+    // 2) Updating bookmarks view
     bookmarksView.update(model.state.bookmarks);
 
-    // 2) Loading recipe
+    // 3) Loading recipe
     await model.loadRecipe(id);
 
-    // 3) Rendering recipe
+    // 4) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
+    console.error(err);
   }
 };
 
@@ -94,8 +97,13 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
 //Subscriber passes the function as an argument to the correct view subscriber function
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);

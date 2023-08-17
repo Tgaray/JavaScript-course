@@ -25,7 +25,7 @@ class PaginationView extends View {
     const backward = this._generateMarkupBackwardBtn(curPage);
     const forward = this._generateMarkupForwardBtn(curPage);
 
-    console.log(numPages);
+    //console.log(numPages);
     //Scenario1: page 1, and there are other pages
     if (curPage === 1 && numPages > 1) {
       return forward;
