@@ -14,10 +14,14 @@ class resultsView extends View {
   }
 
   _generateMarkupPreview(result) {
+    //Give the class active to the active recipe
+    const id = window.location.hash.slice(1);
     //we could put all of this in the map method but we create another method to make it a bit cleaner
     return `       
         <li class="preview">
-            <a class="preview__link" href="#${result.id}">
+            <a class="preview__link ${
+              result.id === id ? 'preview__link--active' : ''
+            }" href="#${result.id}">
               <figure class="preview__fig">
                 <img src="${result.image}" alt="${result.title}" />
               </figure>

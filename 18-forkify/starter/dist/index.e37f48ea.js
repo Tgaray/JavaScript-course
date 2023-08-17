@@ -591,12 +591,14 @@ var _runtime = require("regenerator-runtime/runtime");
 if (module.hot) module.hot.accept();
 const controlRecipes = async function() {
     try {
-        // 1) Getting the hash
+        // 0) Getting the hash
         const id = window.location.hash.slice(1);
         //Guard clause for when there is no id (that we don't get a never ending spinner and empty id string) then return
         if (!id) return;
         //Render spinner
         (0, _recipeViewJsDefault.default).renderSpinner();
+        // 1) Update results view to mark 'active' selected search result
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
         // 2) Loading recipe
         await _modelJs.loadRecipe(id);
         // 3) Rendering recipe
@@ -637,8 +639,9 @@ const controlPagination = function(goToPage) {
 const controlServings = function(newServings) {
     // 1) Update the recipe servings (in state)
     _modelJs.updateServings(newServings);
-    // 2) Update the recipe view
-    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+    // 2) Update the recipe text and icons (instead of rendering the entire view every time)
+    // recipeView.render(model.state.recipe);
+    (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
 };
 //Subscriber passes the function as an argument to the correct view subscriber function
 const init = function() {
@@ -649,7 +652,7 @@ const init = function() {
 };
 init();
 
-},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/paginationView.js":"6z7bi"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 "use strict";
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("52e9b3eefbbce1ed");
@@ -2916,6 +2919,29 @@ class View {
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
     }
+    update(data) {
+        this._data = data;
+        const newMarkup = this._generateMarkup();
+        //Creates a DOM that lives in the memory not on the actual page (for comparing)
+        const newDOM = document.createRange().createContextualFragment(newMarkup);
+        //Select all the (new) elements in this virtual DOM
+        const newElements = Array.from(newDOM.querySelectorAll("*"));
+        //Select all the current elements in the DOM
+        const curElements = Array.from(this._parentElement.querySelectorAll("*"));
+        //Loop over the two arrays at the same time and check for differences
+        newElements.forEach((newEl, i)=>{
+            const curEl = curElements[i];
+            //So now how to compare the newEl to the curEl (A isEqualNode to B)
+            // console.log(curEl, newEl.isEqualNode(curEl));
+            // Updates changed -TEXT-
+            if (!newEl.isEqualNode(curEl) && //to check if it's TEXT (first child in an element node is text node)
+            newEl.firstChild?.nodeValue.trim() !== "") // console.log('🎊', newEl.firstChild.nodeValue.trim() !== '');
+            curEl.textContent = newEl.textContent;
+            // Updates changed -ATTRIBUTES-
+            if (!newEl.isEqualNode(curEl)) // console.log(Array.from(newEl.attributes)); // replace all the attributes
+            Array.from(newEl.attributes).forEach((attr)=>curEl.setAttribute(attr.name, attr.value));
+        });
+    }
     _clear() {
         this._parentElement.innerHTML = "";
     }
@@ -3300,10 +3326,12 @@ class resultsView extends (0, _viewJsDefault.default) {
         return this._data.map(this._generateMarkupPreview).join("");
     }
     _generateMarkupPreview(result) {
+        //Give the class active to the active recipe
+        const id = window.location.hash.slice(1);
         //we could put all of this in the map method but we create another method to make it a bit cleaner
         return `       
         <li class="preview">
-            <a class="preview__link" href="#${result.id}">
+            <a class="preview__link ${result.id === id ? "preview__link--active" : ""}" href="#${result.id}">
               <figure class="preview__fig">
                 <img src="${result.image}" alt="${result.title}" />
               </figure>

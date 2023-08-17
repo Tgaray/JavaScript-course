@@ -16,12 +16,15 @@ if (module.hot) {
 
 const controlRecipes = async function () {
   try {
-    // 1) Getting the hash
+    // 0) Getting the hash
     const id = window.location.hash.slice(1);
     //Guard clause for when there is no id (that we don't get a never ending spinner and empty id string) then return
     if (!id) return;
     //Render spinner
     recipeView.renderSpinner();
+
+    // 1) Update results view to mark 'active' selected search result
+    resultsView.update(model.getSearchResultsPage());
 
     // 2) Loading recipe
     await model.loadRecipe(id);
@@ -72,8 +75,9 @@ const controlServings = function (newServings) {
   // 1) Update the recipe servings (in state)
   model.updateServings(newServings);
 
-  // 2) Update the recipe view
-  recipeView.render(model.state.recipe);
+  // 2) Update the recipe text and icons (instead of rendering the entire view every time)
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 //Subscriber passes the function as an argument to the correct view subscriber function

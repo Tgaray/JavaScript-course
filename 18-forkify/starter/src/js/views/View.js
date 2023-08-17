@@ -14,6 +14,40 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  update(data) {
+    this._data = data;
+    const newMarkup = this._generateMarkup();
+    //Creates a DOM that lives in the memory not on the actual page (for comparing)
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    //Select all the (new) elements in this virtual DOM
+    const newElements = Array.from(newDOM.querySelectorAll('*'));
+    //Select all the current elements in the DOM
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+    //Loop over the two arrays at the same time and check for differences
+    newElements.forEach((newEl, i) => {
+      const curEl = curElements[i];
+      //So now how to compare the newEl to the curEl (A isEqualNode to B)
+      // console.log(curEl, newEl.isEqualNode(curEl));
+
+      // Updates changed -TEXT-
+      if (
+        !newEl.isEqualNode(curEl) &&
+        //to check if it's TEXT (first child in an element node is text node)
+        newEl.firstChild?.nodeValue.trim() !== ''
+      ) {
+        // console.log('🎊', newEl.firstChild.nodeValue.trim() !== '');
+        curEl.textContent = newEl.textContent;
+      }
+
+      // Updates changed -ATTRIBUTES-
+      if (!newEl.isEqualNode(curEl))
+        // console.log(Array.from(newEl.attributes)); // replace all the attributes
+        Array.from(newEl.attributes).forEach(attr =>
+          curEl.setAttribute(attr.name, attr.value)
+        );
+    });
+  }
+
   _clear() {
     this._parentElement.innerHTML = '';
   }
