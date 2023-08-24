@@ -3,6 +3,15 @@ import icons from 'url:../../img/icons.svg'; //Parcel2
 export default class View {
   _data;
 
+  /**
+   * Render the received object to the DOM
+   * @param {Object | Object[]} data The data to be rendered
+   * @param {boolean} [render=true] If false, create markup string instead of rendering markup to the DOM
+   * @returns {undefined | string} A markup string is returned if render is false
+   * @this {Object} View instance
+   * @author Theron Garay
+   * @todo Finish implementation
+   */
   render(data, render = true) {
     //Check if data actually exists (if not throw error), we do not have to pass in a message because there is a default parameter
     if (!data || (Array.isArray(data) && data.length === 0))
