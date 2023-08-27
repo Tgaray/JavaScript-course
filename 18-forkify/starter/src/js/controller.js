@@ -134,6 +134,10 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+const newFeature = function () {
+  console.log('Welcome to the application');
+};
+
 //Subscriber passes the function as an argument to the correct view subscriber function
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);

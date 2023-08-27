@@ -1,6 +1,9 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+node_modules
+dist
+.parcel-cache
 17-Modern-JS-Modules-Tooling/starter/node_modules/ordered-binary/.idea/ordered-binary.iml
 17-Modern-JS-Modules-Tooling/starter/node_modules/ordered-binary/.idea/modules.xml
 17-Modern-JS-Modules-Tooling/starter/node_modules/nullthrows/README.md
